@@ -92,19 +92,19 @@ describe("Gestor Tareas", () => {
     lista_elem.innerHTML = "";
   });
 
-  it("deberia devolver la lista de tareas con tareas añadidas", () =>{
-    const tarea_elem = document.querySelector("#tarea");
-    const boton_elem = document.querySelector("#crear-tarea");
-    const lista_elem = document.querySelector("#lista-tareas");
+  // it("deberia devolver la lista de tareas con tareas añadidas", () =>{
+  //   const tarea_elem = document.querySelector("#tarea");
+  //   const boton_elem = document.querySelector("#crear-tarea");
+  //   const lista_elem = document.querySelector("#lista-tareas");
 
-    tarea_elem.value = "Primera Tarea";
-    boton_elem.click();
+  //   tarea_elem.value = "Primera Tarea";
+  //   boton_elem.click();
 
-    tarea_elem.value = "Segunda Tarea";
-    boton_elem.click();
+  //   tarea_elem.value = "Segunda Tarea";
+  //   boton_elem.click();
 
-    expect(lista_elem.innerHTML).toEqual("Segunda Tarea,Primera Tarea");
-  });
+  //   expect(lista_elem.innerHTML).toEqual("Segunda Tarea,Primera Tarea");
+  // });
 });
 
 const listaTareas = new Array();

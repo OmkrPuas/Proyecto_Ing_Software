@@ -9,9 +9,7 @@ boton_elem.addEventListener("click", (event) => {
 
   var lista = lista_elem.innerHTML
 
-  if(lista.length > 0){
-    tarea_elem.value += "," + lista
-  }
+  tarea_elem.value += "\n" + lista
 
   lista_elem.innerHTML = tarea_elem.value;
 
