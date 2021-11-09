@@ -54,20 +54,6 @@ describe("Gestor Tareas", () => {
     const lista_elem = document.querySelector("#lista-tareas");
 
     tarea_elem.value = "Primera Tarea";
-    boton_elem.click();
-    var tarea_anterior = tarea_elem.value;
-    tarea_elem.value = "Segunda Tarea";
-    boton_elem.click();
-    lista_elem.innerHTML +=  "\n" + tarea_anterior;
-    expect(lista_elem.innerHTML).toEqual("Segunda Tarea" + "\n" + "Primera Tarea");
-  });
-
-  it("deberia mostrar las tareas creadas", () => {
-    const tarea_elem = document.querySelector("#tarea");
-    const boton_elem = document.querySelector("#crear-tarea");
-    const lista_elem = document.querySelector("#lista-tareas");
-
-    tarea_elem.value = "Primera Tarea";
     // boton_elem.click();
     // console.log(lista_elem.innerHTML)
     listaTareas.push(tarea_elem.value);
