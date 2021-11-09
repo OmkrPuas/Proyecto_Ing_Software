@@ -1,4 +1,6 @@
 import fs from "fs";
+//const lista_elem = document.querySelector("#lista-tareas");
+
 describe("Gestor Tareas", () => {
   beforeAll(() => {
     document.body.innerHTML = fs.readFileSync("gestortareas.html", "utf8");
@@ -35,5 +37,19 @@ describe("Gestor Tareas", () => {
   afterEach(() => {
     const lista_elem = document.querySelector("#lista-tareas");
     lista_elem.innerHTML = "";
+  });
+
+  it("deberia devolver la lista de tareas con tareas añadidas", () =>{
+    const tarea_elem = document.querySelector("#tarea");
+    const boton_elem = document.querySelector("#crear-tarea");
+    const lista_elem = document.querySelector("#lista-tareas");
+
+    tarea_elem.value = "Primera Tarea";
+    boton_elem.click();
+
+    tarea_elem.value = "Segunda Tarea";
+    boton_elem.click();
+
+    expect(lista_elem.innerHTML).toEqual("Segunda Tarea,Primera Tarea");
   });
 });

@@ -1,7 +1,7 @@
 {
   "name": "parcel-jest-base",
   "version": "1.0.0",
-  "description": "",
+  "description": "npm install",
   "default": "index.html",
   "scripts": {
     "start": "parcel gestorTareas.html",
@@ -21,5 +21,14 @@
   },
   "dependencies": {
     "jsdom": "^18.0.1"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OmkrPuas/Proyecto_Ing_Software.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OmkrPuas/Proyecto_Ing_Software/issues"
+  },
+  "homepage": "https://github.com/OmkrPuas/Proyecto_Ing_Software#readme"
 }
