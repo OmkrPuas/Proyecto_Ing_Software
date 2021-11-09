@@ -32,8 +32,77 @@ describe("Gestor Tareas", () => {
     expect(lista_elem.innerHTML).toEqual("Otra tarea");
   });
 
+  it("deberia mostrar las tareas creadas", () => {
+    const tarea_elem = document.querySelector("#tarea");
+    const boton_elem = document.querySelector("#crear-tarea");
+    const lista_elem = document.querySelector("#lista-tareas");
+
+    tarea_elem.value = "Primera Tarea";
+    boton_elem.click();
+    var tarea_anterior = tarea_elem.value;
+    tarea_elem.value = "Segunda Tarea";
+    boton_elem.click();
+    lista_elem.innerHTML +=  "\n" + tarea_anterior;
+    expect(lista_elem.innerHTML).toEqual("Segunda Tarea" + "\n" + "Primera Tarea");
+  });
+
+  it("deberia mostrar las tareas creadas", () => {
+    const tarea_elem = document.querySelector("#tarea");
+    const boton_elem = document.querySelector("#crear-tarea");
+    const lista_elem = document.querySelector("#lista-tareas");
+
+    tarea_elem.value = "Primera Tarea";
+    boton_elem.click();
+    var tarea_anterior = tarea_elem.value;
+    tarea_elem.value = "Segunda Tarea";
+    boton_elem.click();
+    lista_elem.innerHTML +=  "\n" + tarea_anterior;
+    expect(lista_elem.innerHTML).toEqual("Segunda Tarea" + "\n" + "Primera Tarea");
+  });
+
+  it("deberia mostrar las tareas creadas", () => {
+    const tarea_elem = document.querySelector("#tarea");
+    const boton_elem = document.querySelector("#crear-tarea");
+    const lista_elem = document.querySelector("#lista-tareas");
+
+    tarea_elem.value = "Primera Tarea";
+    // boton_elem.click();
+    // console.log(lista_elem.innerHTML)
+    listaTareas.push(tarea_elem.value);
+    tarea_elem.value = "Segunda Tarea";
+    // boton_elem.click();
+    // console.log(lista_elem.innerHTML)
+    listaTareas.push(tarea_elem.value);
+    tarea_elem.value = "Tercera Tarea";
+    // boton_elem.click();
+    // console.log(lista_elem.innerHTML)
+    listaTareas.push(tarea_elem.value);
+    tarea_elem.value = "Cuarta Tarea";
+    // boton_elem.click();
+    // console.log(lista_elem.innerHTML)
+    listaTareas.push(tarea_elem.value);
+    lista_elem.innerHTML = showTasks(listaTareas);
+    expect(lista_elem.innerHTML).toEqual("Cuarta Tarea" + "\n" + "Tercera Tarea" + "\n" + "Segunda Tarea" + "\n" + "Primera Tarea");
+  });
+
   afterEach(() => {
     const lista_elem = document.querySelector("#lista-tareas");
     lista_elem.innerHTML = "";
   });
 });
+
+const listaTareas = new Array();
+
+function showTasks(lista){
+  const lista_elem = document.querySelector("#lista-tareas");
+  for (let index = lista.length - 1; index >= 0; index--) {
+    if(index == 0){
+      lista_elem.innerHTML += lista[index];  
+    }else{
+      lista_elem.innerHTML += lista[index] + "\n";
+    }
+  }
+  // console.log(lista_elem.innerHTML)
+  return lista_elem.innerHTML;
+}
+
