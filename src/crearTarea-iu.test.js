@@ -38,7 +38,7 @@ describe("Gestor Tareas", () => {
     expect(lista_elem.innerHTML).toEqual("Otra tarea");
   });
 
-  it("deberia mostrar las tareas creadas", () => {
+  it("deberia mostrar 2 tareas creadas", () => {
     const tarea_elem = document.querySelector("#tarea");
     const boton_elem = document.querySelector("#crear-tarea");
     const lista_elem = document.querySelector("#lista-tareas");
