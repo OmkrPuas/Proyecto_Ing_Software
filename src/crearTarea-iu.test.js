@@ -1,4 +1,8 @@
 import fs from "fs";
+
+//PABLO
+import libreria, { TEAMGROZZO } from './App.js';
+//PABLO
 //const lista_elem = document.querySelector("#lista-tareas");
 
 describe("Gestor Tareas", () => {
@@ -73,10 +77,23 @@ describe("Gestor Tareas", () => {
     expect(lista_elem.innerHTML).toEqual("Cuarta Tarea" + "\n" + "Tercera Tarea" + "\n" + "Segunda Tarea" + "\n" + "Primera Tarea");
   });
 
+
+  
+  //PABLO
+  it("deberia añadir una descripcion a la tarea", () => {
+    var listaEsperada = [];
+    expect(libreria.retornarLista()).toEqual(listaEsperada);
+  });
+  //PABLO
+
+
+
   afterEach(() => {
     const lista_elem = document.querySelector("#lista-tareas");
     lista_elem.innerHTML = "";
   });
+
+
 
   // it("deberia devolver la lista de tareas con tareas añadidas", () =>{
   //   const tarea_elem = document.querySelector("#tarea");

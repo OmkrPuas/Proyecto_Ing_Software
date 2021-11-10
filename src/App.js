@@ -1,5 +1,11 @@
-function sumar(a, b) {
-  return a + b;
+
+//PABLO
+var lista = [];
+function retornarLista(){
+  return lista;
 }
 
-export default sumar;
+module.exports ={
+  retornarLista
+}
+//PABLO
