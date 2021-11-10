@@ -7,7 +7,7 @@ import libreria, { TEAMGROZZO } from './App.js';
 
 describe("Gestor Tareas", () => {
   beforeAll(() => {
-    document.body.innerHTML = fs.readFileSync("gestortareas.html", "utf8");
+    document.body.innerHTML = fs.readFileSync("gestorTareas.html", "utf8");
     require("./gestorTareas.js");
   });
 
