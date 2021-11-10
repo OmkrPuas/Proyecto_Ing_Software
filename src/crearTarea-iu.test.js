@@ -81,7 +81,10 @@ describe("Gestor Tareas", () => {
   
   //PABLO
   it("deberia añadir una descripcion a la tarea", () => {
-    var listaEsperada = [];
+    var id = 0;
+    var newTask = "NO MERCY";
+    var listaEsperada = [{Id:0, Titulo: "Secreto", Descripcion: "NO MERCY"},{Id:1, Titulo: "Tarea para ayer", Descripcion: "gg"}];
+    libreria.añadirDescripcion(id,newTask);
     expect(libreria.retornarLista()).toEqual(listaEsperada);
   });
   //PABLO
