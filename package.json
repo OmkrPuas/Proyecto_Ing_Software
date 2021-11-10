@@ -22,7 +22,7 @@
   "dependencies": {
     "jsdom": "^18.0.1"
   },
-  "main": "index.js",
+  "main": "gestorTareas.html",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OmkrPuas/Proyecto_Ing_Software.git"
