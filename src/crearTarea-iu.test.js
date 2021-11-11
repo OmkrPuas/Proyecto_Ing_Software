@@ -1,4 +1,3 @@
-import exp from "constants";
 import fs from "fs";
 //import Tarea from "./gestorTareas.js"
 
