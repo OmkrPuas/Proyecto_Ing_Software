@@ -13,8 +13,6 @@ var id = 0;
 boton_elem.addEventListener("click", (event) => {
   
   let tarea = new Tarea(id,tarea_elem.value);
-  //tarea.titulo = tarea_elem.value;
-  // tarea.id = 1
-  // tarea.titulo = tarea_elem.value;
-  lista_elem.innerHTML = "<li>" + tarea.titulo + "</li>";
+  lista_elem.innerHTML += "<li>" + tarea.titulo + "</li>";
+  tarea_elem.value = "";
 });
