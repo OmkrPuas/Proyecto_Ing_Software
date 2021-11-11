@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel gestorTareas.html",
     "build": "parcel build gestorTareas.html",
-    "test": "jest --watch --env='jsdom' --coverage",
+    "test": "jest --watch --env='jsdom'",
     "test-once": "jest --env='jsdom' --coverage"
   },
   "author": "Israel Antezana R.",
