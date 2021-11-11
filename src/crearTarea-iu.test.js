@@ -23,6 +23,10 @@ describe("Gestor Tareas", () => {
     expect(crearTarea("Primera Tarea")).toEqual("Primera Tarea");
   });
 
+  it("deberia rechazar una tarea invalida", () =>{
+    expect(crearTarea("")).toEqual("No se creo la tarea. TITULO INVALIDO");
+  });
+
   it("deberia mostrar las tareas añadidas por el usuario en la lista de tareas", () =>{
     crearTarea("Segunda Tarea");
     expect(mostrarListaTareas(listaTareas)).toEqual("Segunda Tarea\nPrimera Tarea"); 
@@ -74,57 +78,26 @@ describe("Gestor Tareas", () => {
   it("deberia crear una tarea con una de las categorias predeterminadas", () => {
     expect(crearTareaConCategoria("Cuarta Tarea", "personal")).toEqual("Cuarta Tarea\nCategoria: personal");
   });
-  // it("deberia mostrar 2 tareas creadas", () => {
-  //   const tarea_elem = document.querySelector("#tarea");
-  //   const boton_elem = document.querySelector("#crear-tarea");
-  //   const lista_elem = document.querySelector("#lista-tareas");
 
-  //   tarea_elem.value = "Primera Tarea";
-  //   boton_elem.click();
-  //   var tarea_anterior = tarea_elem.value;
-  //   tarea_elem.value = "Segunda Tarea";
-  //   boton_elem.click();
-  //   lista_elem.innerHTML +=  "\n" + tarea_anterior;
-  //   expect(lista_elem.innerHTML).toEqual("Segunda Tarea" + "\n" + "Primera Tarea");
-  // });
+  it("deberia crear una descripcion predeterminada", () => {
+    expect("Descripcionado").toEqual("Descripcionado");
+  });
 
-  // it("deberia mostrar las tareas creadas", () => {
-  //   const tarea_elem = document.querySelector("#tarea");
-  //   const boton_elem = document.querySelector("#crear-tarea");
-  //   const lista_elem = document.querySelector("#lista-tareas");
+  it("deberia crear una descripcion ingresada por el usuario", () => {
+    expect(crearDescripcion("Descripcionado")).toEqual("Descripcionado");
+  });
 
-  //   tarea_elem.value = "Primera Tarea";
-  //   // boton_elem.click();
-  //   // console.log(lista_elem.innerHTML)
-  //   listaTareas.push(tarea_elem.value);
-  //   tarea_elem.value = "Segunda Tarea";
-  //   // boton_elem.click();
-  //   // console.log(lista_elem.innerHTML)
-  //   listaTareas.push(tarea_elem.value);
-  //   tarea_elem.value = "Tercera Tarea";
-  //   // boton_elem.click();
-  //   // console.log(lista_elem.innerHTML)
-  //   listaTareas.push(tarea_elem.value);
-  //   tarea_elem.value = "Cuarta Tarea";
-  //   // boton_elem.click();
-  //   // console.log(lista_elem.innerHTML)
-  //   listaTareas.push(tarea_elem.value);
-  //   lista_elem.innerHTML = showTasks(listaTareas);
-  //   expect(lista_elem.innerHTML).toEqual("Cuarta Tarea" + "\n" + "Tercera Tarea" + "\n" + "Segunda Tarea" + "\n" + "Primera Tarea");
-  // });
+  it("deberia rechazar una descripcion vacia", () => {
+    expect(crearDescripcion("")).toEqual("No Descripcionado");
+  });
 
+  it("deberia creaer una tarea con una descripcion", () => {
+    expect(crearTareaConDescripcion("Quinta Tarea","Realizar esta actividad de noche")).toEqual("Quinta Tarea\nDescripcion: Realizar esta actividad de noche");
+  });
 
-  
-  // //PABLO
-  // it("deberia añadir una descripcion a la tarea", () => {
-  //   var id = 0;
-  //   var newTask = "NO MERCY";
-  //   var listaEsperada = [{Id:0, Titulo: "Secreto", Descripcion: "NO MERCY"},{Id:1, Titulo: "Tarea para ayer", Descripcion: "gg"}];
-  //   libreria.añadirDescripcion(id,newTask);
-  //   expect(libreria.retornarLista()).toEqual(listaEsperada);
-  // });
-  //PABLO
-
+  it("deberia rechazar una tarea con una descripcion invalida", () => {
+    expect(crearTareaConDescripcion("Quinta Tarea","")).toEqual("No se creo la tarea. DESCRIPCION INVALIDA");
+  });
 
 
   afterEach(() => {
@@ -132,21 +105,6 @@ describe("Gestor Tareas", () => {
     lista_elem.innerHTML = "";
   });
 
-
-
-  // it("deberia devolver la lista de tareas con tareas añadidas", () =>{
-  //   const tarea_elem = document.querySelector("#tarea");
-  //   const boton_elem = document.querySelector("#crear-tarea");
-  //   const lista_elem = document.querySelector("#lista-tareas");
-
-  //   tarea_elem.value = "Primera Tarea";
-  //   boton_elem.click();
-
-  //   tarea_elem.value = "Segunda Tarea";
-  //   boton_elem.click();
-
-  //   expect(lista_elem.innerHTML).toEqual("Segunda Tarea,Primera Tarea");
-  // });
 });
 
 const listaTareas = new Array();
@@ -154,11 +112,12 @@ var id = 0;
 const listaCategorias = new Array();
 
 export default class Tarea {
-  constructor(id, titulo, fechaLimite, categoria) {
+  constructor(id, titulo, fechaLimite, categoria, descripcion) {
     this.id = id;
     this.titulo = titulo;
     this.fechaLimite = fechaLimite;
     this.categoria = categoria;
+    this.descripcion = descripcion;
   }
 }
 
@@ -176,10 +135,14 @@ function mostrarListaTareas(lista){
 
 function crearTarea(NombreTarea){
   // console.log(id);
-  let tarea = new Tarea(id,NombreTarea, "", "");
-  listaTareas.push(tarea);
-  id++;
-  return tarea.titulo;
+  if(NombreTarea == ""){
+    return "No se creo la tarea. TITULO INVALIDO";
+  }else{
+    let tarea = new Tarea(id,NombreTarea, "", "", "");
+    listaTareas.push(tarea);
+    id++;
+    return tarea.titulo;
+  }
 }
 
 function crearFechaLimite(fechaLimite){
@@ -191,7 +154,7 @@ function crearFechaLimite(fechaLimite){
 
 function crearTareaConFechaLimite(nombreTarea, fechaLimite){
   console.log(id);
-  let tarea = new Tarea(id,nombreTarea, fechaLimite, "");
+  let tarea = new Tarea(id,nombreTarea, fechaLimite, "", "");
   listaTareas.push(tarea);
   id++;
   return tarea.titulo + "\nFecha Limite: " + tarea.fechaLimite;
@@ -216,8 +179,27 @@ function mostrarCategorias(lista){
 }
 function crearTareaConCategoria(nombreTarea, categoria){
   console.log(id);
-  let tarea = new Tarea(id,nombreTarea, "", categoria);
+  let tarea = new Tarea(id,nombreTarea, "", categoria, "");
   listaTareas.push(tarea);
   id++;
   return tarea.titulo + "\nCategoria: " + tarea.categoria;
+}
+
+function crearDescripcion(descripcion){
+  if(descripcion == ""){
+    return "No Descripcionado";
+  }
+  return descripcion;
+}
+
+function crearTareaConDescripcion(nombreTarea, descripcion){
+  console.log(id);
+  if(descripcion == ""){
+    return "No se creo la tarea. DESCRIPCION INVALIDA"
+  }else{
+    let tarea = new Tarea(id,nombreTarea, "", "", descripcion);
+    listaTareas.push(tarea);
+    id++;
+    return tarea.titulo + "\nDescripcion: " + tarea.descripcion;
+  }
 }
