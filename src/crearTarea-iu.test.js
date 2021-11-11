@@ -1,5 +1,6 @@
 import fs from "fs";
 
+import * as gestor from './App2.js';
 //PABLO
 import libreria, { TEAMGROZZO } from './App.js';
 //PABLO
@@ -28,14 +29,14 @@ describe("Gestor Tareas", () => {
 
   //Solo para mostrar lo mismo que la primera prueba pero usando un form, en lugar de boton
   it("solo como ejemplo: formulario con submit", () => {
-    const tarea_input = document.querySelector("#tarea-input");
+    const tarea_input = document.querySelector("#titulo-input");
     const form_submit_elem = document.querySelector("#crear-submit");
     const lista_elem = document.querySelector("#lista-tareas");
     tarea_input.value = "Otra tarea";
 
     form_submit_elem.click();
 
-    expect(lista_elem.innerHTML).toEqual("Otra tarea");
+    expect(lista_elem.innerHTML).toEqual("<div><a> Otra tarea </a><a>  </a><a> Trabajo </a><a>  </a></div>");
   });
 
   it("deberia mostrar 2 tareas creadas", () => {

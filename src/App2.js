@@ -29,3 +29,7 @@ export function obtenerLista(){
     return lista;
 }
 
+export function obtenerTamLista(){
+    return lista.length;
+}
+

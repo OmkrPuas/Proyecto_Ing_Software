@@ -4,9 +4,25 @@
 
 <!--Opcion con formulario:-->
 <form id="form-crear">
-  <input type="text" id="tarea-input" />
+  <label for="titulo-input">Titulo:</label>
+  <input type="text" id="titulo-input" />
+  <label for="descrip-input">Descripcion:</label>
+  <input type="text" id="descrip-input" />
+  <label for="categoria-input">Categoria:</label>
+  <select id="categoria-input" name="categoria-input">
+    <option value="Trabajo">Trabajo</option>
+    <option value="Quehaceres">Quehaceres</option>
+    <option value="Personal">Personal</option>
+    <option value="Otro">Otro</option>
+  </select>
+  <label for="fechaLimit-input">Fecha Limite:</label>
+  <input type="date" id="fechaLimit-input" />
   <input type="submit" id="crear-submit" value="Crear desde Form" />
 </form>
 
-<div id="lista-tareas"></div>
+<div id="lista-tareas">
+  
+</div>
+
+<div id="pruebas"></div>
 <script type="module" src="./src/gestorTareas.js"></script>
