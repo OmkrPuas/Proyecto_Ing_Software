@@ -5,7 +5,7 @@ import fs from "fs";
 
 describe("Gestor Tareas", () => {
   beforeAll(() => {
-    document.body.innerHTML = fs.readFileSync("gestorTareas.html", "utf8");
+    document.body.innerHTML = fs.readFileSync("index.html", "utf8");
     require("./gestorTareas.js");
   });
 
