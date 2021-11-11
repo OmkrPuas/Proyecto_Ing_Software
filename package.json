@@ -2,10 +2,10 @@
   "name": "parcel-jest-base",
   "version": "1.0.0",
   "description": "npm install",
-  "default": "gestorTareas.html",
+  "default": "index.html",
   "scripts": {
-    "start": "parcel gestorTareas.html",
-    "build": "parcel build gestorTareas.html",
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest --watch --env='jsdom'",
     "test-once": "jest --env='jsdom' --coverage"
   },
