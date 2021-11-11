@@ -49,7 +49,31 @@ describe("Gestor Tareas", () => {
     expect(crearTareaConFechaLimite("Tercera Tarea","10/11/2021")).toEqual("Tercera Tarea\nFecha Limite: 10/11/2021");
   });
 
+  it("deberia crear una categoria", () => {
+    expect("trabajo").toEqual("trabajo");
+  });
 
+  it("deberia crear una categoria predeterminada", () => {
+    expect(crearCategoria("trabajo")).toEqual(true);
+  });
+  
+  it("deberia crear una categoria a la lista de categorias predeterminadas", () => {
+    expect(crearCategoria("familia")).toEqual(true);
+  });
+
+  it("deberia crear una categoria a la lista de categorias predeterminadas", () => {
+    expect(listaCategorias.includes("mascotas")).toEqual(false);
+  });
+
+  it("deberia mostrar la lista completa de categorias predeterminadas", () => {
+    crearCategoria("personal");
+    crearCategoria("otros");
+    expect(mostrarCategorias(listaCategorias)).toEqual("trabajo\nfamilia\npersonal\notros");
+  });
+
+  it("deberia crear una tarea con una de las categorias predeterminadas", () => {
+    expect(crearTareaConCategoria("Cuarta Tarea", "personal")).toEqual("Cuarta Tarea\nCategoria: personal");
+  });
   // it("deberia mostrar 2 tareas creadas", () => {
   //   const tarea_elem = document.querySelector("#tarea");
   //   const boton_elem = document.querySelector("#crear-tarea");
@@ -127,12 +151,14 @@ describe("Gestor Tareas", () => {
 
 const listaTareas = new Array();
 var id = 0;
+const listaCategorias = new Array();
 
 export default class Tarea {
-  constructor(id, titulo, fechaLimite) {
+  constructor(id, titulo, fechaLimite, categoria) {
     this.id = id;
     this.titulo = titulo;
     this.fechaLimite = fechaLimite;
+    this.categoria = categoria;
   }
 }
 
@@ -150,7 +176,7 @@ function mostrarListaTareas(lista){
 
 function crearTarea(NombreTarea){
   // console.log(id);
-  let tarea = new Tarea(id,NombreTarea, "");
+  let tarea = new Tarea(id,NombreTarea, "", "");
   listaTareas.push(tarea);
   id++;
   return tarea.titulo;
@@ -165,8 +191,33 @@ function crearFechaLimite(fechaLimite){
 
 function crearTareaConFechaLimite(nombreTarea, fechaLimite){
   console.log(id);
-  let tarea = new Tarea(id,nombreTarea, fechaLimite);
+  let tarea = new Tarea(id,nombreTarea, fechaLimite, "");
   listaTareas.push(tarea);
   id++;
   return tarea.titulo + "\nFecha Limite: " + tarea.fechaLimite;
+}
+
+
+
+function crearCategoria(categoria){
+  listaCategorias.push(categoria);
+  return listaCategorias.includes(categoria);
+}
+function mostrarCategorias(lista){
+  var cadena = "";
+  for (let index = 0; index < lista.length; index++) {
+    if(index == lista.length-1){
+      cadena += lista[index];
+    }
+    else
+      cadena += lista[index] + "\n";
+  }
+  return cadena;
+}
+function crearTareaConCategoria(nombreTarea, categoria){
+  console.log(id);
+  let tarea = new Tarea(id,nombreTarea, "", categoria);
+  listaTareas.push(tarea);
+  id++;
+  return tarea.titulo + "\nCategoria: " + tarea.categoria;
 }
