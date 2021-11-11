@@ -2,7 +2,7 @@
   "name": "parcel-jest-base",
   "version": "1.0.0",
   "description": "npm install",
-  "default": "index.html",
+  "default": "gestorTareas.html",
   "scripts": {
     "start": "parcel gestorTareas.html",
     "build": "parcel build gestorTareas.html",

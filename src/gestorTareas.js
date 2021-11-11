@@ -18,7 +18,7 @@ var id = 0;
 const listaTareas = new Array();
 
 function validarFechaLimite(fecha){
-  if( fecha < "2021-11-10"){
+  if( fecha < "2021-11-11"){
     if(fecha == ""){
       return "Ilimitado";
     }

@@ -42,15 +42,15 @@ describe("Gestor Tareas", () => {
   });
 
   it("deberia crear una fecha limite predeterminada", () => {
-    expect(crearFechaLimite("10/11/2021")).toEqual("10/11/2021");
+    expect(crearFechaLimite("11/11/2021")).toEqual("11/11/2021");
   });
 
   it("deberia crear una fecha limite ingresada", () => {
-    expect(crearFechaLimite("10/11/2021")).toEqual("10/11/2021");
+    expect(crearFechaLimite("11/11/2021")).toEqual("11/11/2021");
   });
 
   it("crear tarea con fecha limite", () => {
-    expect(crearTareaConFechaLimite("Tercera Tarea","10/11/2021")).toEqual("Tercera Tarea\nFecha Limite: 10/11/2021");
+    expect(crearTareaConFechaLimite("Tercera Tarea","11/11/2021")).toEqual("Tercera Tarea\nFecha Limite: 11/11/2021");
   });
 
   it("deberia crear una categoria", () => {
