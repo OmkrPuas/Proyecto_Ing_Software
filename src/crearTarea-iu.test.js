@@ -19,16 +19,6 @@ describe("Gestor Tareas", () => {
     expect(lista_elem.innerHTML).toEqual("");
   });
 
-  it("deberia mostrar una tarea predeterminada en la lista de tareas", () => {    
-    const tarea_elem = document.querySelector("#tarea");
-    const boton_elem = document.querySelector("#crear-tarea");
-    const lista_elem = document.querySelector("#lista-tareas");
-
-    tarea_elem.value = "Primera Tarea";
-    boton_elem.click();
-    expect(lista_elem.innerHTML).toEqual("<li>Primera Tarea</li>");
-  });
-
   it("deberia mostrar una tarea añadida por el usuario", () =>{
     expect(crearTarea("Primera Tarea")).toEqual("Primera Tarea");
   });
@@ -38,6 +28,27 @@ describe("Gestor Tareas", () => {
     expect(mostrarListaTareas(listaTareas)).toEqual("Segunda Tarea\nPrimera Tarea"); 
 
   });
+
+  it("deberia evadir una fecha limite erronea", () => {
+    expect(crearFechaLimite("")).toEqual("Ingresa una fecha limite valida.");
+  });
+
+  it("deberia evadir una fecha limite erronea", () => {
+    expect(crearFechaLimite("09/11/2021")).toEqual("Ingresa una fecha limite valida.");
+  });
+
+  it("deberia crear una fecha limite predeterminada", () => {
+    expect(crearFechaLimite("10/11/2021")).toEqual("10/11/2021");
+  });
+
+  it("deberia crear una fecha limite ingresada", () => {
+    expect(crearFechaLimite("10/11/2021")).toEqual("10/11/2021");
+  });
+
+  it("crear tarea con fecha limite", () => {
+    expect(crearTareaConFechaLimite("Tercera Tarea","10/11/2021")).toEqual("Tercera Tarea\nFecha Limite: 10/11/2021");
+  });
+
 
   // it("deberia mostrar 2 tareas creadas", () => {
   //   const tarea_elem = document.querySelector("#tarea");
@@ -118,9 +129,10 @@ const listaTareas = new Array();
 var id = 0;
 
 export default class Tarea {
-  constructor(id,titulo) {
+  constructor(id, titulo, fechaLimite) {
     this.id = id;
     this.titulo = titulo;
+    this.fechaLimite = fechaLimite;
   }
 }
 
@@ -137,9 +149,24 @@ function mostrarListaTareas(lista){
 }
 
 function crearTarea(NombreTarea){
-  console.log(id);
-  let tarea = new Tarea(id,NombreTarea);
+  // console.log(id);
+  let tarea = new Tarea(id,NombreTarea, "");
   listaTareas.push(tarea);
   id++;
   return tarea.titulo;
+}
+
+function crearFechaLimite(fechaLimite){
+  if(fechaLimite == "" || fechaLimite < "10/11/2020"){
+    return "Ingresa una fecha limite valida.";
+  }
+  return fechaLimite;
+}
+
+function crearTareaConFechaLimite(nombreTarea, fechaLimite){
+  console.log(id);
+  let tarea = new Tarea(id,nombreTarea, fechaLimite);
+  listaTareas.push(tarea);
+  id++;
+  return tarea.titulo + "\nFecha Limite: " + tarea.fechaLimite;
 }
