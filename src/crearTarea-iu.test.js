@@ -1,11 +1,6 @@
 import fs from "fs";
 //import Tarea from "./gestorTareas.js"
 
-//PABLO
-import libreria, { TEAMGROZZO } from './App.js';
-//PABLO
-//const lista_elem = document.querySelector("#lista-tareas");
-
 
 
 describe("Gestor Tareas", () => {
