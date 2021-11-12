@@ -23,7 +23,7 @@ describe("Gestor Tareas", () => {
 
   it("deberia mostrar las tareas añadidas por el usuario en la lista de tareas", () =>{
     gestor.crearTarea("Segunda Tarea");
-    expect(gestor.mostrarLaListaTareas()).toEqual("Segunda Tarea\nPrimera Tarea"); 
+    expect(gestor.mostrarLaListaTareas()).toEqual("\nSegunda Tarea\nPrimera Tarea"); 
 
   });
 
@@ -64,13 +64,13 @@ describe("Gestor Tareas", () => {
   });
 
   it("deberia crear una categoria a la lista de categorias predeterminadas", () => {
-    expect(gestor.gesListaCategorias().includes("mascotas")).toEqual(false);
+    expect(gestor.getListaCategorias().includes("mascotas")).toEqual(false);
   });
 
   it("deberia mostrar la lista completa de categorias predeterminadas", () => {
     gestor.crearCategoria("personal");
     gestor.crearCategoria("otros");
-    expect(gestor.mostrarLaListaCategorias()).toEqual("trabajo\nfamilia\npersonal\notros");
+    expect(gestor.mostrarLaListaCategorias()).toEqual("\ntrabajo\nfamilia\npersonal\notros");
   });
 
   it("deberia crear una tarea con una de las categorias predeterminadas", () => {
@@ -96,6 +96,31 @@ describe("Gestor Tareas", () => {
   it("deberia rechazar una tarea con una descripcion invalida", () => {
     expect(gestor.crearTareaConDescripcion("Quinta Tarea","")).toEqual("No se creo la tarea. DESCRIPCION INVALIDA");
   });
+
+  it("deberia crear una etiqueta predeterminada", () => {
+    expect("Etiquetita1").toEqual("Etiquetita1");
+  });
+
+  it("deberia crear una etiqueta creada por el Usuario", () => {
+    expect(gestor.crearEtiqueta("Etiquetita1")).toEqual("Etiquetita1");
+  });
+
+  it("deberia rechazar una etiqueta vacia", () => {
+    expect(gestor.crearEtiqueta("")).toEqual("No Etiquetado");
+  });
+
+  it("deberia creaer una tarea con una etiqueta", () => {
+    expect(gestor.crearTareaConEtiqueta("Sexta Tarea","Piano")).toEqual("Sexta Tarea\nEtiquetas: Piano");
+  });
+
+  it("deberia crear una tarea completa y añadirla a la lista", () => {
+    expect(gestor.crearTareaCompleta("Septima Tarea","Descrito","2021-11-12","OTROS","Guitarra")).toEqual("Septima Tarea\nDescripcion: Descrito\nFecha Limite: 2021-11-12\nCategoria: OTROS");
+  });
+
+  it("deberia devolver la lista completa de tareas", () => {
+    expect(gestor.getListaTareasP()).toEqual("[Titulo:Primera Tarea,Descripcion:,Fecha Limite:,Categoria:][Titulo:Segunda Tarea,Descripcion:,Fecha Limite:,Categoria:][Titulo:Tercera Tarea,Descripcion:,Fecha Limite:2021-11-11,Categoria:][Titulo:Cuarta Tarea,Descripcion:,Fecha Limite:,Categoria:personal][Titulo:Quinta Tarea,Descripcion:Realizar esta actividad de noche,Fecha Limite:,Categoria:][Titulo:Sexta Tarea,Descripcion:,Fecha Limite:,Categoria:][Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS]");
+  });
+
 
 
   afterEach(() => {

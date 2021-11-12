@@ -1,22 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.dropdown {
+  position: relative;
+  display: inline-block;
+  border-style: solid;
+  padding: 5px 5px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 6px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
+</head>
+<body>
 <!--opcion con boton:-->
 <h1>Gestor de Tareas</h1>
-<label>Titulo: </label><br>
+<label>Titulo: </label>
 <input type="text" id="tarea">
-
+<label>Categoria: </label>
 <select name="select-categoria" id="select-categoria">
     <option value="trabajo">TRABAJO</option>
     <option value="personal" selected>PERSONAL</option>
     <option value="familia">FAMILIA</option>
     <option value="otros">OTROS</option>
 </select>
-<br>
-<label>Fecha limite: </label><br>
-<input type="date" id="fecha"><br>
+<label>Fecha limite: </label>
+<input type="date" id="fecha">
+<div class="dropdown">
+  <span> ETIQUETAS AQUI</span>
+  <div class="dropdown-content">
+  <form action="/action_page.php">
+    <input type="checkbox" id="etiqueta1" name="etiqueta" value="Piano">
+    <label for="etiqueta1"> Piano</label><br>
+    <input type="checkbox" id="etiqueta2" name="etiqueta" value="Guitarra">
+    <label for="etiqueta2"> Guitarra</label><br>
+    <input type="checkbox" id="etiqueta3" name="etiqueta" value="Yolo">
+    <label for="etiqueta3"> Yolo</label><br><br>
+  </form> 
+</div>
+</div> <br>
 <label >Descripcion: </label><br>
 <input type="text" id="descripcion" style="WIDTH: 228px; HEIGHT: 98px" size=32>
 <br><br>
 
-<button id="crear-tarea">Crear Tarea</button>
+<button id="crear-tarea">Crear Tarea</button><br>
+
+<input type="text" id="filtro">
+<button id="filtro-categoria">Buscar por Categoria</button>
 
 <div id="lista-tareas"></div>
 <script type="module" src="./src/gestorTareas.js"></script>
+
+</body>
+</html>
