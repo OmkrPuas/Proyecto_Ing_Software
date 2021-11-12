@@ -27,7 +27,7 @@ boton_elem.addEventListener("click", (event) => {
       if(descripcion_elem.value == ""){
         descripcion_elem.value = "n/a";
       }
-      let tarea = new Tarea(id, tarea_elem.value, validacionFecha, categoria_elem.value, descripcion_elem.value);
+      let tarea = gestor.classTarea(id, tarea_elem.value, validacionFecha, categoria_elem.value, descripcion_elem.value);
       id++;
       var aux = lista_elem.innerHTML;
       lista_elem.innerHTML = "<ul>" + "<li>" + tarea.titulo + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite +"</li>" + "</ul>" + "</li>" + "<button id=ver-mas>Ver más</button></ul>" + aux;
@@ -37,15 +37,3 @@ boton_elem.addEventListener("click", (event) => {
     }
   }
 });
-
-
-class Tarea {
-  constructor(id, titulo, fechaLimite, categoria, descripcion) {
-    this.id = id;
-    this.titulo = titulo;
-    this.fechaLimite = fechaLimite;
-    this.categoria = categoria;
-    this.descripcion = descripcion;
-  }
-}
-

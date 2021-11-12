@@ -2,7 +2,7 @@ var id = 0;
 const listaTareas = new Array();
 const listaCategorias = new Array();
 
-export class Tarea {
+class Tarea {
   constructor(id, titulo, fechaLimite, categoria, descripcion) {
     this.id = id;
     this.titulo = titulo;
@@ -10,6 +10,11 @@ export class Tarea {
     this.categoria = categoria;
     this.descripcion = descripcion;
   }
+}
+
+export function classTarea(id, titulo, fechaLimite, categoria, descripcion){
+  let tmp = new Tarea(id, titulo, fechaLimite, categoria, descripcion);
+  return tmp;
 }
 
 export function validarFechaLimite(fecha){
