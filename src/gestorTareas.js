@@ -6,6 +6,7 @@ const descripcion_elem = document.querySelector("#descripcion");
 const boton_elem = document.querySelector("#crear-tarea");
 const lista_elem = document.querySelector("#lista-tareas");
 const categoria_elem = document.querySelector("#select-categoria");
+const verMas_elem = document.querySelector("#ver-mas");
 
 var id = 0;
 
@@ -29,13 +30,14 @@ boton_elem.addEventListener("click", (event) => {
       let tarea = new Tarea(id, tarea_elem.value, validacionFecha, categoria_elem.value, descripcion_elem.value);
       id++;
       var aux = lista_elem.innerHTML;
-      lista_elem.innerHTML = "<ul>" + "<li>"+ tarea.id + " " + tarea.titulo + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite +"</li>" + "</ul>" + "</li>" + "</ul>" + aux;
+      lista_elem.innerHTML = "<ul>" + "<li>" + tarea.titulo + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite +"</li>" + "</ul>" + "</li>" + "<button id=ver-mas>Ver más</button></ul>" + aux;
       tarea_elem.value = "";
       fecha_elem.value = "";
       descripcion_elem.value = "";
     }
   }
 });
+
 
 class Tarea {
   constructor(id, titulo, fechaLimite, categoria, descripcion) {

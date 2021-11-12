@@ -1,8 +1,7 @@
 <!--opcion con boton:-->
 <h1>Gestor de Tareas</h1>
-<p>Añade un titulo: </p>
+<label>Titulo: </label><br>
 <input type="text" id="tarea">
-<!-- <button id="crear-tarea">Crear Tarea</button> -->
 
 <select name="select-categoria" id="select-categoria">
     <option value="trabajo">TRABAJO</option>
@@ -11,13 +10,13 @@
     <option value="otros">OTROS</option>
 </select>
 <br>
-<p>Añade una descripcion: </p>
-<input type="text" id="descripcion">
-<br>
-<input type="date" id="fecha">
+<label>Fecha limite: </label><br>
+<input type="date" id="fecha"><br>
+<label >Descripcion: </label><br>
+<input type="text" id="descripcion" style="WIDTH: 228px; HEIGHT: 98px" size=32>
+<br><br>
 
 <button id="crear-tarea">Crear Tarea</button>
-
 
 <div id="lista-tareas"></div>
 <script type="module" src="./src/gestorTareas.js"></script>

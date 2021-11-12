@@ -52,7 +52,7 @@ export function crearFechaLimite(fechaLimite){
 }
 
 export function crearTareaConFechaLimite(nombreTarea, fechaLimite){
-  console.log(id);
+  //console.log(id);
   if(validarFechaLimite(fechaLimite) != "No se pudo crear la tarea, FECHA INVALIDA."){
     let tarea = new Tarea(id,nombreTarea, fechaLimite, "", "");
     listaTareas.push(tarea);
@@ -87,7 +87,7 @@ export function mostrarLaListaCategorias(){
   }
 
 export function crearTareaConCategoria(nombreTarea, categoria){
-  console.log(id);
+  //console.log(id);
   let tarea = new Tarea(id,nombreTarea, "", categoria, "");
   listaTareas.push(tarea);
   id++;
@@ -103,7 +103,7 @@ export function crearDescripcion(descripcion){
 
 
 export function crearTareaConDescripcion(nombreTarea, descripcion){
-  console.log(id);
+  //console.log(id);
   if(descripcion == ""){
     return "No se creo la tarea. DESCRIPCION INVALIDA"
   }else{
