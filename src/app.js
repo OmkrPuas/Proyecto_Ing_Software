@@ -75,7 +75,7 @@ export function getListaTareasP(){
   var cadena = "";
   for (let index = 0; index < listaTareas.length; index++) {
     var tarea = listaTareas[index];
-    cadena += "[Titulo:" + tarea.titulo + ",Descripcion:" +tarea.descripcion+ ",Fecha Limite:" + tarea.fechaLimite+ ",Categoria:" + tarea.categoria +"]";
+    cadena += "[Titulo:" + tarea.titulo + ",Descripcion:" +tarea.descripcion+ ",Fecha Limite:" + tarea.fechaLimite+ ",Categoria:" + tarea.categoria + ",Etiquetas: " + tarea.etiquetas + "]";
   }   
   return cadena;
 }
@@ -150,7 +150,7 @@ export function crearTareaCompleta(nombreTarea, descripcion, fechaLimite, catego
     let tarea = new Tarea(id,nombreTarea, fechaLimite, categoria, descripcion, etiqueta);
     listaTareas.push(tarea);
     id++;
-    return tarea.titulo + "\nDescripcion: " + tarea.descripcion+ "\nFecha Limite: " + tarea.fechaLimite+ "\nCategoria: " + tarea.categoria;
+    return tarea.titulo + "\nDescripcion: " + tarea.descripcion+ "\nFecha Limite: " + tarea.fechaLimite+ "\nCategoria: " + tarea.categoria + "\nEtiquetas: " + tarea.etiquetas ;
   }
 }
 
@@ -159,4 +159,39 @@ export function añadirAListaTarea(tarea){
   listaTareas.push(tarea);
   id++;
   return tarea;
+}
+
+export function getElementoDeLista(lista, elemento){
+  var encontrado = "";
+  for(var i = 0; i < lista.length; i++){
+    if(lista[i] == elemento){
+      encontrado = lista[i];
+    }
+  }
+  if(encontrado == ""){
+    encontrado = "No encontrado";
+  }
+  return encontrado;
+}
+
+export function getListaTareasPorTitulo(titulo){
+  var encontrado = [];
+  for(var i = 0; i < listaTareas.length; i++){
+    if(listaTareas[i].titulo == titulo){
+      var guardado = "[Titulo:" + listaTareas[i].titulo + ",Descripcion:" + listaTareas[i].descripcion +",Fecha Limite: " + listaTareas[i].fechaLimite + ",Categoria: " + listaTareas[i].categoria + ",Etiquetas: " + listaTareas[i].etiquetas + "]";
+      //
+      encontrado.push(guardado);
+    }
+  }
+  return encontrado;
+}
+
+export function getListaTareasPorTituloT(titulo){
+  var encontrado = [];
+  for(var i = 0; i < listaTareas.length; i++){
+    if(listaTareas[i].titulo == titulo){
+      encontrado.push(listaTareas[i]);
+    }
+  }
+  return encontrado;
 }

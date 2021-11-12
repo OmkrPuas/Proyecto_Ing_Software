@@ -114,11 +114,21 @@ describe("Gestor Tareas", () => {
   });
 
   it("deberia crear una tarea completa y añadirla a la lista", () => {
-    expect(gestor.crearTareaCompleta("Septima Tarea","Descrito","2021-11-12","OTROS","Guitarra")).toEqual("Septima Tarea\nDescripcion: Descrito\nFecha Limite: 2021-11-12\nCategoria: OTROS");
+    expect(gestor.crearTareaCompleta("Septima Tarea","Descrito","2021-11-12","OTROS","Guitarra")).toEqual("Septima Tarea\nDescripcion: Descrito\nFecha Limite: 2021-11-12\nCategoria: OTROS\nEtiquetas: Guitarra");
   });
 
   it("deberia devolver la lista completa de tareas", () => {
-    expect(gestor.getListaTareasP()).toEqual("[Titulo:Primera Tarea,Descripcion:,Fecha Limite:,Categoria:][Titulo:Segunda Tarea,Descripcion:,Fecha Limite:,Categoria:][Titulo:Tercera Tarea,Descripcion:,Fecha Limite:2021-11-11,Categoria:][Titulo:Cuarta Tarea,Descripcion:,Fecha Limite:,Categoria:personal][Titulo:Quinta Tarea,Descripcion:Realizar esta actividad de noche,Fecha Limite:,Categoria:][Titulo:Sexta Tarea,Descripcion:,Fecha Limite:,Categoria:][Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS]");
+    expect(gestor.getListaTareasP()).toEqual("[Titulo:Primera Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: ][Titulo:Segunda Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: ][Titulo:Tercera Tarea,Descripcion:,Fecha Limite:2021-11-11,Categoria:,Etiquetas: ][Titulo:Cuarta Tarea,Descripcion:,Fecha Limite:,Categoria:personal,Etiquetas: ][Titulo:Quinta Tarea,Descripcion:Realizar esta actividad de noche,Fecha Limite:,Categoria:,Etiquetas: ][Titulo:Sexta Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: Piano][Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra]");
+  });
+  
+  //Ver la posibilidad de hacer mas pruebas con TDD
+
+  it("Deberia devolverme un valor especifico de una lista", () => {
+    expect(gestor.getElementoDeLista(["Manzana","Papaya","Banano","Mango","Durazno","Berenjena"],"Berenjena")).toEqual("Berenjena");
+  });
+
+  it("Deberia devolverme una lista con las tareas que tengan el titulo 'Primera Tarea'", () => {
+    expect(gestor.getListaTareasPorTitulo("Primera Tarea")).toEqual(["[Titulo:Primera Tarea,Descripcion:,Fecha Limite: ,Categoria: ,Etiquetas: ]"]);
   });
 
 
