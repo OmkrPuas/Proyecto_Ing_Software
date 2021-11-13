@@ -22,6 +22,12 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
+.wrap{
+  display: flex;
+}
+.bloque{
+  margin: 5px;
+}
 </style>
 </head>
 <body>
@@ -61,7 +67,10 @@
 <input type="text" id="descripcion" style="WIDTH: 228px; HEIGHT: 98px" size=32>
 <br><br>
 
-<button id="crear-tarea">Crear Tarea</button><br>
+<div class="wrap">
+  <button class="bloque" id="crear-tarea">Crear Tarea</button>
+  <button class="bloque" id="mostrar-tareas">Mostrar Tareas</button>
+</div>
 
 <input type="text" id="titulo-filtro">
 <button id="filtro-titulo">Buscar por Titulo</button>

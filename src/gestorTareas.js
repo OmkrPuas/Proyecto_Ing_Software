@@ -26,6 +26,7 @@ function getSelectedCheckboxValues(name) {
 boton_elem.addEventListener("click", (event) => {
   let validacionFecha = gestor.validarFechaLimite(fecha_elem.value);
   let etiquetas = getSelectedCheckboxValues('etiqueta');
+  console.log(etiquetas);
   if(etiquetas.length > 5){
     alert("No se pudo crear la tarea, DEMASIADAS ETIQUETAS.")
     tarea_elem.value = "";
@@ -43,12 +44,9 @@ boton_elem.addEventListener("click", (event) => {
         descripcion_elem.value = "";
         fecha_elem.value = "";
       }else{
-        if(etiquetas == ""){
-          alert("No se pudo crear la tarea, ETIQUETA INVALIDA.")
-          tarea_elem.value = "";
-          fecha_elem.value = "";
-          descripcion_elem.value = "";
-        }else{
+          if(etiquetas == ""){
+            etiquetas = "n/a";
+          }
           if(descripcion_elem.value == ""){
             descripcion_elem.value = "n/a";
           }
@@ -66,7 +64,6 @@ boton_elem.addEventListener("click", (event) => {
             elements[i].checked = false;
           }
           alert("Tarea Creada!");
-        }
       }
     }
   }

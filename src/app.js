@@ -132,14 +132,14 @@ export function crearTareaConDescripcion(nombreTarea, descripcion){
 
 export function crearTareaConEtiqueta(nombreTarea, etiqueta){
   //console.log(id);
-  if(descripcion == ""){
-    return "No se creo la tarea. ETIQUETA INVALIDA"
-  }else{
+  // if(descripcion == ""){
+  //   return "No se creo la tarea. ETIQUETA INVALIDA"
+  // }else{
     let tarea = new Tarea(id,nombreTarea, "", "", "", etiqueta);
     listaTareas.push(tarea);
     id++;
     return tarea.titulo + "\nEtiquetas: " + tarea.etiquetas;
-  }
+  // }
 }
 
 export function crearTareaCompleta(nombreTarea, descripcion, fechaLimite, categoria, etiqueta){
