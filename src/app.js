@@ -80,6 +80,15 @@ export function getListaTareasP(){
   return cadena;
 }
 
+export function getListaTareasEspecificas(lista){
+  let cadena = "";
+  for (let index = 0; index < lista.length; index++) {
+    let tarea = lista[index];
+    cadena += "[Titulo:" + tarea.titulo + ",Descripcion:" +tarea.descripcion+ ",Fecha Limite:" + tarea.fechaLimite+ ",Categoria:" + tarea.categoria + ",Etiquetas: " + tarea.etiquetas + "]";
+  }   
+  return cadena;
+}
+
 
 export function crearCategoria(categoria){
   listaCategorias.push(categoria);
@@ -197,9 +206,13 @@ export function mostrarTareas(){
 }
 
 export function getListaTareasPorTituloT(titulo){
-  var encontrado = [];
-  for(var i = 0; i < listaTareas.length; i++){
-    if(listaTareas[i].titulo == titulo){
+  if(titulo === ""){
+    return [];
+  }
+  let encontrado = [];
+  for(var i = 0; i < listaTareas.length; i++){ 
+    var re = new RegExp(titulo, "g");
+    if(listaTareas[i].titulo.match(re)){
       encontrado.push(listaTareas[i]);
     }
   }

@@ -72,17 +72,20 @@ boton_elem.addEventListener("click", (event) => {
 mostrarTareas_elem.addEventListener("click", (event) => {
   let lista = gestor.getListaTareas();
   lista_elem.innerHTML = "";
-  for(var i = 0; i < lista.length; i++){
+  for(var i = lista.length - 1; i >= 0 ; i--){
     lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +lista[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + lista[i].categoria +"</li>"+ "<li>" + "Descripcion: " + lista[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + lista[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + lista[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>";
   }
 });
 
 boton_filtro.addEventListener("click", (event) => {
   let tareasFiltradas = gestor.getListaTareasPorTituloT(titulo_filtro.value);
+  if(tareasFiltradas == ""){
+    alert("No se pudo encontrar ninguna coincidencia de Titulo:' " + titulo_filtro.value + "' en la lista de tareas")
+  }
   lista_elem.innerHTML = "";
-  var aux = lista_elem.innerHTML;
-  for(var i = 0; i < tareasFiltradas.length; i++){
-    lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tareasFiltradas[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tareasFiltradas[i].categoria +"</li>"+ "<li>" + "Descripcion: " + tareasFiltradas[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + tareasFiltradas[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tareasFiltradas[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>"  + aux;
+  // var aux = lista_elem.innerHTML;
+  for(var i = tareasFiltradas.length - 1; i >= 0 ; i--){
+    lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tareasFiltradas[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tareasFiltradas[i].categoria +"</li>"+ "<li>" + "Descripcion: " + tareasFiltradas[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + tareasFiltradas[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tareasFiltradas[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>";
   }
 });
 
