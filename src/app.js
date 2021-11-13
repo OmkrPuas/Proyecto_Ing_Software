@@ -186,6 +186,16 @@ export function getListaTareasPorTitulo(titulo){
   return encontrado;
 }
 
+export function mostrarTareas(){
+  let lista = [];
+  for(var i = 0; i < listaTareas.length; i++){
+    if(listaTareas[i].titulo == titulo){
+      lista = "\n[Titulo:" + listaTareas[i].titulo + ",Descripcion:" + listaTareas[i].descripcion +",Fecha Limite: " + listaTareas[i].fechaLimite + ",Categoria: " + listaTareas[i].categoria + ",Etiquetas: " + listaTareas[i].etiquetas + "]";
+    }
+  }
+  return lista;
+}
+
 export function getListaTareasPorTituloT(titulo){
   var encontrado = [];
   for(var i = 0; i < listaTareas.length; i++){
