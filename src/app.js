@@ -82,7 +82,7 @@ export function getListaTareasP(){
 
 export function getListaTareasEspecificas(lista){
   let cadena = "";
-  for (let index = 0; index < lista.length; index++) {
+  for (var index = 0; index < lista.length; index++) {
     let tarea = lista[index];
     cadena += "[Titulo:" + tarea.titulo + ",Descripcion:" +tarea.descripcion+ ",Fecha Limite:" + tarea.fechaLimite+ ",Categoria:" + tarea.categoria + ",Etiquetas: " + tarea.etiquetas + "]";
   }   
@@ -98,7 +98,7 @@ export function crearCategoria(categoria){
 
 export function mostrarLaListaCategorias(){
     var cadena = "";
-    for (let index = 0; index < listaCategorias.length; index++) {
+    for (var index = 0; index < listaCategorias.length; index++) {
         cadena += "\n" + listaCategorias[index];
     }
     return cadena;
@@ -206,13 +206,25 @@ export function mostrarTareas(){
 }
 
 export function getListaTareasPorTituloT(titulo){
-  if(titulo === ""){
+  if(titulo == ""){
     return [];
   }
   let encontrado = [];
-  for(var i = 0; i < listaTareas.length; i++){ 
+  for(let i = 0; i < listaTareas.length; i++){ 
     var re = new RegExp(titulo, "g");
     if(listaTareas[i].titulo.match(re)){
+      encontrado.push(listaTareas[i]);
+    }
+  }
+  return encontrado;
+}
+export function getListaTareasPorCategoria(categoria){
+  if(categoria == ""){
+    return [];
+  }
+  let encontrado = [];
+  for(let i = 0; i < listaTareas.length; i++){
+    if(listaTareas[i].categoria == categoria){
       encontrado.push(listaTareas[i]);
     }
   }

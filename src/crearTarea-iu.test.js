@@ -131,7 +131,7 @@ describe("Gestor Tareas", () => {
     expect(gestor.getListaTareasPorTitulo("Primera Tarea")).toEqual(["[Titulo:Primera Tarea,Descripcion:,Fecha Limite: ,Categoria: ,Etiquetas: ]"]);
   });
 
-  it("Deberia devolverme una lista vacia que coincidan con el titulo ''", () => {
+  it("La busqueda deberia devolverme una lista vacia que coincidan con el titulo ''", () => {
     let lista = gestor.getListaTareasPorTituloT("");
     expect(gestor.getListaTareasEspecificas(lista)).toEqual("");
   });
@@ -139,6 +139,16 @@ describe("Gestor Tareas", () => {
   it("Deberia devolverme una lista filtrada por titulo con todas las tareas que coincidan con el titulo 'Septima'", () => {
     gestor.crearTareaCompleta("Septima Tarea v2","Descrito","2021-11-12","OTROS","Guitarra");
     let lista = gestor.getListaTareasPorTituloT("Septima");
+    expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra]");
+  });
+
+  it("La busqueda deberia devolverme una lista vacia que coincidan con la categoria ''", () => {
+    let lista = gestor.getListaTareasPorCategoria("");
+    expect(gestor.getListaTareasEspecificas(lista)).toEqual("");
+  });
+
+  it("Deberia devolverme una lista filtrada por categoria con todas las tareas que coincidan con la categoria 'OTROS'", () => {
+    let lista = gestor.getListaTareasPorCategoria("OTROS");
     expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra]");
   });
 
