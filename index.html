@@ -1,84 +1,96 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-.dropdown {
-  position: relative;
-  display: inline-block;
-  border-style: solid;
-  padding: 5px 5px;
-}
+  <head>
+    <style>
+      .dropdown {
+        position: relative;
+        display: inline-block;
+        border-style: solid;
+        padding: 5px 5px;
+      }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 200px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 6px 16px;
-  z-index: 1;
-}
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        padding: 6px 16px;
+        z-index: 1;
+      }
 
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-.wrap{
-  display: flex;
-}
-.bloque{
-  margin: 5px;
-}
-</style>
-</head>
-<body>
-<!--opcion con boton:-->
-<h1>Gestor de Tareas</h1>
-<label>Titulo: </label>
-<input type="text" id="tarea">
-<label>Categoria: </label>
-<select name="select-categoria" id="select-categoria">
-    <option value="trabajo">TRABAJO</option>
-    <option value="personal" selected>PERSONAL</option>
-    <option value="familia">FAMILIA</option>
-    <option value="otros">OTROS</option>
-</select>
-<label>Fecha limite: </label>
-<input type="date" id="fecha">
-<div class="dropdown">
-  <span> ETIQUETAS AQUI</span>
-  <div class="dropdown-content">
-  <form action="/action_page.php">
-    <input type="checkbox" id="etiqueta1" name="etiqueta" value="Piano">
-    <label for="etiqueta1"> Piano</label><br>
-    <input type="checkbox" id="etiqueta2" name="etiqueta" value="Guitarra">
-    <label for="etiqueta2"> Guitarra</label><br>
-    <input type="checkbox" id="etiqueta3" name="etiqueta" value="Yolo">
-    <label for="etiqueta3"> Yolo</label><br>
-    <input type="checkbox" id="etiqueta4" name="etiqueta" value="SiSoy">
-    <label for="etiqueta3"> SiSoy</label><br>
-    <input type="checkbox" id="etiqueta5" name="etiqueta" value="LMAO">
-    <label for="etiqueta3"> LMAO</label><br>
-    <input type="checkbox" id="etiqueta6" name="etiqueta" value="LOOOL">
-    <label for="etiqueta3"> LOOOL</label><br><br>
-  </form> 
-</div>
-</div> <br>
-<label >Descripcion: </label><br>
-<input type="text" id="descripcion" style="WIDTH: 228px; HEIGHT: 98px" size=32>
-<br><br>
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+      .wrap {
+        display: flex;
+      }
+      .bloque {
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <!--opcion con boton:-->
+    <h1>Gestor de Tareas</h1>
+    <label>Titulo: </label>
+    <input type="text" id="tarea" />
+    <label>Categoria: </label>
+    <select name="select-categoria" id="select-categoria">
+      <option value="trabajo">TRABAJO</option>
+      <option value="personal" selected>PERSONAL</option>
+      <option value="familia">FAMILIA</option>
+      <option value="otros">OTROS</option>
+    </select>
+    <label>Fecha limite: </label>
+    <input type="date" id="fecha" />
+    <div class="dropdown">
+      <span> ETIQUETAS AQUI</span>
+      <div class="dropdown-content">
+        <form action="/action_page.php">
+          <input type="checkbox" id="etiqueta1" name="etiqueta" value="Piano" />
+          <label for="etiqueta1"> Piano</label><br />
+          <input
+            type="checkbox"
+            id="etiqueta2"
+            name="etiqueta"
+            value="Guitarra"
+          />
+          <label for="etiqueta2"> Guitarra</label><br />
+          <input type="checkbox" id="etiqueta3" name="etiqueta" value="Yolo" />
+          <label for="etiqueta3"> Yolo</label><br />
+          <input type="checkbox" id="etiqueta4" name="etiqueta" value="SiSoy" />
+          <label for="etiqueta3"> SiSoy</label><br />
+          <input type="checkbox" id="etiqueta5" name="etiqueta" value="LMAO" />
+          <label for="etiqueta3"> LMAO</label><br />
+          <input type="checkbox" id="etiqueta6" name="etiqueta" value="LOOOL" />
+          <label for="etiqueta3"> LOOOL</label><br /><br />
+        </form>
+      </div>
+    </div>
+    <br />
+    <label>Descripcion: </label><br />
+    <input
+      type="text"
+      id="descripcion"
+      style="width: 228px; height: 98px"
+      size="32"
+    />
+    <br /><br />
 
-<div class="wrap">
-  <button class="bloque" id="crear-tarea">Crear Tarea</button>
-  <button class="bloque" id="mostrar-tareas">Mostrar Tareas</button>
-</div>
+    <div class="wrap">
+      <button class="bloque" id="crear-tarea">Crear Tarea</button>
+      <button class="bloque" id="mostrar-tareas">Mostrar Tareas</button>
+    </div>
 
-<input type="text" id="titulo-filtro">
-<button id="filtro-titulo">Buscar por Titulo</button>
+    <input type="text" id="titulo-filtro" />
+    <button class="bloque" id="filtro-titulo">Buscar por Titulo</button>
+    <br />
 
-<div id="lista-tareas"></div>
-<script type="module" src="./src/gestorTareas.js"></script>
+    <input type="text" id="categoria-filtro" />
+    <button class="bloque" id="filtro-categoria">Buscar por Categoria</button>
 
-
-
-</body>
+    <div id="lista-tareas"></div>
+    <script type="module" src="./src/gestorTareas.js"></script>
+  </body>
 </html>

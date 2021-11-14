@@ -224,7 +224,8 @@ export function getListaTareasPorCategoria(categoria){
   }
   let encontrado = [];
   for(let i = 0; i < listaTareas.length; i++){
-    if(listaTareas[i].categoria == categoria){
+    if(listaTareas[i].categoria === categoria){
+      alert("ENCONTRO");
       encontrado.push(listaTareas[i]);
     }
   }

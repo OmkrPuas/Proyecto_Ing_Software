@@ -12,6 +12,8 @@ const mostrarTareas_elem = document.querySelector("#mostrar-tareas");
 const boton_filtro = document.querySelector("#filtro-titulo");
 const titulo_filtro = document.querySelector("#titulo-filtro");
 
+const boton_filtro_categoria = document.querySelector("#filtro-categoria");
+const categoria_filtro = document.querySelector("#categoria-filtro");
 var id = 0;
 
 function getSelectedCheckboxValues(name) {
@@ -81,6 +83,18 @@ boton_filtro.addEventListener("click", (event) => {
   let tareasFiltradas = gestor.getListaTareasPorTituloT(titulo_filtro.value);
   if(tareasFiltradas == ""){
     alert("No se pudo encontrar ninguna coincidencia de Titulo:' " + titulo_filtro.value + "' en la lista de tareas")
+  }
+  lista_elem.innerHTML = "";
+  // var aux = lista_elem.innerHTML;
+  for(var i = tareasFiltradas.length - 1; i >= 0 ; i--){
+    lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tareasFiltradas[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tareasFiltradas[i].categoria +"</li>"+ "<li>" + "Descripcion: " + tareasFiltradas[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + tareasFiltradas[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tareasFiltradas[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>";
+  }
+});
+
+boton_filtro_categoria.addEventListener("click", (event) => {
+  let tareasFiltradas = gestor.getListaTareasPorCategoria(categoria_filtro.value);
+  if(tareasFiltradas == ""){
+    alert("No se pudo encontrar ninguna coincidencia de Categoria:' " + categoria_filtro.value + "' en la lista de tareas")
   }
   lista_elem.innerHTML = "";
   // var aux = lista_elem.innerHTML;
