@@ -152,6 +152,16 @@ describe("Gestor Tareas", () => {
     expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra]");
   });
 
+  it("La busqueda deberia devolverme una lista vacia que coincidan con la etiqueta ''", () => {
+    let lista = gestor.getListaTareasPorEtiqueta("");
+    expect(gestor.getListaTareasEspecificas(lista)).toEqual("");
+  });
+
+  it("Deberia devolverme una lista filtrada por categoria con todas las tareas que coincidan con la etiqueta 'Guitarra'", () => {
+    let lista = gestor.getListaTareasPorEtiqueta("Guitarra");
+    expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra]");
+  });
+
 
 
 

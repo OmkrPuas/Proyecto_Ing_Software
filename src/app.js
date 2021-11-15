@@ -225,7 +225,19 @@ export function getListaTareasPorCategoria(categoria){
   let encontrado = [];
   for(let i = 0; i < listaTareas.length; i++){
     if(listaTareas[i].categoria === categoria){
-      alert("ENCONTRO");
+      encontrado.push(listaTareas[i]);
+    }
+  }
+  return encontrado;
+}
+export function getListaTareasPorEtiqueta(etiquetas){
+  if(etiquetas == ""){
+    return [];
+  }
+  let encontrado = [];
+  for(let i = 0; i < listaTareas.length; i++){ 
+    let re = new RegExp(etiquetas, "g");
+    if(listaTareas[i].etiquetas.match(re)){
       encontrado.push(listaTareas[i]);
     }
   }
