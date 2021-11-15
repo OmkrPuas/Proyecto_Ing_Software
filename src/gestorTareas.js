@@ -20,6 +20,9 @@ const etiquetas_filtro = document.querySelector("#etiquetas-filtro");
 
 const boton_filtro_dia = document.querySelector("#filtro-dia");
 const dia_filtro = document.querySelector("#dia-filtro");
+
+const boton_filtro_descripcion = document.querySelector("#filtro-descripcion");
+const descripcion_filtro = document.querySelector("#descripcion-filtro");
 var id = 0;
 
 function getSelectedCheckboxValues(name) {
@@ -130,3 +133,13 @@ boton_filtro_dia.addEventListener("click", (event) => {
   }
 });
 
+boton_filtro_descripcion.addEventListener("click", (event) => {
+  let tareasFiltradas = gestor.getListaTareasPorDescripcion(descripcion_filtro.value);
+  if(tareasFiltradas == ""){
+    alert("No se pudo encontrar ninguna tarea para la descripcion:' " + descripcion_filtro.value + "' en la lista de tareas")
+  }
+  lista_elem.innerHTML = "";
+  for(var i = tareasFiltradas.length - 1; i >= 0 ; i--){
+    lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tareasFiltradas[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tareasFiltradas[i].categoria +"</li>"+ "<li>" + "Descripcion: " + tareasFiltradas[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + tareasFiltradas[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tareasFiltradas[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>";
+  }
+});
