@@ -113,6 +113,8 @@ describe("Gestor Tareas", () => {
     expect(gestor.crearTareaConEtiqueta("Sexta Tarea","Piano")).toEqual("Sexta Tarea\nEtiquetas: Piano");
   });
 
+  
+
   it("deberia crear una tarea completa y añadirla a la lista", () => {
     expect(gestor.crearTareaCompleta("Septima Tarea","Descrito","2021-11-12","OTROS","Guitarra")).toEqual("Septima Tarea\nDescripcion: Descrito\nFecha Limite: 2021-11-12\nCategoria: OTROS\nEtiquetas: Guitarra");
   });

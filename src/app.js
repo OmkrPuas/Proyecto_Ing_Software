@@ -230,6 +230,7 @@ export function getListaTareasPorCategoria(categoria){
   }
   return encontrado;
 }
+
 export function getListaTareasPorEtiqueta(etiquetas){
   if(etiquetas == ""){
     return [];
@@ -237,7 +238,9 @@ export function getListaTareasPorEtiqueta(etiquetas){
   let encontrado = [];
   for(let i = 0; i < listaTareas.length; i++){ 
     let re = new RegExp(etiquetas, "g");
-    if(listaTareas[i].etiquetas.match(re)){
+    console.log(listaTareas[i].etiquetas);
+    // if(listaTareas[i].etiquetas.match(re)){
+    if(listaTareas[i].etiquetas.includes(etiquetas)){
       encontrado.push(listaTareas[i]);
     }
   }
