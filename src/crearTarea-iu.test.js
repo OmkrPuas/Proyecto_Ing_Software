@@ -113,7 +113,7 @@ describe("Gestor Tareas", () => {
     expect(gestor.crearTareaConEtiqueta("Sexta Tarea","Piano")).toEqual("Sexta Tarea\nEtiquetas: Piano");
   });
 
-  
+
 
   it("deberia crear una tarea completa y añadirla a la lista", () => {
     expect(gestor.crearTareaCompleta("Septima Tarea","Descrito","2021-11-12","OTROS","Guitarra")).toEqual("Septima Tarea\nDescripcion: Descrito\nFecha Limite: 2021-11-12\nCategoria: OTROS\nEtiquetas: Guitarra");
@@ -164,6 +164,15 @@ describe("Gestor Tareas", () => {
     expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra]");
   });
 
+  it("La busqueda deberia devolverme una lista vacia que coincidan con la fechaLimite: ''", () => {
+    let lista = gestor.getListaTareasPorDia("");
+    expect(gestor.getListaTareasEspecificas(lista)).toEqual("");
+  });
+
+  it("La busqueda deberia devolverme una lista vacia que coincidan con la fechaLimite: '2021-11-12'", () => {
+    let lista = gestor.getListaTareasPorDia("2021-11-12");
+    expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra]");
+  });
 
 
 

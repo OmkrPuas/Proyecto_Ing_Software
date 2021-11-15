@@ -238,9 +238,21 @@ export function getListaTareasPorEtiqueta(etiquetas){
   let encontrado = [];
   for(let i = 0; i < listaTareas.length; i++){ 
     let re = new RegExp(etiquetas, "g");
-    console.log(listaTareas[i].etiquetas);
     // if(listaTareas[i].etiquetas.match(re)){
     if(listaTareas[i].etiquetas.includes(etiquetas)){
+      encontrado.push(listaTareas[i]);
+    }
+  }
+  return encontrado;
+}
+
+export function getListaTareasPorDia(dia){
+  if(dia == ""){
+    return [];
+  }
+  let encontrado = [];
+  for(let i = 0; i < listaTareas.length; i++){
+    if(listaTareas[i].fechaLimite === dia){
       encontrado.push(listaTareas[i]);
     }
   }
