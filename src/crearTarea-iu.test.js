@@ -169,11 +169,20 @@ describe("Gestor Tareas", () => {
     expect(gestor.getListaTareasEspecificas(lista)).toEqual("");
   });
 
-  it("La busqueda deberia devolverme una lista vacia que coincidan con la fechaLimite: '2021-11-12'", () => {
+  it("La busqueda deberia devolverme una lista que coincidan con la fechaLimite: '2021-11-12'", () => {
     let lista = gestor.getListaTareasPorDia("2021-11-12");
     expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra]");
   });
 
+  it("La busqueda deberia devolverme una lista vacia que coincidan con la descripcion: ''", () => {
+    let lista = gestor.getListaTareasPorDescripcion("");
+    expect(gestor.getListaTareasEspecificas(lista)).toEqual("");
+  });
+
+  it("La busqueda deberia devolverme una lista que coincidan con la descripcion: 'Descrito'", () => {
+    let lista = gestor.getListaTareasPorDescripcion("Descrito");
+    expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra]");
+  });
 
 
   afterEach(() => {

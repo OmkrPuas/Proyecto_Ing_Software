@@ -258,3 +258,17 @@ export function getListaTareasPorDia(dia){
   }
   return encontrado;
 }
+
+export function getListaTareasPorDescripcion(descripcion){
+  if(descripcion == ""){
+    return [];
+  }
+  let encontrado = [];
+  for(let i = 0; i < listaTareas.length; i++){ 
+    var re = new RegExp(descripcion, "g");
+    if(listaTareas[i].descripcion.match(re)){
+      encontrado.push(listaTareas[i]);
+    }
+  }
+  return encontrado;
+}
