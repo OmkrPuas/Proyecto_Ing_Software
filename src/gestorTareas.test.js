@@ -3,16 +3,6 @@ import * as gestor from './app.js';
 
 
 describe("Gestor Tareas", () => {
-  beforeAll(() => {
-    document.body.innerHTML = fs.readFileSync("index.html", "utf8");
-    require("./gestorTareas.js");
-  });
-
-  it("Al iniciar no hay nada en la lista de tareas", () => {
-    const lista_elem = document.querySelector("#lista-tareas");
-    expect(lista_elem.innerHTML).toEqual("");
-  });
-
   it("deberia mostrar una tarea añadida por el usuario", () =>{
     expect(gestor.crearTarea("Primera Tarea")).toEqual("Primera Tarea");
   });
@@ -182,12 +172,6 @@ describe("Gestor Tareas", () => {
   it("La busqueda deberia devolverme una lista que coincidan con la descripcion: 'Descrito'", () => {
     let lista = gestor.getListaTareasPorDescripcion("Descrito");
     expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra]");
-  });
-
-
-  afterEach(() => {
-    const lista_elem = document.querySelector("#lista-tareas");
-    lista_elem.innerHTML = "";
   });
 
 });
