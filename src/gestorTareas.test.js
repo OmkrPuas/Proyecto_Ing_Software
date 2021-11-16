@@ -36,15 +36,15 @@ describe("Gestor Tareas", () => {
   });
 
   it("deberia crear una fecha limite predeterminada", () => {
-    expect(gestor.crearFechaLimite("2021-11-11")).toEqual("2021-11-11");
+    expect(gestor.crearFechaLimite("2022-11-19")).toEqual("2022-11-19");
   });
 
   it("deberia crear una fecha limite ingresada", () => {
-    expect(gestor.crearFechaLimite("2021-11-11")).toEqual("2021-11-11");
+    expect(gestor.crearFechaLimite("2022-11-19")).toEqual("2022-11-19");
   });
 
   it("crear tarea con fecha limite", () => {
-    expect(gestor.crearTareaConFechaLimite("Tercera Tarea","2021-11-11")).toEqual("Tercera Tarea\nFecha Limite: 2021-11-11");
+    expect(gestor.crearTareaConFechaLimite("Tercera Tarea","2022-11-19")).toEqual("Tercera Tarea\nFecha Limite: 2022-11-19");
   });
 
   it("crear tarea con fecha limite invalida", () => {
@@ -116,11 +116,11 @@ describe("Gestor Tareas", () => {
 
 
   it("deberia crear una tarea completa y añadirla a la lista", () => {
-    expect(gestor.crearTareaCompleta("Septima Tarea","Descrito","2021-11-12","OTROS","Guitarra")).toEqual("Septima Tarea\nDescripcion: Descrito\nFecha Limite: 2021-11-12\nCategoria: OTROS\nEtiquetas: Guitarra");
+    expect(gestor.crearTareaCompleta("Septima Tarea","Descrito","2022-11-19","OTROS","Guitarra")).toEqual("Septima Tarea\nDescripcion: Descrito\nFecha Limite: 2022-11-19\nCategoria: OTROS\nEtiquetas: Guitarra");
   });
 
   it("deberia devolver la lista completa de tareas", () => {
-    expect(gestor.getListaTareasP()).toEqual("[Titulo:Primera Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: ][Titulo:Segunda Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: ][Titulo:Tercera Tarea,Descripcion:,Fecha Limite:2021-11-11,Categoria:,Etiquetas: ][Titulo:Cuarta Tarea,Descripcion:,Fecha Limite:,Categoria:personal,Etiquetas: ][Titulo:Quinta Tarea,Descripcion:Realizar esta actividad de noche,Fecha Limite:,Categoria:,Etiquetas: ][Titulo:Sexta Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: Piano][Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra]");
+    expect(gestor.getListaTareasP()).toEqual("[Titulo:Primera Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: ][Titulo:Segunda Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: ][Titulo:Tercera Tarea,Descripcion:,Fecha Limite:2022-11-19,Categoria:,Etiquetas: ][Titulo:Cuarta Tarea,Descripcion:,Fecha Limite:,Categoria:personal,Etiquetas: ][Titulo:Quinta Tarea,Descripcion:Realizar esta actividad de noche,Fecha Limite:,Categoria:,Etiquetas: ][Titulo:Sexta Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: Piano][Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra]");
   });
   
   //Ver la posibilidad de hacer mas pruebas con TDD
@@ -139,9 +139,9 @@ describe("Gestor Tareas", () => {
   });
 
   it("Deberia devolverme una lista filtrada por titulo con todas las tareas que coincidan con el titulo 'Septima'", () => {
-    gestor.crearTareaCompleta("Septima Tarea v2","Descrito","2021-11-12","OTROS","Guitarra");
+    gestor.crearTareaCompleta("Septima Tarea v2","Descrito","2022-11-19","OTROS","Guitarra");
     let lista = gestor.getListaTareasPorTituloT("Septima");
-    expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra]");
+    expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra]");
   });
 
   it("La busqueda deberia devolverme una lista vacia que coincidan con la categoria ''", () => {
@@ -151,7 +151,7 @@ describe("Gestor Tareas", () => {
 
   it("Deberia devolverme una lista filtrada por categoria con todas las tareas que coincidan con la categoria 'OTROS'", () => {
     let lista = gestor.getListaTareasPorCategoria("OTROS");
-    expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra]");
+    expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra]");
   });
 
   it("La busqueda deberia devolverme una lista vacia que coincidan con la etiqueta ''", () => {
@@ -161,7 +161,7 @@ describe("Gestor Tareas", () => {
 
   it("Deberia devolverme una lista filtrada por categoria con todas las tareas que coincidan con la etiqueta 'Guitarra'", () => {
     let lista = gestor.getListaTareasPorEtiqueta("Guitarra");
-    expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra]");
+    expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra]");
   });
 
   it("La busqueda deberia devolverme una lista vacia que coincidan con la fechaLimite: ''", () => {
@@ -169,9 +169,9 @@ describe("Gestor Tareas", () => {
     expect(gestor.getListaTareasEspecificas(lista)).toEqual("");
   });
 
-  it("La busqueda deberia devolverme una lista que coincidan con la fechaLimite: '2021-11-12'", () => {
-    let lista = gestor.getListaTareasPorDia("2021-11-12");
-    expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra]");
+  it("La busqueda deberia devolverme una lista que coincidan con la fechaLimite: '2022-11-19'", () => {
+    let lista = gestor.getListaTareasPorDia("2022-11-19");
+    expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Tercera Tarea,Descripcion:,Fecha Limite:2022-11-19,Categoria:,Etiquetas: ][Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra]");
   });
 
   it("La busqueda deberia devolverme una lista vacia que coincidan con la descripcion: ''", () => {
@@ -181,7 +181,7 @@ describe("Gestor Tareas", () => {
 
   it("La busqueda deberia devolverme una lista que coincidan con la descripcion: 'Descrito'", () => {
     let lista = gestor.getListaTareasPorDescripcion("Descrito");
-    expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2021-11-12,Categoria:OTROS,Etiquetas: Guitarra]");
+    expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra]");
   });
 
 

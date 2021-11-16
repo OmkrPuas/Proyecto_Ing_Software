@@ -33,7 +33,12 @@ function getSelectedCheckboxValues(name) {
   });
   // console.log(values);
   return values;
-  
+}
+
+function limpiarCampos(){
+  tarea_elem.value = "";
+  fecha_elem.value = "";
+  descripcion_elem.value = "";
 }
 
 boton_elem.addEventListener("click", (event) => {
@@ -41,36 +46,26 @@ boton_elem.addEventListener("click", (event) => {
   let etiquetas = getSelectedCheckboxValues('etiqueta');
   if(etiquetas.length > 5){
     alert("No se pudo crear la tarea, DEMASIADAS ETIQUETAS.")
-    tarea_elem.value = "";
-    fecha_elem.value = "";
-    descripcion_elem.value = "";
+    limpiarCampos();
   }else{
     if(validacionFecha == "No se pudo crear la tarea, FECHA INVALIDA."){
       alert("No se pudo crear la tarea, FECHA INVALIDA.")
-      tarea_elem.value = "";
-      fecha_elem.value = "";
-      descripcion_elem.value = "";
+      limpiarCampos();
     }else{
       if(tarea_elem.value == ""){
         alert("No se pudo crear la tarea, TITULO INVALIDO.")
-        descripcion_elem.value = "";
-        fecha_elem.value = "";
+        limpiarCampos();
       }else{
-          if(etiquetas == ""){
-            etiquetas = "n/a";
-          }
-          if(descripcion_elem.value == ""){
-            descripcion_elem.value = "n/a";
-          }
+          etiquetas = gestor.verificarCampoVacio(etiquetas);
+          descripcion_elem.value = gestor.verificarCampoVacio(descripcion_elem.value);
           let tarea = gestor.classTarea(id, tarea_elem.value, validacionFecha, categoria_elem.value, descripcion_elem.value, etiquetas);
           gestor.añadirAListaTarea(tarea);
           id++;
           var aux = lista_elem.innerHTML;
           lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tarea.titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tarea.etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>"  + aux;
-          tarea_elem.value = "";
-          fecha_elem.value = "";
-          descripcion_elem.value = "";
+          limpiarCampos();
 
+          // Ver de refactorizar las siguientes lineas
           var elements = document.getElementsByName("etiqueta");
           for(var i = 0; i < elements.length; i++){
             elements[i].checked = false;

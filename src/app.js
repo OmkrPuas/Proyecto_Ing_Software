@@ -1,6 +1,10 @@
 var id = 0;
 const listaTareas = new Array();
 const listaCategorias = new Array();
+const fechaActual = new Date();
+const dia = fechaActual.getDate();
+const mes = fechaActual.getMonth() + 1;
+const anio = fechaActual.getFullYear();
 
 class Tarea {
   constructor(id, titulo, fechaLimite, categoria, descripcion, etiquetas) {
@@ -18,8 +22,12 @@ export function classTarea(id, titulo, fechaLimite, categoria, descripcion, etiq
   return tmp;
 }
 
+function unirFechaActual(){
+  return anio + "-" + mes + "-" + dia;
+}
+
 export function validarFechaLimite(fecha){
-  if( fecha < "2021-11-11"){
+  if( fecha < unirFechaActual()){
     if(fecha == ""){
       return "Ilimitado";
     }
@@ -271,4 +279,11 @@ export function getListaTareasPorDescripcion(descripcion){
     }
   }
   return encontrado;
+}
+
+export function verificarCampoVacio(campo){
+  if(campo == "" ){
+    campo = "n/a";
+  }
+  return campo;
 }
