@@ -13,6 +13,16 @@ describe("Gestor Tareas", () => {
     expect(lista_elem.innerHTML).toEqual("");
   });
 
+  // it("Deberia completar una tarea", () => {
+  //   const tarea_elem = document.querySelector("#tarea");
+  //   const boton_elem = document.querySelector("#crear-tarea");
+  //   const lista_elem = document.querySelector("#lista-tareas");
+
+  //   tarea_elem.value = "Primera Tarea";
+  //   boton_elem.click();
+  //   expect(lista_elem.innerHTML).toEqual("Primera Tarea");
+  // });
+
 //   it("Visualizar tarea en la lista", () => {
 //     const tarea_elem = document.querySelector("#tarea");
 //     const fecha_elem = document.querySelector("#fecha");

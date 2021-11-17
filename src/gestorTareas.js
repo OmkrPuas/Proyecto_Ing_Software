@@ -7,6 +7,8 @@ const boton_elem = document.querySelector("#crear-tarea");
 const lista_elem = document.querySelector("#lista-tareas");
 const categoria_elem = document.querySelector("#select-categoria");
 const mostrarTareas_elem = document.querySelector("#mostrar-tareas");
+//Completar
+const boton_completar = document.querySelector("#completar-tarea");
 
 //FILTROS
 const boton_filtro = document.querySelector("#filtro-titulo");
@@ -58,11 +60,12 @@ boton_elem.addEventListener("click", (event) => {
       }else{
           etiquetas = gestor.verificarCampoVacio(etiquetas);
           descripcion_elem.value = gestor.verificarCampoVacio(descripcion_elem.value);
-          let tarea = gestor.classTarea(id, tarea_elem.value, validacionFecha, categoria_elem.value, descripcion_elem.value, etiquetas);
+          let tarea = gestor.classTarea(id, tarea_elem.value, validacionFecha, categoria_elem.value, descripcion_elem.value, etiquetas, false);
           gestor.añadirAListaTarea(tarea);
           id++;
           var aux = lista_elem.innerHTML;
-          lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tarea.titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tarea.etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>"  + aux;
+          lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tarea.titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tarea.etiquetas + "</li>" +"</div>"+ "</div>"+ "<button class=" + "bloque" + " id=" + "completar-tarea" + ">Completar" + "</" + "button>" + "</ul>" + "</li>"  + aux;
+          
           limpiarCampos();
 
           // Ver de refactorizar las siguientes lineas
@@ -137,4 +140,8 @@ boton_filtro_descripcion.addEventListener("click", (event) => {
   for(var i = tareasFiltradas.length - 1; i >= 0 ; i--){
     lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tareasFiltradas[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tareasFiltradas[i].categoria +"</li>"+ "<li>" + "Descripcion: " + tareasFiltradas[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + tareasFiltradas[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tareasFiltradas[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>";
   }
+});
+
+boton_completar.addEventListener("click", (event) => {
+  alert("Tarea Completada");
 });
