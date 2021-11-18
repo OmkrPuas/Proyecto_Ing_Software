@@ -19,6 +19,11 @@ const boton_completar = document.querySelector("#completar-tarea");
 //Alertar Fecha Limite 
 const boton_alertar = document.querySelector("#revisar-fechas");
 
+//Añadir etiqueta
+const boton_nueva_etiqueta = document.querySelector("#añadir-etiqueta");
+const nueva_etiqueta = document.querySelector("#nueva-etiqueta");
+const form_etiquetas = document.querySelector("#form-etiquetas");
+
 //FILTROS
 const boton_filtro = document.querySelector("#filtro-titulo");
 const titulo_filtro = document.querySelector("#titulo-filtro");
@@ -35,6 +40,8 @@ const dia_filtro = document.querySelector("#dia-filtro");
 const boton_filtro_descripcion = document.querySelector("#filtro-descripcion");
 const descripcion_filtro = document.querySelector("#descripcion-filtro");
 var id = 0;
+
+gestor.inicializarListas();
 
 function getSelectedCheckboxValues(name) {
   const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
@@ -156,8 +163,22 @@ boton_alertar.addEventListener("click", (event) => {
   alert("Hay "+ pendientes +" Tareas para mañana");
 });
 
+boton_nueva_etiqueta.addEventListener("click", (event) => {
+  let listaEtiquetas = gestor.getListaEtiquetas();
+  let nuevaEtiqueta = nueva_etiqueta.value;
+  let etiquetas = form_etiquetas.innerHTML;
+  let etiqueta_nueva = "<input type='checkbox' id='etiqueta' name='etiqueta' value='"+ nuevaEtiqueta + "' /><label for='etiqueta3'>" + nuevaEtiqueta + "</label><br />";
+  form_etiquetas.innerHTML = etiquetas + etiqueta_nueva;
+  listaEtiquetas = gestor.crearNuevaEtiqueta(nuevaEtiqueta);
+  
+});
+
 boton_completar.addEventListener("click", (event) => {
   alert("Tarea Completada");
 });
 
 
+//var nueva etiqueta = "<input type='checkbox' id="etiqueta" name="etiqueta" value="NuevaEtiqueta" /><label for="etiqueta3"> NuevaEtiqueta</label><br /><br />""
+
+//var aux = lista_elem.innerHTML;
+//lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tarea.titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tarea.etiquetas + "</li>" +"</div>"+ "</div>"+ "<button class=" + "bloque" + " id=" + "completar-tarea" + ">Completar" + "</" + "button>" + "</ul>" + "</li>"  + aux;

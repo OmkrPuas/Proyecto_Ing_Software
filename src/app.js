@@ -2,6 +2,7 @@ var id = 0;
 const listaTareasPendientes = new Array();
 const listaCategorias = new Array();
 const listaTareasCompletadas = new Array();
+const listaEtiquetas = new Array();
 const fechaActual = new Date();
 const dia = fechaActual.getDate();
 const mes = fechaActual.getMonth() + 1;
@@ -22,6 +23,11 @@ class Tarea {
 export function classTarea(id, titulo, fechaLimite, categoria, descripcion, etiquetas, completada){
   let tmp = new Tarea(id, titulo, fechaLimite, categoria, descripcion, etiquetas, completada);
   return tmp;
+}
+
+export function inicializarListas(){
+  listaCategorias.push('TRABAJO','PERSONAL','FAMILIA','OTROS');
+  listaEtiquetas.push('Piano','Guitarra','Yolo','Importante','LMAO','LOOOL');
 }
 
 function unirFechaActual(){
@@ -96,6 +102,10 @@ export function getListaCategorias(){
     return listaCategorias;
 }
 
+export function getListaEtiquetas(){
+    return listaEtiquetas;
+}
+
 export function getListaTareas(){
   return listaTareasPendientes;
 }
@@ -124,6 +134,10 @@ export function crearCategoria(categoria){
   return listaCategorias.includes(categoria);
 }
 
+export function crearNuevaEtiqueta(etiqueta){
+  listaEtiquetas.push(etiqueta);
+  return listaEtiquetas.includes(etiqueta);
+}
 
 export function mostrarLaListaCategorias(){
     var cadena = "";

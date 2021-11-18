@@ -47,7 +47,7 @@
     <div class="dropdown">
       <span> ETIQUETAS AQUI</span>
       <div class="dropdown-content">
-        <form action="/action_page.php">
+        <form id="form-etiquetas" action="/action_page.php">
           <input type="checkbox" id="etiqueta1" name="etiqueta" value="Piano" />
           <label for="etiqueta1"> Piano</label><br />
           <input
@@ -64,10 +64,12 @@
           <input type="checkbox" id="etiqueta5" name="etiqueta" value="LMAO" />
           <label for="etiqueta3"> LMAO</label><br />
           <input type="checkbox" id="etiqueta6" name="etiqueta" value="LOOOL" />
-          <label for="etiqueta3"> LOOOL</label><br /><br />
+          <label for="etiqueta3"> LOOOL</label><br />
         </form>
       </div>
     </div>
+    <button class="bloque" id="añadir-etiqueta">Añadir Etiqueta</button>
+    <input type="text" id="nueva-etiqueta" name="nueva-etiqueta" placeholder="Inserte nueva etiqueta" />
     <br />
     <label>Descripcion: </label><br />
     <input
