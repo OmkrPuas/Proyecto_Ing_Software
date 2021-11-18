@@ -28,13 +28,32 @@ function unirFechaActual(){
   return anio + "-" + mes + "-" + dia;
 }
 
+function esMañana(){
+  return anio + "-" + mes + "-" + (dia+1);
+}
+
+export function revisarFechasLimites(){
+  var mañana = esMañana();
+  var tareas = 0;
+  for(var i = 0; i < listaTareasPendientes.length; i++){
+    if(listaTareasPendientes[i].fechaLimite == mañana){
+      tareas++;
+    }else{
+      if(listaTareasPendientes[i].fechaLimite == unirFechaActual()){
+        tareas++;
+      }
+    }
+  }
+  return tareas;
+}
+
 export function validarFechaLimite(fecha){
   if( fecha < unirFechaActual()){
     if(fecha == ""){
       return "Ilimitado";
     }
     return "No se pudo crear la tarea, FECHA INVALIDA.";
-  }else{ 
+  }else{
     return fecha;
   }
 }

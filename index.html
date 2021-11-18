@@ -81,24 +81,35 @@
     <div class="wrap">
       <button class="bloque" id="crear-tarea">Crear Tarea</button>
       <button class="bloque" id="mostrar-tareas">Mostrar Tareas</button>
+      <button class="bloque" id="revisar-fechas">Revisar Fechas Limites</button>
     </div>
 
     <input type="text" id="titulo-filtro" />
     <button class="bloque" id="filtro-titulo">Buscar por Titulo</button>
-    <br />
 
-    <input type="text" id="categoria-filtro" />
+
+    <select name="filtro-categoria" id="filtro-categoria">
+      <option value="Ninguno"></option>
+      <option value="trabajo">TRABAJO</option>
+      <option value="personal" selected>PERSONAL</option>
+      <option value="familia">FAMILIA</option>
+      <option value="otros">OTROS</option>
+    </select>
     <button class="bloque" id="filtro-categoria">Buscar por Categoria</button>
-    <br />
+  
 
-    <input type="text" id="etiquetas-filtro" />
+    <select name="filtro-etiqueta" id="filtro-etiqueta">
+      <option value="Ninguno"></option>
+      <option value="Guitarra">Guitarra</option>
+      <option value="Yolo" selected>Yolo</option>
+      <option value="LMAO">LMAO</option>
+      <option value="Importante">Importante</option>
+    </select>
     <button class="bloque" id="filtro-etiquetas">Buscar por Etiqueta</button>
-    <br />
 
-    <input type="text" id="dia-filtro" />
+    <input type="date" id="dia-filtro" />
     <button class="bloque" id="filtro-dia">Buscar por Dia</button>
 
-    <br />
 
     <input type="text" id="descripcion-filtro" />
     <button class="bloque" id="filtro-descripcion">Buscar por Descripcion</button>

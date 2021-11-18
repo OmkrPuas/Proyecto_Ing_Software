@@ -1,5 +1,9 @@
 import * as gestor from './app.js';
 
+
+
+
+//gestor.algo
 const tarea_elem = document.querySelector("#tarea");
 const fecha_elem = document.querySelector("#fecha");
 const descripcion_elem = document.querySelector("#descripcion");
@@ -7,8 +11,13 @@ const boton_elem = document.querySelector("#crear-tarea");
 const lista_elem = document.querySelector("#lista-tareas");
 const categoria_elem = document.querySelector("#select-categoria");
 const mostrarTareas_elem = document.querySelector("#mostrar-tareas");
+
+
 //Completar
 const boton_completar = document.querySelector("#completar-tarea");
+
+//Alertar Fecha Limite 
+const boton_alertar = document.querySelector("#revisar-fechas");
 
 //FILTROS
 const boton_filtro = document.querySelector("#filtro-titulo");
@@ -142,6 +151,13 @@ boton_filtro_descripcion.addEventListener("click", (event) => {
   }
 });
 
+boton_alertar.addEventListener("click", (event) => {
+  let pendientes = gestor.revisarFechasLimites();
+  alert("Hay "+ pendientes +" Tareas para mañana");
+});
+
 boton_completar.addEventListener("click", (event) => {
   alert("Tarea Completada");
 });
+
+
