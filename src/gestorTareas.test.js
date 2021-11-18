@@ -149,11 +149,11 @@ describe("Gestor Tareas", () => {
     expect(gestor.getListaTareasEspecificas(lista)).toEqual("");
   });
 
-  it("Deberia devolverme una lista filtrada por categoria con todas las tareas que coincidan con la etiqueta 'Guitarra'", () => {
-    let lista = gestor.getListaTareasPorEtiqueta("Guitarra");
-    expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra]");
+  it("Deberia devolverme una lista filtrada por categoria con todas las tareas que coincidan con la etiqueta 'Importante'", () => {
+    let lista = gestor.getListaTareasPorEtiqueta("Importante");
+    expect(gestor.getListaTareasEspecificas(lista)).toEqual("[Titulo:Sexta Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: Piano][Titulo:Sexta Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: Piano][Titulo:Sexta Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: Piano][Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra]");
   });
-
+//[Titulo:Septima Tarea,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra][Titulo:Septima Tarea v2,Descripcion:Descrito,Fecha Limite:2022-11-19,Categoria:OTROS,Etiquetas: Guitarra]
   it("La busqueda deberia devolverme una lista vacia que coincidan con la fechaLimite: ''", () => {
     let lista = gestor.getListaTareasPorDia("");
     expect(gestor.getListaTareasEspecificas(lista)).toEqual("");

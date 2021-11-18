@@ -127,9 +127,10 @@ boton_filtro_categoria.addEventListener("click", (event) => {
 });
 
 boton_filtro_etiquetas.addEventListener("click", (event) => {
-  let tareasFiltradas = gestor.getListaTareasPorEtiqueta(etiquetas_filtro.value);
+  let etiquetas = getSelectedCheckboxValues("filtro-etiqueta");
+  let tareasFiltradas = gestor.getListaTareasPorEtiqueta(etiquetas);
   if(tareasFiltradas == ""){
-    alert("No se pudo encontrar ninguna coincidencia de Etiqueta:' " + etiquetas_filtro.value + "' en la lista de tareas")
+    alert("No se pudo encontrar ninguna coincidencia de Etiqueta:' " + etiquetas + "' en la lista de tareas")
   }
   lista_elem.innerHTML = "";
   for(var i = tareasFiltradas.length - 1; i >= 0 ; i--){
@@ -173,9 +174,6 @@ boton_nueva_etiqueta.addEventListener("click", (event) => {
   
 });
 
-boton_completar.addEventListener("click", (event) => {
-  alert("Tarea Completada");
-});
 
 
 //var nueva etiqueta = "<input type='checkbox' id="etiqueta" name="etiqueta" value="NuevaEtiqueta" /><label for="etiqueta3"> NuevaEtiqueta</label><br /><br />""

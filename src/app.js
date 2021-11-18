@@ -282,8 +282,11 @@ export function getListaTareasPorEtiqueta(etiquetas){
   for(let i = 0; i < listaTareasPendientes.length; i++){ 
     let re = new RegExp(etiquetas, "g");
     // if(listaTareasPendientes[i].etiquetas.match(re)){
-    if(listaTareasPendientes[i].etiquetas.includes(etiquetas)){
-      encontrado.push(listaTareasPendientes[i]);
+    let listaEtiquetas = listaTareasPendientes[i].etiquetas;    
+    for(let j = 0; j< etiquetas.length; j++){
+      if(listaEtiquetas.includes(etiquetas[j])){
+        encontrado.push(listaTareasPendientes[i]);
+      }
     }
   }
   return encontrado;
