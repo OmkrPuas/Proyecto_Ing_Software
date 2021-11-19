@@ -81,6 +81,7 @@ boton_elem.addEventListener("click", (event) => {
           id++;
           var aux = lista_elem.innerHTML;
           lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tarea.titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tarea.etiquetas + "</li>" +"</div>"+ "</div>"+ "<button class=" + "bloque" + " id=" + "completar-tarea" + ">Completar" + "</" + "button>" + "</ul>" + "</li>"  + aux;
+          // lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tarea.titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tarea.etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>"  + aux;
           
           limpiarCampos();
 
@@ -173,9 +174,9 @@ boton_nueva_etiqueta.addEventListener("click", (event) => {
   
 });
 
-boton_completar.addEventListener("click", (event) => {
-  alert("Tarea Completada");
-});
+// boton_completar.addEventListener("click", (event) => {
+//   alert("Tarea Completada");
+// });
 
 
 //var nueva etiqueta = "<input type='checkbox' id="etiqueta" name="etiqueta" value="NuevaEtiqueta" /><label for="etiqueta3"> NuevaEtiqueta</label><br /><br />""

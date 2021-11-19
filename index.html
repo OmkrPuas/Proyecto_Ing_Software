@@ -28,6 +28,16 @@
       .bloque {
         margin: 5px;
       }
+
+      .lista{
+        display: grid;
+        grid-template-columns: repeat(2, 2fr);
+        height:110px;
+        /* background-color: #f6a0a0; */
+        position: fixed;
+        /* width: 100%; */
+      }
+
     </style>
   </head>
   <body>
@@ -116,7 +126,7 @@
     <input type="text" id="descripcion-filtro" />
     <button class="bloque" id="filtro-descripcion">Buscar por Descripcion</button>
 
-    <div id="lista-tareas"></div>
+    <div class='lista' id="lista-tareas"></div>
     <script type="module" src="./src/gestorTareas.js"></script>
   </body>
 </html>
