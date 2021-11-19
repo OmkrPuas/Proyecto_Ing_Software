@@ -100,7 +100,7 @@
     <button class="bloque" id="filtro-titulo">Buscar por Titulo</button>
 
 
-    <select name="filtro-categoria" id="filtro-categoria">
+    <select name="categoria-filtro" id="categoria-filtro">
       <option value="Ninguno"></option>
       <option value="trabajo">TRABAJO</option>
       <option value="personal" selected>PERSONAL</option>
@@ -110,13 +110,30 @@
     <button class="bloque" id="filtro-categoria">Buscar por Categoria</button>
   
 
-    <select name="filtro-etiqueta" id="filtro-etiqueta">
-      <option value="Ninguno"></option>
-      <option value="Guitarra">Guitarra</option>
-      <option value="Yolo" selected>Yolo</option>
-      <option value="LMAO">LMAO</option>
-      <option value="Importante">Importante</option>
-    </select>
+    <div class="dropdown">
+      <span>FILTROS ETIQUETAS</span>
+        <div class="dropdown-content">
+          <form id="etiquetas-filtro" action="/action_page.php">
+            <input type="checkbox" id="etiqueta1" name="filtro-etiqueta" value="Piano" />
+            <label for="etiqueta1"> Piano</label><br />
+            <input
+              type="checkbox"
+              id="etiqueta2"
+              name="filtro-etiqueta"
+              value="Guitarra"
+            />
+            <label for="etiqueta2"> Guitarra</label><br />
+            <input type="checkbox" id="etiqueta3" name="filtro-etiqueta" value="Yolo" />
+            <label for="etiqueta3"> Yolo</label><br />
+            <input type="checkbox" id="etiqueta4" name="filtro-etiqueta" value="Importante" />
+            <label for="etiqueta3"> Importante</label><br />
+            <input type="checkbox" id="etiqueta5" name="filtro-etiqueta" value="LMAO" />
+            <label for="etiqueta3"> LMAO</label><br />
+            <input type="checkbox" id="etiqueta6" name="filtro-etiqueta" value="LOOOL" />
+            <label for="etiqueta3"> LOOOL</label><br />
+          </form>
+        </div>
+    </div>
     <button class="bloque" id="filtro-etiquetas">Buscar por Etiqueta</button>
 
     <input type="date" id="dia-filtro" />
