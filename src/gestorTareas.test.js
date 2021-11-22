@@ -212,4 +212,12 @@ describe("Gestor Tareas", () => {
     gestor.completarTarea(tarea);                   //SEGUNDA TAREA
     expect(gestor.getListaTareasCompletadas()).toEqual("[Titulo:Primera Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: ,Completada:true][Titulo:Segunda Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: ,Completada:true]");
   });
+
+  it("Deberia devolver la cantidad de tareas completadas por categoría", () => {
+    let vec = [0,0,0,0,2];
+    gestor.crearCategoria("");
+    let tarea = gestor.crearTareaCompleta("Septima Tarea v2","Descrito","2022-11-19","OTROS","Guitarra",false)
+    gestor.agregarTareaCompletadaALista(tarea);
+    expect(gestor.getNumTareasPorCategoria()).toEqual(vec);
+  });
 });
