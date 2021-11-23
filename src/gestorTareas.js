@@ -40,6 +40,7 @@ const dia_filtro = document.querySelector("#dia-filtro");
 const boton_filtro_descripcion = document.querySelector("#filtro-descripcion");
 const descripcion_filtro = document.querySelector("#descripcion-filtro");
 
+//Tareas Completadas
 const boton_filtro_tareas_completadas = document.querySelector("#filtro-tareas-completadas");
 const boton_filtro_completadas_categorias = document.querySelector("#filtro-completadas-por-categoria");
 const categoria_completadas_filtro = document.querySelector("#categoria-completadas-filtro");
@@ -187,9 +188,9 @@ boton_nueva_etiqueta.addEventListener("click", (event) => {
 
 boton_filtro_tareas_completadas.addEventListener("click", (event) => {
   if(zz == 0){
-    gestor.crearTareaCompletaT("Septima Tarea v2","Descrito","2022-11-19","otros","Guitarra",true);
-    gestor.crearTareaCompletaT("Octava Tarea v2","Descrito","2022-11-12","familia","Guitarra",true);
-    zz+=1;
+    gestor.crearTareaCompletada("Septima Tarea v2","Descrito","2022-11-19","otros","Guitarra",true);
+    gestor.crearTareaCompletada("Octava Tarea v2","Descrito","2022-11-12","familia","Guitarra",true);
+    zz = zz + 1;
   }
   
   
