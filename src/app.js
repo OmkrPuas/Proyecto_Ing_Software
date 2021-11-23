@@ -26,7 +26,7 @@ export function classTarea(id, titulo, fechaLimite, categoria, descripcion, etiq
 }
 
 export function inicializarListas(){
-  listaCategorias.push('','TRABAJO','PERSONAL','FAMILIA','otros');
+  listaCategorias.push('','trabajo','personal','familia','otros');
   listaEtiquetas.push('Piano','Guitarra','Yolo','Importante','LMAO','LOOOL');
 }
 
@@ -286,6 +286,19 @@ export function getListaTareasPorCategoria(categoria){
   return encontrado;
 }
 
+export function getListaTareasCompletasPorCategoria(categoria){
+  if(categoria == ""){
+    return [];
+  }
+  let encontrado = [];
+  for(let i = 0; i < listaTareasCompletadas.length; i++){
+    if(listaTareasCompletadas[i].categoria === categoria){
+      encontrado.push(listaTareasCompletadas[i]);
+    }
+  }
+  return encontrado;
+}
+
 export function getListaTareasPorEtiqueta(etiquetas){
   if(etiquetas == ""){
     return [];
@@ -381,23 +394,22 @@ export function getListaTareasCompletadas(){
   return cadena;
 }
 
-export function getNumTareasPorCategoria(){
-  //Se introduciran los numeros por categoria en el sig array con el sig orden ['TRABAJO','PERSONAL','FAMILIA','otros']
+export function getNumTareasCompletadasPorCategoria(){
   let numTareas = [];
   let cont1 =0, cont2=0, cont3=0, cont4=0, cont5 =0;
   for (let i = 0; i < listaTareasCompletadas.length; i++){
     for(let j = 0; j < listaCategorias.length; j++){
-      if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'TRABAJO'){
-        cont1++;
+      if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'trabajo'){
+        cont1 = cont1 + 1;
       }
-      if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'FAMILIA'){
-        cont2++;
+      if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'familia'){
+        cont2 = cont2 + 1;
       }
-      if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'PERSONAL'){
-        cont3++;
+      if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'personal'){
+        cont3 = cont3 + 1;
       }
       if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'otros'){
-        cont4++;
+        cont4 = cont4 + 1;
       }
       if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == ""){
         cont5 = cont5 + 1;
@@ -410,6 +422,23 @@ export function getNumTareasPorCategoria(){
   numTareas[3] = cont4;
   numTareas[4] = cont5;
   return numTareas;
+}
+
+export function getListaTareasPorRangoFechas(dia1, dia2){
+  if(dia1 == "" || dia2 == ""){
+    return [];
+  }
+  let encontrado = [];
+  for(let i = 0; i < listaTareasCompletadas.length; i++){
+    if(listaTareasCompletadas[i].fechaLimite > dia1 && listaTareasCompletadas[i].fechaLimite < dia2){
+      encontrado.push(listaTareasCompletadas[i]);
+    }
+  }
+  return encontrado;
+}
+
+export function getListaCompletadasTareas(){
+  return listaTareasCompletadas;
 }
 
 export function completarTarea(tarea){

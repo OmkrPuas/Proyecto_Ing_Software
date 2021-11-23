@@ -134,6 +134,19 @@
     <input type="text" id="descripcion-filtro" />
     <button class="bloque" id="filtro-descripcion">Buscar por Descripcion</button>
 
+    <button class="bloque" id="filtro-tareas-completadas">Mostrar tareas completadas</button>
+    <select name="categoria-completadas-filtro" id="categoria-completadas-filtro">
+      <option value="Ninguno"></option>
+      <option value="trabajo">TRABAJO</option>
+      <option value="personal" selected>PERSONAL</option>
+      <option value="familia">FAMILIA</option>
+      <option value="otros">otros</option>
+    </select>
+    <button class="bloque" id="filtro-completadas-por-categoria">Mostrar tareas completadas por categoria</button>
+    <input type="date" id="dia-completada-filtroInicio" />
+    <input type="date" id="dia-completada-filtroFinal" />
+    <button class="bloque" id="filtro-completadas-por-fechas">Mostrar tareas completadas por fechas</button>
+
     <div class='lista' id="lista-tareas"></div>
     <script type="module" src="./src/gestorTareas.js"></script>
   </body>

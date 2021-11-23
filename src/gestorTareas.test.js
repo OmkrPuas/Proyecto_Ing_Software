@@ -218,7 +218,7 @@ describe("Gestor Tareas", () => {
     gestor.crearCategoria("");
     let tarea = gestor.crearTareaCompleta("Septima Tarea v2","Descrito","2022-11-19","otros","Guitarra",true)
     gestor.agregarTareaCompletadaALista(tarea);
-    expect(gestor.getNumTareasPorCategoria()).toEqual(vec);
+    expect(gestor.getNumTareasCompletadasPorCategoria()).toEqual(vec);
   });
 
 });
