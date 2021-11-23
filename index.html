@@ -38,9 +38,9 @@
     <input type="text" id="tarea" />
     <label>Categoria: </label>
     <select name="select-categoria" id="select-categoria">
-      <option value="trabajo">TRABAJO</option>
-      <option value="personal" selected>PERSONAL</option>
-      <option value="familia">FAMILIA</option>
+      <option value="trabajo">trabajo</option>
+      <option value="personal" selected>personal</option>
+      <option value="familia">familia</option>
       <option value="otros">otros</option>
     </select>
     <label>Fecha limite: </label>
@@ -93,9 +93,9 @@
 
     <select name="categoria-filtro" id="categoria-filtro">
       <option value="Ninguno"></option>
-      <option value="trabajo">TRABAJO</option>
-      <option value="personal" selected>PERSONAL</option>
-      <option value="familia">FAMILIA</option>
+      <option value="trabajo">trabajo</option>
+      <option value="personal" selected>personal</option>
+      <option value="familia">familia</option>
       <option value="otros">otros</option>
     </select>
     <button class="bloque" id="filtro-categoria">Buscar por Categoria</button>
@@ -137,13 +137,18 @@
     <button class="bloque" id="filtro-tareas-completadas">Mostrar tareas completadas</button>
     <select name="categoria-completadas-filtro" id="categoria-completadas-filtro">
       <option value="Ninguno"></option>
-      <option value="trabajo">TRABAJO</option>
-      <option value="personal" selected>PERSONAL</option>
-      <option value="familia">FAMILIA</option>
+      <option value="trabajo">trabajo</option>
+      <option value="personal" selected>personal</option>
+      <option value="familia">familia</option>
       <option value="otros">otros</option>
     </select>
+    
     <button class="bloque" id="filtro-completadas-por-categoria">Mostrar tareas completadas por categoria</button>
+    
+    <label>Desde: </label>
     <input type="date" id="dia-completada-filtroInicio" />
+    
+    <label>Hasta: </label>
     <input type="date" id="dia-completada-filtroFinal" />
     <button class="bloque" id="filtro-completadas-por-fechas">Mostrar tareas completadas por fechas</button>
 

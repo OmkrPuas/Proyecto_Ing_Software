@@ -30,11 +30,11 @@ export function inicializarListas(){
   listaEtiquetas.push('Piano','Guitarra','Yolo','Importante','LMAO','LOOOL');
 }
 
-function unirFechaActual(){
+export function unirFechaActual(){
   return anio + "-" + mes + "-" + dia;
 }
 
-function esMañana(){
+export function esMañana(){
   return anio + "-" + mes + "-" + (dia+1);
 }
 
@@ -430,7 +430,7 @@ export function getListaTareasPorRangoFechas(dia1, dia2){
   }
   let encontrado = [];
   for(let i = 0; i < listaTareasCompletadas.length; i++){
-    if(listaTareasCompletadas[i].fechaLimite > dia1 && listaTareasCompletadas[i].fechaLimite < dia2){
+    if(listaTareasCompletadas[i].fechaLimite >= dia1 && listaTareasCompletadas[i].fechaLimite <= dia2){
       encontrado.push(listaTareasCompletadas[i]);
     }
   }

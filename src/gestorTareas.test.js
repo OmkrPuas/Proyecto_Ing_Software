@@ -221,4 +221,10 @@ describe("Gestor Tareas", () => {
     expect(gestor.getNumTareasCompletadasPorCategoria()).toEqual(vec);
   });
 
+  it("Deberia crear una instancia de tarea", () => {
+    let tarea = gestor.classTarea(gestor.getListaTareasPendientes.length,"Novena tarea","Descrito","2022-11-19","otros","Guitarra",false);
+    
+    expect(tarea).toEqual({"categoria": "2022-11-19", "completada": false, "descripcion": "otros", "etiquetas": "Guitarra", "fechaLimite": "Descrito", "id": 0, "titulo": 
+    "Novena tarea"});
+  });
 });

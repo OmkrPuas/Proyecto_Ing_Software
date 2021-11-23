@@ -1,5 +1,5 @@
 import * as gestor from './app.js';
-
+let zz = 0;
 
 
 
@@ -184,8 +184,13 @@ boton_nueva_etiqueta.addEventListener("click", (event) => {
 });
 
 boton_filtro_tareas_completadas.addEventListener("click", (event) => {
-  gestor.crearTareaCompletaT("Septima Tarea v2","Descrito","2022-11-19","otros","Guitarra",true);
-  gestor.crearTareaCompletaT("Octava Tarea v2","Descrito","2022-11-12","familia","Guitarra",true);
+  if(zz == 0){
+    gestor.crearTareaCompletaT("Septima Tarea v2","Descrito","2022-11-19","otros","Guitarra",true);
+    gestor.crearTareaCompletaT("Octava Tarea v2","Descrito","2022-11-12","familia","Guitarra",true);
+    zz+=1;
+  }
+  
+  
   let Informe = gestor.getNumTareasCompletadasPorCategoria();
   let labelInforme = "<label>" + "Tareas completadas: " + "Trabajo:" + Informe[0] + " Familia:" + Informe[1] + " Personal:" + Informe[2] + " Otros:" + Informe[3] +  "</label>";
   let tareasFiltradas = gestor.getListaCompletadasTareas();
