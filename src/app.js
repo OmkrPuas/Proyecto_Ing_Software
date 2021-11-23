@@ -26,7 +26,7 @@ export function classTarea(id, titulo, fechaLimite, categoria, descripcion, etiq
 }
 
 export function inicializarListas(){
-  listaCategorias.push(' ','TRABAJO','PERSONAL','FAMILIA','OTROS');
+  listaCategorias.push('','TRABAJO','PERSONAL','FAMILIA','otros');
   listaEtiquetas.push('Piano','Guitarra','Yolo','Importante','LMAO','LOOOL');
 }
 
@@ -206,6 +206,18 @@ export function crearTareaCompleta(nombreTarea, descripcion, fechaLimite, catego
   }
 }
 
+export function crearTareaCompletaT(nombreTarea, descripcion, fechaLimite, categoria, etiqueta, completada){
+  //console.log(id);
+  if(nombreTarea == ""){
+    return "No se creo la tarea. TITULO INVALIDO";
+  }else{
+    let tarea = new Tarea(id,nombreTarea, fechaLimite, categoria, descripcion, etiqueta, completada);
+    listaTareasCompletadas.push(tarea);
+    id++;
+    return tarea;
+  }
+}
+
 export function añadirAListaTarea(tarea){
   //console.log(id);
   listaTareasPendientes.push(tarea);
@@ -359,6 +371,7 @@ export function agregarTareaCompletadaALista(tarea){
 
 }
 
+
 export function getListaTareasCompletadas(){
   var cadena = "";
   for (let index = 0; index < listaTareasCompletadas.length; index++) {
@@ -369,18 +382,18 @@ export function getListaTareasCompletadas(){
 }
 
 export function getNumTareasPorCategoria(){
-  //Se introduciran los numeros por categoria en el sig array con el sig orden ['TRABAJO','PERSONAL','FAMILIA','OTROS']
+  //Se introduciran los numeros por categoria en el sig array con el sig orden ['TRABAJO','PERSONAL','FAMILIA','otros']
   let numTareas = [];
   let cont1 =0, cont2=0, cont3=0, cont4=0, cont5 =0;
   for (let i = 0; i < listaTareasCompletadas.length; i++){
     for(let j = 0; j < listaCategorias.length; j++){
-      if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'trabajo'){
+      if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'TRABAJO'){
         cont1++;
       }
-      if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'familia'){
+      if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'FAMILIA'){
         cont2++;
       }
-      if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'personal'){
+      if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'PERSONAL'){
         cont3++;
       }
       if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'otros'){
