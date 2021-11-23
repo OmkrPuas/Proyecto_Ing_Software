@@ -174,13 +174,15 @@ boton_alertar.addEventListener("click", (event) => {
 });
 
 boton_nueva_etiqueta.addEventListener("click", (event) => {
-  let listaEtiquetas = gestor.getListaEtiquetas();
   let nuevaEtiqueta = nueva_etiqueta.value;
   let etiquetas = form_etiquetas.innerHTML;
   let etiqueta_nueva = "<input type='checkbox' id='etiqueta' name='etiqueta' value='"+ nuevaEtiqueta + "' /><label for='etiqueta3'>" + nuevaEtiqueta + "</label><br />";
   form_etiquetas.innerHTML = etiquetas + etiqueta_nueva;
-  listaEtiquetas = gestor.crearNuevaEtiqueta(nuevaEtiqueta);
-  
+
+  let etiquetas_filtros = etiquetas_filtro.innerHTML;
+  etiquetas_filtro.innerHTML = etiquetas_filtros + etiqueta_nueva;
+
+  gestor.crearNuevaEtiqueta(nuevaEtiqueta);
 });
 
 boton_filtro_tareas_completadas.addEventListener("click", (event) => {

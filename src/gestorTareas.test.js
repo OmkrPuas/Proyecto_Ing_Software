@@ -103,7 +103,13 @@ describe("Gestor Tareas", () => {
     expect(gestor.crearTareaConEtiqueta("Sexta Tarea","Piano", false)).toEqual("Sexta Tarea\nEtiquetas: Piano");
   });
 
+  it("deberia creaer una tarea con una etiqueta", () => {
+    expect(gestor.crearTareaConEtiqueta("Sexta Tarea","", false)).toEqual("No se creo la tarea. ETIQUETA INVALIDA");
+  });
 
+  it("deberia retornar la lista completa de etiquetas", () => {
+    expect(gestor.getListaEtiquetas()).toEqual(["Etiquetita1","Piano"]);
+  });
 
   it("deberia crear una tarea completa y añadirla a la lista", () => {
     expect(gestor.crearTareaCompleta("Septima Tarea","Descrito","2022-11-19","otros","Guitarra", false)).toEqual("Septima Tarea\nDescripcion: Descrito\nFecha Limite: 2022-11-19\nCategoria: otros\nEtiquetas: Guitarra\nCompletada: false");
@@ -227,4 +233,32 @@ describe("Gestor Tareas", () => {
     expect(tarea).toEqual({"categoria": "2022-11-19", "completada": false, "descripcion": "otros", "etiquetas": "Guitarra", "fechaLimite": "Descrito", "id": 0, "titulo": 
     "Novena tarea"});
   });
+
+  it("Deberia mostrar el mañana", () => {
+    let tarea = gestor.esMañana();
+    let fechamañana = new Date();
+    let dia = fechamañana.getDate()+1;
+    let mes = fechamañana.getMonth() + 1;
+    let anio = fechamañana.getFullYear();
+    expect(tarea).toEqual(anio + "-" + mes + "-" + dia);
+  });
+
+  it("Deberia mostrar la cantidad de tareas pendientes para hoy y mañana", () => {
+    let tareapendientes = gestor.revisarFechasLimites();
+    expect(tareapendientes).toEqual(0);
+  });
+
+  it("Deberia mostrar la cantidad de tareas pendientes para mañana", () => {
+    gestor.crearTareaCompleta("Octava Tarea","Descrito",gestor.esMañana(),"otros","Guitarra",false);
+    let tareapendientes = gestor.revisarFechasLimites();
+    expect(tareapendientes).toEqual(1);
+  });
+
+  it("Deberia mostrar la cantidad de tareas pendientes para hoy y mañana", () => {
+    gestor.crearTareaCompleta("Novena Tarea","Descritito",gestor.esHoy(),"familia","Piano",false);
+    let tareapendientes = gestor.revisarFechasLimites();
+    expect(tareapendientes).toEqual(2);
+  });
+
+
 });

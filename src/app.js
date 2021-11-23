@@ -30,7 +30,7 @@ export function inicializarListas(){
   listaEtiquetas.push('Piano','Guitarra','Yolo','Importante','LMAO','LOOOL');
 }
 
-export function unirFechaActual(){
+export function esHoy(){
   return anio + "-" + mes + "-" + dia;
 }
 
@@ -39,13 +39,12 @@ export function esMañana(){
 }
 
 export function revisarFechasLimites(){
-  var mañana = esMañana();
   var tareas = 0;
   for(var i = 0; i < listaTareasPendientes.length; i++){
-    if(listaTareasPendientes[i].fechaLimite == mañana){
+    if(listaTareasPendientes[i].fechaLimite == esMañana()){
       tareas++;
     }else{
-      if(listaTareasPendientes[i].fechaLimite == unirFechaActual()){
+      if(listaTareasPendientes[i].fechaLimite == esHoy()){
         tareas++;
       }
     }
@@ -54,7 +53,7 @@ export function revisarFechasLimites(){
 }
 
 export function validarFechaLimite(fecha){
-  if( fecha < unirFechaActual()){
+  if( fecha < esHoy()){
     if(fecha == ""){
       return "Ilimitado";
     }
@@ -165,6 +164,8 @@ export function crearDescripcion(descripcion){
 export function crearEtiqueta(etiqueta){
   if(etiqueta == ""){
     return "No Etiquetado";
+  }else{
+    crearNuevaEtiqueta(etiqueta);
   }
   return etiqueta;
 }
@@ -183,15 +184,14 @@ export function crearTareaConDescripcion(nombreTarea, descripcion, completada){
 }
 
 export function crearTareaConEtiqueta(nombreTarea, etiqueta, completada){
-  //console.log(id);
-  // if(descripcion == ""){
-  //   return "No se creo la tarea. ETIQUETA INVALIDA"
-  // }else{
+  if(crearEtiqueta(etiqueta) == "No Etiquetado"){
+    return "No se creo la tarea. ETIQUETA INVALIDA";
+  }else{
     let tarea = new Tarea(id,nombreTarea, "", "", "", etiqueta, completada);
     listaTareasPendientes.push(tarea);
     id++;
     return tarea.titulo + "\nEtiquetas: " + tarea.etiquetas;
-  // }
+  }
 }
 
 export function crearTareaCompleta(nombreTarea, descripcion, fechaLimite, categoria, etiqueta, completada){
