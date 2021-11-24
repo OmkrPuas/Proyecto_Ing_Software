@@ -195,7 +195,7 @@ boton_filtro_tareas_completadas.addEventListener("click", (event) => {
   
   
   let Informe = gestor.getNumTareasCompletadasPorCategoria();
-  let labelInforme = "<label>" + "Tareas completadas: " + "Trabajo:" + Informe[0] + " Familia:" + Informe[1] + " Personal:" + Informe[2] + " Otros:" + Informe[3] +  "</label>";
+  let labelInforme = "<label>" + "Tareas completadas por categoria: " + "Trabajo:" + Informe["trabajo"] + " Familia:" + Informe["familia"] + " Personal:" + Informe["personal"] + " Otros:" + Informe["otros"] + " No asignado:" + Informe[""] +  "</label>";
   let tareasFiltradas = gestor.getListaCompletadasTareas();
   if(tareasFiltradas == ""){
     alert("No se pudo encontrar ninguna tarea completa");
