@@ -48,6 +48,7 @@ const categoria_completadas_filtro = document.querySelector("#categoria-completa
 const dia_Inicio_filtro = document.querySelector("#dia-completada-filtroInicio");
 const dia_Final_filtro = document.querySelector("#dia-completada-filtroFinal");
 const boton_filtro_completadas_fechas = document.querySelector("#filtro-completadas-por-fechas");
+
 var id = 0;
 
 gestor.inicializarListas();
@@ -62,17 +63,24 @@ function getSelectedCheckboxValues(name) {
   return values;
 }
 
-
-
 function limpiarCampos(){
   tarea_elem.value = "";
   fecha_elem.value = "";
   descripcion_elem.value = "";
-}
+  titulo_filtro.value = "";
+  descripcion_filtro.value = "";
+  dia_filtro.value = "";
 
-// function displayDate() {
-//   lista_elem.getElementById("demo").innerHTML = Date();
-// }
+  var elements = document.getElementsByName("etiqueta");
+  for(var i = 0; i < elements.length; i++){
+    elements[i].checked = false;
+  }
+
+  var elements = document.getElementsByName("filtro-etiqueta");
+  for(var i = 0; i < elements.length; i++){
+    elements[i].checked = false;
+  }
+}
 
 boton_elem.addEventListener("click", (event) => {
   let validacionFecha = gestor.validarFechaLimite(fecha_elem.value);
@@ -99,17 +107,13 @@ boton_elem.addEventListener("click", (event) => {
           // lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tarea.titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tarea.etiquetas + "</li>" +"</div>"+ "</div>"+ "<button class=" + "bloque" + " id=" + "completar-tarea" + ">Completar" + "</" + "button>" + "</ul>" + "</li>"  + aux;
           let lista = gestor.getListaTareas();
           for(var i = lista.length - 1; i >= 0 ; i--){
-            let boton_prueba = "<button onclick='myFunction2("+lista[i].id+")'>Click me</button>";
+            let boton_prueba = "<button onclick='myFunction("+lista[i].id+")'>Completar</button>";
             lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +lista[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + lista[i].categoria +"</li>"+ "<li>" + "Descripcion: " + lista[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + lista[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + lista[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>" + boton_prueba;
           }
-          
+
           limpiarCampos();
 
           // Ver de refactorizar las siguientes lineas
-          var elements = document.getElementsByName("etiqueta");
-          for(var i = 0; i < elements.length; i++){
-            elements[i].checked = false;
-          }
           alert("Tarea Creada!");
       }
     }
@@ -120,8 +124,9 @@ mostrarTareas_elem.addEventListener("click", (event) => {
   let lista = gestor.getListaTareas();
   lista_elem.innerHTML = "";
   for(var i = lista.length - 1; i >= 0 ; i--){
-    let boton_prueba = "<button onclick='myFunction2("+lista[i].id+")'>Terminar</button>";
+    let boton_prueba = "<button onclick='myFunction("+lista[i].id+")'>Completar</button>";
     lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +lista[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + lista[i].categoria +"</li>"+ "<li>" + "Descripcion: " + lista[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + lista[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + lista[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>" + boton_prueba;
+    limpiarCampos();
   }
 });
 
@@ -158,6 +163,7 @@ boton_filtro_etiquetas.addEventListener("click", (event) => {
   for(var i = tareasFiltradas.length - 1; i >= 0 ; i--){
     lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tareasFiltradas[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tareasFiltradas[i].categoria +"</li>"+ "<li>" + "Descripcion: " + tareasFiltradas[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + tareasFiltradas[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tareasFiltradas[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>";
   }
+  limpiarCampos();
 });
 boton_filtro_dia.addEventListener("click", (event) => {
   let tareasFiltradas = gestor.getListaTareasPorDia(dia_filtro.value);

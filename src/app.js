@@ -363,7 +363,7 @@ export function verificarCampoVacio(campo){
   return campo;
 }
 
-export function cambiarEstadoATareaCompletada(tarea){
+export function cambiarEstadoATareaCompletada(id){
   // console.log(listaTareasPendientes[8]);
   if(tarea != undefined){
     tarea.completada = true;
@@ -480,11 +480,11 @@ export function completarTarea(tarea){
 }
 
 export function completarTarea2(id){
-  if(buscarTarea(id) != -1){
-    
+  let index = buscarTarea(id)
+  if( index != -1){
+    cambiarEstadoATareaCompletada(listaTareasPendientes[index]);
+    // let index = obtenerIndexABorrar(tarea);
+    agregarTareaCompletadaALista(listaTareasPendientes[index]);
+    borrarTareaListaPendientes(index, index + 1);
   }
-  cambiarEstadoATareaCompletada(tarea);
-  let index = obtenerIndexABorrar(tarea);
-  borrarTareaListaPendientes(index, index + 1);
-  agregarTareaCompletadaALista(tarea);
 }

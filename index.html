@@ -85,15 +85,13 @@
       <button class="bloque" id="crear-tarea">Crear Tarea</button>
       <button class="bloque" id="mostrar-tareas">Mostrar Tareas</button>
       <button class="bloque" id="revisar-fechas">Revisar Fechas Limites</button>
-      <p id="demo"></p>
-    <script>
-    function myFunction() {
-      document.getElementById("demo").innerHTML = "Hello World";
-    }
-    function myFunction2(id) {
-      document.getElementById("demo").innerHTML = id;
-    }
-    </script>
+      
+      <script>
+        function myFunction(id) {
+          document.getElementById("demo").innerHTML = id;
+          completarTarea2(id)
+        }
+      </script>
 
     </div>
     <input type="text" id="titulo-filtro" />
@@ -164,16 +162,10 @@
     <button class="bloque" id="filtro-completadas-por-fechas">Mostrar tareas completadas por fechas</button>
     
     <div class='lista' id="lista-tareas"></div>
-    <script type="module">
-      function test(id) {
-      alert(id);
-    }
-    function test2() {
-      alert("TEST");
-    }
-    </script>
+    
+    <p id="demo"></p>
 
     <script type="module" src="./src/gestorTareas.js"></script>
-    
   </body>
 </html>
+
