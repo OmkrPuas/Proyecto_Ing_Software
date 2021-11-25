@@ -460,12 +460,7 @@ export function getListaCompletadasTareas(){
   return listaTareasCompletadas;
 }
 
-export function completarTarea(tarea){
-  cambiarEstadoATareaCompletada(tarea);
-  let index = obtenerIndexABorrar(tarea);
-  borrarTareaListaPendientes(index, index + 1);
-  agregarTareaCompletadaALista(tarea);
-}
+
 
 export function buscarTarea(id){
   var tareaId = -1;
@@ -475,4 +470,21 @@ export function buscarTarea(id){
     }
   }
   return tareaId;
+}
+
+export function completarTarea(tarea){
+  cambiarEstadoATareaCompletada(tarea);
+  let index = obtenerIndexABorrar(tarea);
+  borrarTareaListaPendientes(index, index + 1);
+  agregarTareaCompletadaALista(tarea);
+}
+
+export function completarTarea2(id){
+  if(buscarTarea(id) != -1){
+    
+  }
+  cambiarEstadoATareaCompletada(tarea);
+  let index = obtenerIndexABorrar(tarea);
+  borrarTareaListaPendientes(index, index + 1);
+  agregarTareaCompletadaALista(tarea);
 }

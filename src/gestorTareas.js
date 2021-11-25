@@ -95,7 +95,6 @@ boton_elem.addEventListener("click", (event) => {
           gestor.añadirAListaTarea(tarea);
           lista_elem.innerHTML = "";
           id++;
-<<<<<<< HEAD
           // var aux = lista_elem.innerHTML;
           // lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tarea.titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tarea.etiquetas + "</li>" +"</div>"+ "</div>"+ "<button class=" + "bloque" + " id=" + "completar-tarea" + ">Completar" + "</" + "button>" + "</ul>" + "</li>"  + aux;
           let lista = gestor.getListaTareas();
@@ -104,16 +103,6 @@ boton_elem.addEventListener("click", (event) => {
             lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +lista[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + lista[i].categoria +"</li>"+ "<li>" + "Descripcion: " + lista[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + lista[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + lista[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>" + boton_prueba;
           }
           
-=======
-          var aux = lista_elem.innerHTML;
-          lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tarea.titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tarea.etiquetas + "</li>" +"</div>"+ "</div>"+ "<button class=" + "bloque" + " id=" + "completar-tarea" + ">Completar" + "</" + "button>" + "</ul>" + "</li>"  + aux;
-          // lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tarea.titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tarea.etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>"  + aux;
-          document.getElementById("completar-tarea").addEventListener("click",(event) => {
-            alert("Tarea Completada");
-            alert(tarea.id);
-          });
-
->>>>>>> 3ff37bb9f1400a7d83615618f70eb16393fc0168
           limpiarCampos();
 
           // Ver de refactorizar las siguientes lineas
