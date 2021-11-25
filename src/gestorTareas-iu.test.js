@@ -32,14 +32,14 @@ describe("Gestor Tareas", () => {
 //     const categoria_elem = document.querySelector("#select-categoria");
 //     const mostrarTareas_elem = document.querySelector("#mostrar-tareas");
 //     boton_elem.addEventListener("click", (event) => {
-//         let tarea = gestor.classTarea(0, "a", "Ilimitado", "OTROS", "a", "n/a");
+//         let tarea = gestor.classTarea(0, "a", "Ilimitado", "otros", "a", "n/a");
 //         gestor.añadirAListaTarea(tarea);
 //         id++;
 //         // var aux = lista_elem.innerHTML;
 //         lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tarea.titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tarea.etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>";
 //     });
 //     console.log(lista_elem.innerHTML);
-//     expect(lista_elem.innerHTML).toEqual("<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" + "a" + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + "OTROS" +"</li>"+ "<li>" + "Descripcion: " + "a" + "</li>" + "<li>" + "Fecha Limite: " + "Ilimitado" + "</li>"+  "<li>" + "Etiquetas: " + "n/a" + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>");
+//     expect(lista_elem.innerHTML).toEqual("<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" + "a" + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + "otros" +"</li>"+ "<li>" + "Descripcion: " + "a" + "</li>" + "<li>" + "Fecha Limite: " + "Ilimitado" + "</li>"+  "<li>" + "Etiquetas: " + "n/a" + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>");
 //   });
 
   afterEach(() => {
