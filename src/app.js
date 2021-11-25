@@ -466,3 +466,13 @@ export function completarTarea(tarea){
   borrarTareaListaPendientes(index, index + 1);
   agregarTareaCompletadaALista(tarea);
 }
+
+export function buscarTarea(id){
+  var tareaId = -1;
+  for (let index = 0; index < listaTareasPendientes.length; index++) {
+    if(listaTareasPendientes[index].id === id){
+      tareaId = index;
+    }
+  }
+  return tareaId;
+}

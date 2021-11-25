@@ -62,6 +62,8 @@ function getSelectedCheckboxValues(name) {
   return values;
 }
 
+
+
 function limpiarCampos(){
   tarea_elem.value = "";
   fecha_elem.value = "";
@@ -87,10 +89,15 @@ boton_elem.addEventListener("click", (event) => {
           descripcion_elem.value = gestor.verificarCampoVacio(descripcion_elem.value);
           let tarea = gestor.classTarea(id, tarea_elem.value, validacionFecha, categoria_elem.value, descripcion_elem.value, etiquetas, false);
           gestor.añadirAListaTarea(tarea);
+          lista_elem.innerHTML = "";
           id++;
-          var aux = lista_elem.innerHTML;
+          // var aux = lista_elem.innerHTML;
           // lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tarea.titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tarea.etiquetas + "</li>" +"</div>"+ "</div>"+ "<button class=" + "bloque" + " id=" + "completar-tarea" + ">Completar" + "</" + "button>" + "</ul>" + "</li>"  + aux;
-          lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tarea.titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tarea.etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>"  + aux;
+          let lista = gestor.getListaTareas();
+          for(var i = lista.length - 1; i >= 0 ; i--){
+            let boton_prueba = "<button onclick='myFunction2("+lista[i].id+")'>Click me</button>";
+            lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +lista[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + lista[i].categoria +"</li>"+ "<li>" + "Descripcion: " + lista[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + lista[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + lista[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>" + boton_prueba;
+          }
           
           limpiarCampos();
 
@@ -109,7 +116,8 @@ mostrarTareas_elem.addEventListener("click", (event) => {
   let lista = gestor.getListaTareas();
   lista_elem.innerHTML = "";
   for(var i = lista.length - 1; i >= 0 ; i--){
-    lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +lista[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + lista[i].categoria +"</li>"+ "<li>" + "Descripcion: " + lista[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + lista[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + lista[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>";
+    let boton_prueba = "<button onclick='myFunction2("+lista[i].id+")'>Terminar</button>";
+    lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +lista[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + lista[i].categoria +"</li>"+ "<li>" + "Descripcion: " + lista[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + lista[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + lista[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>" + boton_prueba;
   }
 });
 
