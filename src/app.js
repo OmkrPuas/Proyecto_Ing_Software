@@ -9,6 +9,7 @@ const mes = fechaActual.getMonth() + 1;
 const anio = fechaActual.getFullYear();
 
 export class Tarea {
+
   constructor(id, titulo, fechaLimite, categoria, descripcion, etiquetas, completada) {
     this.id = id;
     this.titulo = titulo;
@@ -18,8 +19,6 @@ export class Tarea {
     this.etiquetas = etiquetas;
     this.completada = completada;
   }
-
-
 }
 
 export function classTarea(id, titulo, fechaLimite, categoria, descripcion, etiquetas, completada){
@@ -32,48 +31,68 @@ export function inicializarListas(){
   listaEtiquetas.push('Piano','Guitarra','Yolo','Importante','LMAO','LOOOL');
 }
 
-export function esHoy(){
-  return anio + "-" + mes + "-" + dia;
-}
 
 export function esMañana(){
   return anio + "-" + mes + "-" + (dia+1);
 }
 
-export function revisarFechasLimites(){
-  var tareas = 0;
-  for(var i = 0; i < listaTareasPendientes.length; i++){
-    if(listaTareasPendientes[i].fechaLimite == esMañana()){
-      tareas++;
-    }else{
-      if(listaTareasPendientes[i].fechaLimite == esHoy()){
-        tareas++;
-      }
-    }
-  }
-  return tareas;
-}
+// ---------------------ASIGNACIONES------------------
 
-export function validarFechaLimite(fecha){
-  if( fecha < esHoy()){
-    if(fecha == ""){
-      return "Ilimitado";
-    }
-    return "No se pudo crear la tarea, FECHA INVALIDA.";
+
+export function asignarTituloATarea(tarea, titulo){
+  if(validarTitulo(titulo)){
+    tarea.titulo = titulo;
+    return tarea;
   }else{
-    return fecha;
+    return "No se creo la tarea. TITULO INVALIDO";
   }
 }
 
-export function mostrarLaListaTareas(){
-    var cadena = "";
-    for (let index = listaTareasPendientes.length-1; index >= 0; index--) {
-      cadena += "\n" + listaTareasPendientes[index].titulo;
-    }
-    return cadena;
-  }
+export function asignarDescipcionATarea(tarea, descripcion){
+  let descripcionVerificada = verificarDescripcion(descripcion);
+  tarea.descripcion = descripcionVerificada;
+  return tarea;
+}
 
-export function crearTarea(NombreTarea, completada){
+export function asignarCategoriaATarea(tarea, categoria){
+  if(validarCategoria(categoria)){
+    tarea.categoria = categoria;
+    return tarea;
+  }else{
+    return "No se creo la tarea. CATEGORIA INVALIDA";
+  }
+}
+
+//-----------EXTRA------------
+export function esHoy(){
+  return anio + "-" + mes + "-" + dia;
+}
+//----------------------------
+
+export function asignarFechaLimiteATarea(tarea, fecha){
+  fecha = validarFecha(fecha);
+  if(fecha != false){
+    tarea.fechaLimite = fecha;
+    return tarea;
+  }else{
+    return "No se creo la tarea. FECHA LIMITE INVALIDA";
+  }
+}
+
+export function asignarEtiquetaATarea(tarea, etiqueta){
+  if(validarEtiqueta(etiqueta)){
+    tarea.etiquetas = etiqueta;
+    return tarea;
+  }else{
+    return "No se creo la tarea. ETIQUETA INVALIDA";
+  }
+}
+
+
+
+// ---------------------CREAR TAREA------------------
+
+export function crearTareaConTitulo(NombreTarea, completada){
   if(NombreTarea == ""){
     return "No se creo la tarea. TITULO INVALIDO";
   }else{
@@ -82,10 +101,6 @@ export function crearTarea(NombreTarea, completada){
     id++;
     return tarea.titulo;
   }
-}
-
-export function crearFechaLimite(fechaLimite){
-  return validarFechaLimite(fechaLimite);
 }
 
 export function crearTareaConFechaLimite(nombreTarea, fechaLimite, completada){
@@ -99,55 +114,6 @@ export function crearTareaConFechaLimite(nombreTarea, fechaLimite, completada){
   }
 }
 
-export function getListaCategorias(){
-    return listaCategorias;
-}
-
-export function getListaEtiquetas(){
-    return listaEtiquetas;
-}
-
-export function getListaTareas(){
-  return listaTareasPendientes;
-}
-
-export function getListaTareasPendientes(){
-  var cadena = "";
-  for (let index = 0; index < listaTareasPendientes.length; index++) {
-    var tarea = listaTareasPendientes[index];
-    cadena += "[Titulo:" + tarea.titulo + ",Descripcion:" +tarea.descripcion+ ",Fecha Limite:" + tarea.fechaLimite+ ",Categoria:" + tarea.categoria + ",Etiquetas: " + tarea.etiquetas + ",Completada:" + tarea.completada + "]";
-  }   
-  return cadena;
-}
-
-export function getListaTareasEspecificas(lista){
-  let cadena = "";
-  for (var index = 0; index < lista.length; index++) {
-    let tarea = lista[index];
-    cadena += "[Titulo:" + tarea.titulo + ",Descripcion:" +tarea.descripcion+ ",Fecha Limite:" + tarea.fechaLimite+ ",Categoria:" + tarea.categoria + ",Etiquetas: " + tarea.etiquetas + "]";
-  }   
-  return cadena;
-}
-
-
-export function crearCategoria(categoria){
-  listaCategorias.push(categoria);
-  return listaCategorias.includes(categoria);
-}
-
-export function crearNuevaEtiqueta(etiqueta){
-  listaEtiquetas.push(etiqueta);
-  return listaEtiquetas.includes(etiqueta);
-}
-
-export function mostrarLaListaCategorias(){
-    var cadena = "";
-    for (var index = 0; index < listaCategorias.length; index++) {
-        cadena += "\n" + listaCategorias[index];
-    }
-    return cadena;
-  }
-
 export function crearTareaConCategoria(nombreTarea, categoria, completada){
   //console.log(id);
   let tarea = new Tarea(id,nombreTarea, "", categoria, "","", completada);
@@ -155,23 +121,6 @@ export function crearTareaConCategoria(nombreTarea, categoria, completada){
   id++;
   return tarea.titulo + "\nCategoria: " + tarea.categoria;
 }
-
-export function crearDescripcion(descripcion){
-  if(descripcion == ""){
-    return "No Descripcionado";
-  }
-  return descripcion;
-}
-
-export function crearEtiqueta(etiqueta){
-  if(etiqueta == ""){
-    return "No Etiquetado";
-  }else{
-    crearNuevaEtiqueta(etiqueta);
-  }
-  return etiqueta;
-}
-
 
 export function crearTareaConDescripcion(nombreTarea, descripcion, completada){
   //console.log(id);
@@ -232,24 +181,174 @@ export function crearTareaCompletada(nombreTarea, descripcion, fechaLimite, cate
   }
 }
 
-export function añadirAListaTarea(tarea){
-  //console.log(id);
-  listaTareasPendientes.push(tarea);
-  id++;
-  return tarea;
+//-----------------------------------------------------------------
+//------------------------------VALIDACIONES-----------------------
+
+export function verificarCampoVacio(campo){
+  if(campo == "" ){
+    campo = "n/a";
+  }
+  return campo;
 }
 
-export function getElementoDeLista(lista, elemento){
-  var encontrado = "";
-  for(var i = 0; i < lista.length; i++){
-    if(lista[i] == elemento){
-      encontrado = lista[i];
+export function validarTitulo(titulo){
+  if(titulo == ""){
+    return false;
+  }else{
+    return true;
+  }
+}
+
+export function verificarDescripcion(descripcion){
+  if(descripcion == ""){
+    return "n/a";
+  }else{
+    return descripcion;
+  }
+}
+
+export function validarCategoria(categoria){
+  if(categoria === ""){
+    return false;
+  }
+  else{
+    return buscarCategoria(categoria);
+  }
+}
+
+export function buscarCategoria(categoria){
+  var encontrado = false;
+  for(var i = 0; i < listaCategorias.length; i++){
+    if(listaCategorias[i] === categoria){
+      encontrado = true;
     }
   }
-  if(encontrado == ""){
-    encontrado = "No encontrado";
-  }
   return encontrado;
+}
+
+export function validarFechaLimite(fecha){
+  if( fecha < esHoy()){
+    if(fecha == ""){
+      return "Ilimitado";
+    }
+    return "No se pudo crear la tarea, FECHA INVALIDA.";
+  }else{
+    return fecha;
+  }
+}
+
+export function validarFecha(fecha){
+  if( fecha < esHoy()){
+    if(fecha == ""){
+      return "Ilimitado";
+    }
+    return false;
+  }else{
+    return fecha;
+  }
+}
+
+export function validarEtiqueta(etiqueta){
+  if(etiqueta == ""){
+    return false;
+  }else{
+    return true;
+  }
+}
+
+//-------------FECHA LIMITE ------------
+export function crearFechaLimite(fechaLimite){
+  return validarFechaLimite(fechaLimite);
+}
+
+
+
+export function revisarFechasLimites(){
+  var tareas = 0;
+  for(var i = 0; i < listaTareasPendientes.length; i++){
+    if(listaTareasPendientes[i].fechaLimite == esMañana()){
+      tareas++;
+    }else{
+      if(listaTareasPendientes[i].fechaLimite == esHoy()){
+        tareas++;
+      }
+    }
+  }
+  return tareas;
+}
+
+
+//-------------CATEGORIA ------------
+export function crearCategoria(categoria){
+  listaCategorias.push(categoria);
+  return listaCategorias.includes(categoria);
+}
+
+export function crearListaDeCategorias(){
+  listaCategorias.push('trabajo','personal','familia','otros');
+  return listaCategorias;
+}
+
+
+
+//-------------DESCRIPCION ------------
+export function crearDescripcion(descripcion){
+  if(descripcion == ""){
+    return "No Descripcionado";
+  }
+  return descripcion;
+}
+
+
+//-------------ETIQUETA ------------
+
+export function crearNuevaEtiqueta(etiqueta){
+  listaEtiquetas.push(etiqueta);
+  return listaEtiquetas.includes(etiqueta);
+}
+
+export function crearEtiqueta(etiqueta){
+  if(etiqueta == ""){
+    return "No Etiquetado";
+  }else{
+    crearNuevaEtiqueta(etiqueta);
+  }
+  return etiqueta;
+}
+
+
+//-----------------------------------------------------------------
+//------------------------------GET LISTAS-----------------------
+
+
+export function getListaTareasPendientes(){
+  var cadena = "";
+  for (let index = 0; index < listaTareasPendientes.length; index++) {
+    var tarea = listaTareasPendientes[index];
+    cadena += "[Titulo:" + tarea.titulo + ",Descripcion:" +tarea.descripcion+ ",Fecha Limite:" + tarea.fechaLimite+ ",Categoria:" + tarea.categoria + ",Etiquetas: " + tarea.etiquetas + ",Completada:" + tarea.completada + "]";
+  }   
+  return cadena;
+}
+
+export function getListaTareasEspecificas(lista){
+  let cadena = "";
+  for (var index = 0; index < lista.length; index++) {
+    let tarea = lista[index];
+    cadena += "[Titulo:" + tarea.titulo + ",Descripcion:" +tarea.descripcion+ ",Fecha Limite:" + tarea.fechaLimite+ ",Categoria:" + tarea.categoria + ",Etiquetas: " + tarea.etiquetas + "]";
+  }   
+  return cadena;
+}
+
+export function getListaCategorias(){
+  return listaCategorias;
+}
+
+export function getListaEtiquetas(){
+  return listaEtiquetas;
+}
+
+export function getListaTareas(){
+return listaTareasPendientes;
 }
 
 export function getListaTareasPorTitulo(titulo){
@@ -263,16 +362,6 @@ export function getListaTareasPorTitulo(titulo){
   }
   return encontrado;
 }
-
-// export function mostrarTareas(){
-//   let lista = [];
-//   for(var i = 0; i < listaTareasPendientes.length; i++){
-//     if(listaTareasPendientes[i].titulo == titulo){
-//       lista = "\n[Titulo:" + listaTareasPendientes[i].titulo + ",Descripcion:" + listaTareasPendientes[i].descripcion +",Fecha Limite: " + listaTareasPendientes[i].fechaLimite + ",Categoria: " + listaTareasPendientes[i].categoria + ",Etiquetas: " + listaTareasPendientes[i].etiquetas + "]";
-//     }
-//   }
-//   return lista;
-// }
 
 export function getListaTareasPorTituloT(titulo){
   if(titulo == ""){
@@ -358,29 +447,102 @@ export function getListaTareasPorDescripcion(descripcion){
   return encontrado;
 }
 
-export function verificarCampoVacio(campo){
-  if(campo == "" ){
-    campo = "n/a";
+
+export function getNumTareasCompletadasPorCategoria(){
+  let categoriasCompletadas = {'trabajo':0,'familia':0,'personal':0,'otros':0,'':0};
+  for (let i = 0; i < listaTareasCompletadas.length; i++){
+    categoriasCompletadas[listaTareasCompletadas[i].categoria]+=1;
   }
-  return campo;
+  return categoriasCompletadas;
 }
 
-export function cambiarEstadoATareaCompletada(tarea){
-  // console.log(listaTareasPendientes[8]);
-  if(tarea != undefined){
-    tarea.completada = true;
-    return tarea;
+export function getListaTareasPorRangoFechas(dia1, dia2){
+  if(dia1 == "" || dia2 == ""){
+    return [];
   }
-  return true;
+  let encontrado = [];
+  for(let i = 0; i < listaTareasCompletadas.length; i++){
+    if(listaTareasCompletadas[i].fechaLimite >= dia1 && listaTareasCompletadas[i].fechaLimite <= dia2){
+      encontrado.push(listaTareasCompletadas[i]);
+    }
+  }
+  return encontrado;
+}
+
+export function getListaCompletadasTareas(){
+  return listaTareasCompletadas;
+}
+
+
+export function getListaTareasCompletadas(){
+  var cadena = "";
+  for (let index = 0; index < listaTareasCompletadas.length; index++) {
+    var tarea = listaTareasCompletadas[index];
+    cadena += "[Titulo:" + tarea.titulo + ",Descripcion:" +tarea.descripcion+ ",Fecha Limite:" + tarea.fechaLimite+ ",Categoria:" + tarea.categoria + ",Etiquetas: " + tarea.etiquetas + ",Completada:" + tarea.completada + "]";
+  }   
+  return cadena;
+}
+
+export function getElementoDeLista(lista, elemento){
+  var encontrado = "";
+  for(var i = 0; i < lista.length; i++){
+    if(lista[i] == elemento){
+      encontrado = lista[i];
+    }
+  }
+  if(encontrado == ""){
+    encontrado = "No encontrado";
+  }
+  return encontrado;
 }
 
 export function getListaTareasArray(){
   return listaTareasPendientes;
 }
 
+//-----------------------------------------------------------------
+//------------------------------AGREGAR A LISTAS-----------------------
+
+export function añadirAListaTarea(tarea){
+  //console.log(id);
+  listaTareasPendientes.push(tarea);
+  id++;
+  return tarea;
+}
+
+export function agregarTareaCompletadaALista(tarea){
+  listaTareasCompletadas.push(tarea);
+}
+
+//-----------------------------------------------------------------
+//------------------------------MOSTRAR LISTAS-----------------------
+
+
+export function mostrarLaListaTareas(){
+    var cadena = "";
+    for (let index = listaTareasPendientes.length-1; index >= 0; index--) {
+      cadena += "\n" + listaTareasPendientes[index].titulo;
+    }
+    return cadena;
+  }
+
+export function mostrarLaListaCategorias(){
+    var cadena = "";
+    for (var index = 0; index < listaCategorias.length; index++) {
+        cadena += "\n" + listaCategorias[index];
+    }
+    return cadena;
+}
+
 export function mostrarTarea(tarea){
   return tarea.titulo + "\nDescripcion: " + tarea.descripcion+ "\nFecha Limite: " + tarea.fechaLimite+ "\nCategoria: " + tarea.categoria + "\nEtiquetas: " + tarea.etiquetas + "\nCompletada: " + tarea.completada;
 }
+
+
+//-----------------------------------------------------------------
+//------------------------------PROCESO COMPLETAR TAREA-----------------------
+
+
 
 export function borrarTareaListaPendientes(indexAnt, indexPost){
   // console.log(tarea);
@@ -393,19 +555,32 @@ export function obtenerIndexABorrar(tarea){
   return index;
 }
 
-export function agregarTareaCompletadaALista(tarea){
-  listaTareasCompletadas.push(tarea);
+export function completarTarea(tarea){
+  cambiarEstadoATareaCompletada(tarea);
+  let index = obtenerIndexABorrar(tarea);
+  borrarTareaListaPendientes(index, index + 1);
+  agregarTareaCompletadaALista(tarea);
 }
 
-
-export function getListaTareasCompletadas(){
-  var cadena = "";
-  for (let index = 0; index < listaTareasCompletadas.length; index++) {
-    var tarea = listaTareasCompletadas[index];
-    cadena += "[Titulo:" + tarea.titulo + ",Descripcion:" +tarea.descripcion+ ",Fecha Limite:" + tarea.fechaLimite+ ",Categoria:" + tarea.categoria + ",Etiquetas: " + tarea.etiquetas + ",Completada:" + tarea.completada + "]";
-  }   
-  return cadena;
+export function cambiarEstadoATareaCompletada(tarea){
+  // console.log(listaTareasPendientes[8]);
+  if(tarea != undefined){
+    tarea.completada = true;
+    return tarea;
+  }
+  return true;
 }
+
+// export function mostrarTareas(){
+//   let lista = [];
+//   for(var i = 0; i < listaTareasPendientes.length; i++){
+//     if(listaTareasPendientes[i].titulo == titulo){
+//       lista = "\n[Titulo:" + listaTareasPendientes[i].titulo + ",Descripcion:" + listaTareasPendientes[i].descripcion +",Fecha Limite: " + listaTareasPendientes[i].fechaLimite + ",Categoria: " + listaTareasPendientes[i].categoria + ",Etiquetas: " + listaTareasPendientes[i].etiquetas + "]";
+//     }
+//   }
+//   return lista;
+// }
+
 
 // export function getNumTareasCompletadasPorCategoria(){
 //   let numTareas = [];
@@ -437,31 +612,6 @@ export function getListaTareasCompletadas(){
 //   return numTareas;
 // }
 
-export function getNumTareasCompletadasPorCategoria(){
-  let categoriasCompletadas = {'trabajo':0,'familia':0,'personal':0,'otros':0,'':0};
-  for (let i = 0; i < listaTareasCompletadas.length; i++){
-    categoriasCompletadas[listaTareasCompletadas[i].categoria]+=1;
-  }
-  return categoriasCompletadas;
-}
-
-export function getListaTareasPorRangoFechas(dia1, dia2){
-  if(dia1 == "" || dia2 == ""){
-    return [];
-  }
-  let encontrado = [];
-  for(let i = 0; i < listaTareasCompletadas.length; i++){
-    if(listaTareasCompletadas[i].fechaLimite >= dia1 && listaTareasCompletadas[i].fechaLimite <= dia2){
-      encontrado.push(listaTareasCompletadas[i]);
-    }
-  }
-  return encontrado;
-}
-
-export function getListaCompletadasTareas(){
-  return listaTareasCompletadas;
-}
-
 
 
 // export function buscarTarea(id){
@@ -473,13 +623,6 @@ export function getListaCompletadasTareas(){
 //   }
 //   return tareaId;
 // }
-
-export function completarTarea(tarea){
-  cambiarEstadoATareaCompletada(tarea);
-  let index = obtenerIndexABorrar(tarea);
-  borrarTareaListaPendientes(index, index + 1);
-  agregarTareaCompletadaALista(tarea);
-}
 
 // export function completarTarea2(id){
 //   let index = buscarTarea(id)

@@ -3,16 +3,221 @@ import * as gestor from './app.js';
 
 
 describe("Gestor Tareas", () => {
+
+  // Asignar Titulo a una Tarea
+
+  it("Deberia invalidar un titulo vacio", () =>{
+    expect(gestor.validarTitulo("")).toEqual(
+      false);
+  });
+
+  it("Deberia validar un titulo", () =>{
+    expect(gestor.validarTitulo("Titulo de la tarea")).toEqual(
+      true);
+  });
+  
+
+  it("Deberia asignar un titulo dado por el usuario a una tarea", () =>{
+    let tarea = new gestor.Tarea();
+    expect(gestor.asignarTituloATarea(tarea,"Primera Tarea")).toEqual(
+      {"categoria": undefined, 
+      "completada": undefined, 
+      "descripcion": undefined, 
+      "etiquetas": undefined, 
+      "fechaLimite": undefined, 
+      "id": undefined, 
+      "titulo": "Primera Tarea"});
+  });
+
+  it("Deberia mostrar el error al asignar un titulovacio a una tarea", () =>{
+    let tarea = new gestor.Tarea();
+    expect(gestor.asignarTituloATarea(tarea,"")).toEqual(
+      "No se creo la tarea. TITULO INVALIDO");
+  });
+
+  // Asignar Descripcion a una Tarea
+
+  it("Deberia varificar si la descripcion esta vacia, en caso de que este vacio devolver 'n/a'", () =>{
+    expect(gestor.verificarDescripcion("")).toEqual(
+      "n/a");
+  });
+
+  it("Deberia varificar si la descripcion esta vacia, si no esta vacia deberia devolver la misma descripcion", () =>{
+    expect(gestor.verificarDescripcion("Esta es la descripcion de la tarea")).toEqual(
+      "Esta es la descripcion de la tarea");
+  });
+  
+
+  it("Deberia asignar una descripcion dada por el usuario a una tarea", () =>{
+    let tarea = new gestor.Tarea();
+    expect(gestor.asignarDescipcionATarea(tarea,"Descripcion de la tarea")).toEqual(
+      {"categoria": undefined, 
+      "completada": undefined, 
+      "descripcion": "Descripcion de la tarea", 
+      "etiquetas": undefined, 
+      "fechaLimite": undefined, 
+      "id": undefined, 
+      "titulo": undefined});
+  });
+
+  it("Deberia asignar una descripcion vacia a una tarea", () =>{
+    let tarea = new gestor.Tarea();
+    expect(gestor.asignarDescipcionATarea(tarea,"")).toEqual(
+      {"categoria": undefined, 
+      "completada": undefined, 
+      "descripcion": "n/a", 
+      "etiquetas": undefined, 
+      "fechaLimite": undefined, 
+      "id": undefined, 
+      "titulo": undefined});
+  });
+
+  //Asignar Categoria a una Tarea
+
+  it("Deberia crear una lista de categorias predeterminada", () =>{
+    expect(gestor.crearListaDeCategorias()).toEqual(['trabajo','personal','familia','otros']);
+  });
+
+  it("Deberia buscar una categoria en la lista de categorias predeterminada", () =>{
+    expect(gestor.buscarCategoria("trabajo")).toEqual(true);
+  });
+
+  it("Deberia buscar una categoria en la lista de categorias predeterminada", () =>{
+    expect(gestor.buscarCategoria("trabajitos")).toEqual(false);
+  });
+
+  it("Deberia validar una categoria", () =>{
+    expect(gestor.validarCategoria("trabajo")).toEqual(true);
+  });
+
+  it("Deberia invalidar una categoria que no este en la lista de categorias", () =>{
+    expect(gestor.validarCategoria("categoriaInvalida")).toEqual(false);
+  });
+
+  it("Deberia invalidar una categoria vacia", () =>{
+    expect(gestor.validarCategoria("")).toEqual(false);
+  });
+
+  it("Deberia asignar una categoria escogida por el usuario a una tarea", () =>{
+    let tarea = new gestor.Tarea();
+    expect(gestor.asignarCategoriaATarea(tarea,"trabajo")).toEqual(
+      {"categoria": "trabajo", 
+      "completada": undefined, 
+      "descripcion": undefined, 
+      "etiquetas": undefined, 
+      "fechaLimite": undefined, 
+      "id": undefined, 
+      "titulo": undefined});
+  });
+
+  it("Deberia evitar asignar una categoria que no este en la lista de categorias a una tarea", () =>{
+    let tarea = new gestor.Tarea();
+    expect(gestor.asignarCategoriaATarea(tarea,"categoriaInvalida")).toEqual(
+      "No se creo la tarea. CATEGORIA INVALIDA");
+  });
+
+  it("Deberia evitar asignar una categoria vacia a una tarea", () =>{
+    let tarea = new gestor.Tarea();
+    expect(gestor.asignarCategoriaATarea(tarea,"")).toEqual(
+      "No se creo la tarea. CATEGORIA INVALIDA");
+  });
+
+  //Asignar fecha limite a una tarea
+
+  it("Deberia validar una fecha limite, devolviendo la fecha", () =>{
+    expect(gestor.validarFecha("2022-12-32")).toEqual("2022-12-32");
+  });
+
+  it("Deberia invalidar una fecha limite pasada", () =>{
+    expect(gestor.validarFecha("2020-12-32")).toEqual(false);
+  });
+
+  it("Deberia validar una fecha limite vacia, marcandola como sin limite", () =>{
+    expect(gestor.validarFecha("")).toEqual("Ilimitado");
+  });
+
+  it("Deberia asignar una fecha limite a una tarea", () =>{
+    let tarea = new gestor.Tarea();
+    expect(gestor.asignarFechaLimiteATarea(tarea,"2022-1-12")).toEqual(
+      {"categoria": undefined, 
+      "completada": undefined, 
+      "descripcion": undefined, 
+      "etiquetas": undefined, 
+      "fechaLimite": "2022-1-12", 
+      "id": undefined, 
+      "titulo": undefined});
+  });
+
+  it("Deberia asignar una fecha limite a una tarea", () =>{
+    let tarea = new gestor.Tarea();
+    expect(gestor.asignarFechaLimiteATarea(tarea,"")).toEqual(
+      {"categoria": undefined, 
+      "completada": undefined, 
+      "descripcion": undefined, 
+      "etiquetas": undefined, 
+      "fechaLimite": "Ilimitado", 
+      "id": undefined, 
+      "titulo": undefined});
+  });
+
+  it("Deberia invalidar una fecha limite pasada al asignarla a una tarea", () =>{
+    let tarea = new gestor.Tarea();
+    expect(gestor.asignarFechaLimiteATarea(tarea,"2020-11-25")).toEqual(
+      "No se creo la tarea. FECHA LIMITE INVALIDA");
+  });
+
+  //Asignar Una o Varias Etiquetas a una Tarea 
+
+  it("Deberia validar cualquier etiqueta", () =>{
+    expect(gestor.validarEtiqueta("Hashtag")).toEqual(true);
+  });
+
+  it("Deberia invalidar una etiqueta vacia", () =>{
+    expect(gestor.validarEtiqueta("")).toEqual(false);
+  });
+
+  it("Deberia asignar una etiqueta a una tarea", () =>{
+    let tarea = new gestor.Tarea();
+    expect(gestor.asignarEtiquetaATarea(tarea,["Hashtag"])).toEqual(
+      {"categoria": undefined, 
+      "completada": undefined, 
+      "descripcion": undefined, 
+      "etiquetas": ["Hashtag"], 
+      "fechaLimite": undefined, 
+      "id": undefined, 
+      "titulo": undefined});
+  });
+
+  it("Deberia asignar varias etiquetas a una tarea", () =>{
+    let tarea = new gestor.Tarea();
+    expect(gestor.asignarEtiquetaATarea(tarea,["Hashtag","EtiquetaDos"])).toEqual(
+      {"categoria": undefined, 
+      "completada": undefined, 
+      "descripcion": undefined, 
+      "etiquetas": ["Hashtag","EtiquetaDos"], 
+      "fechaLimite": undefined, 
+      "id": undefined, 
+      "titulo": undefined});
+  });
+
+  it("Deberia asignar una etiqueta a una tarea", () =>{
+    let tarea = new gestor.Tarea();
+    expect(gestor.asignarEtiquetaATarea(tarea,"")).toEqual(
+      "No se creo la tarea. ETIQUETA INVALIDA");
+  });
+
+
+//--------------------------------------------------------------
   it("deberia mostrar una tarea añadida por el usuario", () =>{
-    expect(gestor.crearTarea("Primera Tarea", false)).toEqual("Primera Tarea");
+    expect(gestor.crearTareaConTitulo("Primera Tarea", false)).toEqual("Primera Tarea");
   });
 
   it("deberia rechazar una tarea invalida", () =>{
-    expect(gestor.crearTarea("")).toEqual("No se creo la tarea. TITULO INVALIDO");
+    expect(gestor.crearTareaConTitulo("")).toEqual("No se creo la tarea. TITULO INVALIDO");
   });
 
   it("deberia mostrar las tareas añadidas por el usuario en la lista de tareas", () =>{
-    gestor.crearTarea("Segunda Tarea", false);
+    gestor.crearTareaConTitulo("Segunda Tarea", false);
     expect(gestor.mostrarLaListaTareas()).toEqual("\nSegunda Tarea\nPrimera Tarea"); 
 
   });
@@ -60,7 +265,7 @@ describe("Gestor Tareas", () => {
   it("deberia mostrar la lista completa de categorias predeterminadas", () => {
     gestor.crearCategoria("personal");
     gestor.crearCategoria("otros");
-    expect(gestor.mostrarLaListaCategorias()).toEqual("\ntrabajo\nfamilia\npersonal\notros");
+    expect(gestor.mostrarLaListaCategorias()).toEqual("\ntrabajo\npersonal\nfamilia\notros\ntrabajo\nfamilia\npersonal\notros");
   });
 
   it("deberia crear una tarea con una de las categorias predeterminadas", () => {

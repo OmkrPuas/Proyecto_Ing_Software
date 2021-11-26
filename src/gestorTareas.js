@@ -114,7 +114,7 @@ boton_elem.addEventListener("click", (event) => {
           limpiarCampos();
 
           // Ver de refactorizar las siguientes lineas
-          alert("Tarea Creada!");
+          //alert("Tarea Creada!");
       }
     }
   }
