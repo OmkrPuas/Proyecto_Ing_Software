@@ -1,5 +1,5 @@
 import fs from "fs";
-import * as gestor from './app.js';
+// import * as gestor from './gestorTareas.js';
 
 
 describe("Gestor Tareas", () => {
@@ -13,15 +13,67 @@ describe("Gestor Tareas", () => {
     expect(lista_elem.innerHTML).toEqual("");
   });
 
-  // it("Deberia completar una tarea", () => {
-  //   const tarea_elem = document.querySelector("#tarea");
-  //   const boton_elem = document.querySelector("#crear-tarea");
-  //   const lista_elem = document.querySelector("#lista-tareas");
+  it("Deberia completar una tarea solo con titulo y mostrar elementos y tags", () => {
+    const tarea_elem = document.querySelector("#tarea");
+    const boton_elem = document.querySelector("#crear-tarea");
+    const lista_elem = document.querySelector("#lista-tareas");
 
-  //   tarea_elem.value = "Primera Tarea";
-  //   boton_elem.click();
-  //   expect(lista_elem.innerHTML).toEqual("Primera Tarea");
-  // });
+    tarea_elem.value = "Primera Tarea";
+    boton_elem.click();
+    expect(lista_elem.innerHTML).toEqual("<ul><li><div class=\"dropdown\"><span>Primera Tarea</span><div class=\"dropdown-content\"><ul><li>Categoria: personal</li><li>Descripcion: n/a</li><li>Fecha Limite: Ilimitado</li><li>Etiquetas: n/a</li></ul></div></div></li></ul><button onclick=\"myFunction(0)\">Completar</button>");
+  });
+
+  it("Deberia completar una tarea solo con titulo y mostrar solo el contenido", () => {
+    const tarea_elem = document.querySelector("#tarea");
+    const boton_elem = document.querySelector("#crear-tarea");
+    const lista_elem = document.querySelector("#lista-tareas");
+    
+    tarea_elem.value = "Segunda Tarea";
+    boton_elem.click();
+    expect(lista_elem.textContent).toEqual("Segunda TareaCategoria: personalDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletarPrimera TareaCategoria: personalDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletar");
+  });
+
+  it("Deberia completar una tarea con titulo y categoria, y mostrar solo el contenido", () => {
+    const tarea_elem = document.querySelector("#tarea");
+    const boton_elem = document.querySelector("#crear-tarea");
+    const lista_elem = document.querySelector("#lista-tareas");
+    const categoria_elem = document.querySelector("#select-categoria");
+    
+    tarea_elem.value = "Tercera Tarea";
+    categoria_elem.value = "otros"
+    boton_elem.click();
+    expect(lista_elem.textContent).toEqual("Tercera TareaCategoria: otrosDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletarSegunda TareaCategoria: personalDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletarPrimera TareaCategoria: personalDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletar");
+  });
+
+  it("Deberia completar una tarea con titulo, categoria y fecha limite, y mostrar solo el contenido", () => {
+    const tarea_elem = document.querySelector("#tarea");
+    const boton_elem = document.querySelector("#crear-tarea");
+    const lista_elem = document.querySelector("#lista-tareas");
+    const categoria_elem = document.querySelector("#select-categoria");
+    const fecha_elem = document.querySelector("#fecha");
+
+    tarea_elem.value = "Cuarta Tarea";
+    categoria_elem.value = "personal";
+    fecha_elem.value = "2022-11-28";
+    boton_elem.click();
+    expect(lista_elem.textContent).toEqual("Cuarta TareaCategoria: personalDescripcion: n/aFecha Limite: 2022-11-28Etiquetas: n/aCompletarTercera TareaCategoria: otrosDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletarSegunda TareaCategoria: personalDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletarPrimera TareaCategoria: personalDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletar");
+  });
+
+  it("Deberia completar una tarea con titulo, categoria, fecha limite y descripcion, y mostrar solo el contenido", () => {
+    const tarea_elem = document.querySelector("#tarea");
+    const boton_elem = document.querySelector("#crear-tarea");
+    const lista_elem = document.querySelector("#lista-tareas");
+    const categoria_elem = document.querySelector("#select-categoria");
+    const fecha_elem = document.querySelector("#fecha");
+    const descripcion_elem = document.querySelector("#descripcion");
+
+    tarea_elem.value = "Quinta Tarea";
+    categoria_elem.value = "personal";
+    fecha_elem.value = "2022-11-28";
+    descripcion_elem.value = "Esta es una descripcion";
+    boton_elem.click();
+    expect(lista_elem.textContent).toEqual("Quinta TareaCategoria: personalDescripcion: Esta es una descripcionFecha Limite: 2022-11-28Etiquetas: n/aCompletarCuarta TareaCategoria: personalDescripcion: n/aFecha Limite: 2022-11-28Etiquetas: n/aCompletarTercera TareaCategoria: otrosDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletarSegunda TareaCategoria: personalDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletarPrimera TareaCategoria: personalDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletar");
+  });
 
 //   it("Visualizar tarea en la lista", () => {
 //     const tarea_elem = document.querySelector("#tarea");

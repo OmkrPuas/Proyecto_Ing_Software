@@ -8,7 +8,7 @@ const dia = fechaActual.getDate();
 const mes = fechaActual.getMonth() + 1;
 const anio = fechaActual.getFullYear();
 
-class Tarea {
+export class Tarea {
   constructor(id, titulo, fechaLimite, categoria, descripcion, etiquetas, completada) {
     this.id = id;
     this.titulo = titulo;
@@ -18,6 +18,8 @@ class Tarea {
     this.etiquetas = etiquetas;
     this.completada = completada;
   }
+
+
 }
 
 export function classTarea(id, titulo, fechaLimite, categoria, descripcion, etiquetas, completada){
@@ -363,7 +365,7 @@ export function verificarCampoVacio(campo){
   return campo;
 }
 
-export function cambiarEstadoATareaCompletada(id){
+export function cambiarEstadoATareaCompletada(tarea){
   // console.log(listaTareasPendientes[8]);
   if(tarea != undefined){
     tarea.completada = true;
@@ -462,15 +464,15 @@ export function getListaCompletadasTareas(){
 
 
 
-export function buscarTarea(id){
-  var tareaId = -1;
-  for (let index = 0; index < listaTareasPendientes.length; index++) {
-    if(listaTareasPendientes[index].id === id){
-      tareaId = index;
-    }
-  }
-  return tareaId;
-}
+// export function buscarTarea(id){
+//   var tareaId = -1;
+//   for (let index = 0; index < listaTareasPendientes.length; index++) {
+//     if(listaTareasPendientes[index].id === id){
+//       tareaId = index;
+//     }
+//   }
+//   return tareaId;
+// }
 
 export function completarTarea(tarea){
   cambiarEstadoATareaCompletada(tarea);
@@ -479,12 +481,12 @@ export function completarTarea(tarea){
   agregarTareaCompletadaALista(tarea);
 }
 
-export function completarTarea2(id){
-  let index = buscarTarea(id)
-  if( index != -1){
-    cambiarEstadoATareaCompletada(listaTareasPendientes[index]);
-    // let index = obtenerIndexABorrar(tarea);
-    agregarTareaCompletadaALista(listaTareasPendientes[index]);
-    borrarTareaListaPendientes(index, index + 1);
-  }
-}
+// export function completarTarea2(id){
+//   let index = buscarTarea(id)
+//   if( index != -1){
+//     cambiarEstadoATareaCompletada(listaTareasPendientes[index]);
+//     // let index = obtenerIndexABorrar(tarea);
+//     agregarTareaCompletadaALista(listaTareasPendientes[index]);
+//     borrarTareaListaPendientes(index, index + 1);
+//   }
+// }
