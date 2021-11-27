@@ -17,10 +17,9 @@ describe("Gestor Tareas", () => {
     const tarea_elem = document.querySelector("#tarea");
     const boton_elem = document.querySelector("#crear-tarea");
     const lista_elem = document.querySelector("#lista-tareas");
-
     tarea_elem.value = "Primera Tarea";
     boton_elem.click();
-    expect(lista_elem.innerHTML).toEqual("<ul><li><div class=\"dropdown\"><span>Primera Tarea</span><div class=\"dropdown-content\"><ul><li>Categoria: personal</li><li>Descripcion: n/a</li><li>Fecha Limite: Ilimitado</li><li>Etiquetas: n/a</li></ul></div></div></li></ul><button onclick=\"myFunction(0)\">Completar</button>");
+    expect(lista_elem.innerHTML).toEqual("<ul><li><div class=\"dropdown\"><span>Primera Tarea</span><div class=\"dropdown-content\"><ul><li>Categoria: personal</li><li>Descripcion: n/a</li><li>Fecha Limite: Ilimitado</li><li>Etiquetas: n/a</li></ul></div></div></li></ul><button onclick=\"showImportedMessage(0);\">Completar</button>");
   });
 
   it("Deberia completar una tarea solo con titulo y mostrar solo el contenido", () => {

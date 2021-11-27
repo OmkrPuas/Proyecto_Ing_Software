@@ -44,7 +44,7 @@ export function asignarTituloATarea(tarea, titulo){
     tarea.titulo = titulo;
     return tarea;
   }else{
-    return "P1:No se creo la tarea. TITULO INVALIDO";
+    return "No se creo la tarea. TITULO INVALIDO";
   }
 }
 
@@ -94,7 +94,7 @@ export function asignarEtiquetaATarea(tarea, etiqueta){
 
 export function crearTareaConTitulo(NombreTarea, completada){
   if(NombreTarea == ""){
-    return "P2:No se creo la tarea. TITULO INVALIDO";
+    return "No se creo la tarea. TITULO INVALIDO";
   }else{
     let tarea = new Tarea(id,NombreTarea, "", "", "","", completada);
     listaTareasPendientes.push(tarea);
@@ -148,7 +148,7 @@ export function crearTareaConEtiqueta(nombreTarea, etiqueta, completada){
 export function crearTareaCompleta(nombreTarea, descripcion, fechaLimite, categoria, etiqueta, completada){
   //console.log(id);
   if(nombreTarea == ""){
-    return "P3:No se creo la tarea. TITULO INVALIDO";
+    return "No se creo la tarea. TITULO INVALIDO";
   }else{
     let tarea = new Tarea(id,nombreTarea, fechaLimite, categoria, descripcion, etiqueta, completada);
     añadirAListaTarea(tarea);
@@ -160,7 +160,7 @@ export function crearTareaCompleta(nombreTarea, descripcion, fechaLimite, catego
 export function crearTareaCompletaT(nombreTarea, descripcion, fechaLimite, categoria, etiqueta, completada){
   //console.log(id);
   if(nombreTarea == ""){
-    return "P4:No se creo la tarea. TITULO INVALIDO";
+    return "No se creo la tarea. TITULO INVALIDO";
   }else{
     let tarea = new Tarea(id,nombreTarea, fechaLimite, categoria, descripcion, etiqueta, completada);
     añadirAListaTarea(tarea);
@@ -172,7 +172,7 @@ export function crearTareaCompletaT(nombreTarea, descripcion, fechaLimite, categ
 export function crearTareaCompletada(nombreTarea, descripcion, fechaLimite, categoria, etiqueta, completada){
   //console.log(id);
   if(nombreTarea == ""){
-    return "P5:No se creo la tarea. TITULO INVALIDO";
+    return "No se creo la tarea. TITULO INVALIDO";
   }else{
     let tarea = new Tarea(id,nombreTarea, fechaLimite, categoria, descripcion, etiqueta, completada);
     listaTareasCompletadas.push(tarea);
