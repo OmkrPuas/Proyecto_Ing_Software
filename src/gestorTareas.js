@@ -53,6 +53,10 @@ var id = 0;
 
 gestor.inicializarListas();
 
+window.showImportedMessage = function showImportedMessage(id) {
+  gestor.completarTareaPendiente(id)
+}
+
 function getSelectedCheckboxValues(name) {
   const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
   let values = [];
@@ -86,15 +90,15 @@ boton_elem.addEventListener("click", (event) => {
   let validacionFecha = gestor.validarFechaLimite(fecha_elem.value);
   let etiquetas = getSelectedCheckboxValues('etiqueta');
   if(etiquetas.length > 5){
-    alert("No se pudo crear la tarea, DEMASIADAS ETIQUETAS.")
+    alert("No se pudo crear la tarea, DEMASIADAS ETIQUETAS.");
     limpiarCampos();
   }else{
     if(validacionFecha == "No se pudo crear la tarea, FECHA INVALIDA."){
-      alert("No se pudo crear la tarea, FECHA INVALIDA.")
+      alert("No se pudo crear la tarea, FECHA INVALIDA.");
       limpiarCampos();
     }else{
       if(tarea_elem.value == ""){
-        alert("No se pudo crear la tarea, TITULO INVALIDO.")
+        alert("I:No se pudo crear la tarea, TITULO INVALIDO.");
         limpiarCampos();
       }else{
           etiquetas = gestor.verificarCampoVacio(etiquetas);
@@ -107,14 +111,13 @@ boton_elem.addEventListener("click", (event) => {
           // lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tarea.titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tarea.etiquetas + "</li>" +"</div>"+ "</div>"+ "<button class=" + "bloque" + " id=" + "completar-tarea" + ">Completar" + "</" + "button>" + "</ul>" + "</li>"  + aux;
           let lista = gestor.getListaTareas();
           for(var i = lista.length - 1; i >= 0 ; i--){
-            let boton_prueba = "<button onclick='myFunction("+lista[i].id+")'>Completar</button>";
+            let boton_prueba = "<button onclick='showImportedMessage("+lista[i].id+");'>Completar</button>";
             lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +lista[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + lista[i].categoria +"</li>"+ "<li>" + "Descripcion: " + lista[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + lista[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + lista[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>" + boton_prueba;
           }
-
           limpiarCampos();
 
           // Ver de refactorizar las siguientes lineas
-          //alert("Tarea Creada!");
+          alert("Tarea Creada!");
       }
     }
   }
@@ -124,10 +127,11 @@ mostrarTareas_elem.addEventListener("click", (event) => {
   let lista = gestor.getListaTareas();
   lista_elem.innerHTML = "";
   for(var i = lista.length - 1; i >= 0 ; i--){
-    let boton_prueba = "<button onclick='myFunction("+lista[i].id+")'>Completar</button>";
+    let boton_prueba = "<button onclick='showImportedMessage("+lista[i].id+")'>Completar</button>";
     lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +lista[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + lista[i].categoria +"</li>"+ "<li>" + "Descripcion: " + lista[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + lista[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + lista[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>" + boton_prueba;
-    limpiarCampos();
   }
+  limpiarCampos();
+
 });
 
 boton_filtro.addEventListener("click", (event) => {
