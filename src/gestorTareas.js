@@ -189,6 +189,8 @@ boton_filtro_descripcion.addEventListener("click", (event) => {
 
 boton_alertar.addEventListener("click", (event) => {
   let pendientes = gestor.revisarFechasLimites();
+  const urgentes = document.querySelector("#urgentes");
+  urgentes.value = pendientes;
   alert("Hay "+ pendientes +" Tareas para mañana");
 });
 
@@ -196,10 +198,11 @@ boton_nueva_etiqueta.addEventListener("click", (event) => {
   let nuevaEtiqueta = nueva_etiqueta.value;
   let etiquetas = form_etiquetas.innerHTML;
   let etiqueta_nueva = "<input type='checkbox' id='etiqueta' name='etiqueta' value='"+ nuevaEtiqueta + "' /><label for='etiqueta3'>" + nuevaEtiqueta + "</label><br />";
+  let etiqueta_nueva_filtro = "<input type='checkbox' id='etiqueta' name='filtro-etiqueta' value='"+ nuevaEtiqueta + "' /><label for='etiqueta3'>" + nuevaEtiqueta + "</label><br />";
   form_etiquetas.innerHTML = etiquetas + etiqueta_nueva;
 
   let etiquetas_filtros = etiquetas_filtro.innerHTML;
-  etiquetas_filtro.innerHTML = etiquetas_filtros + etiqueta_nueva;
+  etiquetas_filtro.innerHTML = etiquetas_filtros + etiqueta_nueva_filtro;
 
   gestor.crearNuevaEtiqueta(nuevaEtiqueta);
 });
