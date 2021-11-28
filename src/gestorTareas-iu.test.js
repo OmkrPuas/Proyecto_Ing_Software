@@ -1,5 +1,5 @@
 import fs from "fs";
-// import * as gestor from './gestorTareas.js';
+import * as gestor from './app.js';
 
 
 describe("Gestor Tareas", () => {
@@ -312,8 +312,63 @@ it("Deberia alertar la cantidad de tareas pendientes para hoy y mañana ", () =>
   expect(urgentes.value).toEqual(0);
 });
 
-//PRUEBAS TAREAS COMPLETADAS 
 
+
+//PRUEBAS TAREAS COMPLETADAS 
+it("Deberia mostrar las tareas completadas ", () => {
+  const boton_completadas = document.querySelector("#filtro-tareas-completadas");
+  const lista_elem = document.querySelector("#lista-tareas");
+  boton_completadas.click();
+  expect(lista_elem.innerHTML).toEqual("<label>Tareas completadas por categoria: Trabajo:0 Familia:0 Personal:0 Otros:0 No asignado:0</label>");
+});
+
+it("Deberia mostrar las tareas completadas ", () => {
+  const boton_completadas = document.querySelector("#filtro-tareas-completadas");
+  gestor.crearTareaCompletada("Tarea Completada","Descrito","2022-11-19","otros","Guitarra",true);
+  const lista_elem = document.querySelector("#lista-tareas");
+  boton_completadas.click();
+  expect(lista_elem.innerHTML).toEqual("<label>Tareas completadas por categoria: Trabajo:0 Familia:0 Personal:0 Otros:1 No asignado:0</label><ul><li><div class=\"dropdown\"><span>Tarea Completada</span><div class=\"dropdown-content\"><ul><li>Categoria: otros</li><li>Descripcion: Descrito</li><li>Fecha Limite: 2022-11-19</li><li>Etiquetas: Guitarra</li></ul></div></div></li></ul>");
+});
+
+it("Deberia mostrar las tareas completadas filtrada por una categoria ", () => {
+  const filtro_categoria_completadas = document.querySelector("#categoria-completadas-filtro");
+  const boton_completadas = document.querySelector("#filtro-completadas-por-categoria");
+  filtro_categoria_completadas.value = "otros";
+  const lista_elem = document.querySelector("#lista-tareas");
+  boton_completadas.click();
+  expect(lista_elem.innerHTML).toEqual("<ul><li><div class=\"dropdown\"><span>Tarea Completada</span><div class=\"dropdown-content\"><ul><li>Categoria: otros</li><li>Descripcion: Descrito</li><li>Fecha Limite: 2022-11-19</li><li>Etiquetas: Guitarra</li></ul></div></div></li></ul>");
+});
+
+it("Deberia mostrar las tareas completadas filtradas por un rango de fecha ", () => {
+  const filtro_fechaInicial_completadas = document.querySelector("#dia-completada-filtroInicio");
+  const filtro_fechaFinal_completadas = document.querySelector("#dia-completada-filtroFinal");
+  const boton_completadas_por_fechas = document.querySelector("#filtro-completadas-por-fechas");
+  filtro_fechaInicial_completadas.value = "2022-10-12";
+  filtro_fechaFinal_completadas.value = "2022-12-12";
+  const lista_elem = document.querySelector("#lista-tareas");
+  boton_completadas_por_fechas.click();
+  expect(lista_elem.innerHTML).toEqual("<ul><li><div class=\"dropdown\"><span>Tarea Completada</span><div class=\"dropdown-content\"><ul><li>Categoria: otros</li><li>Descripcion: Descrito</li><li>Fecha Limite: 2022-11-19</li><li>Etiquetas: Guitarra</li></ul></div></div></li></ul>");
+});
+
+it("Deberia mostrar las tareas completadas filtradas por un rango de fecha ", () => {
+  const filtro_fechaInicial_completadas = document.querySelector("#dia-completada-filtroInicio");
+  const filtro_fechaFinal_completadas = document.querySelector("#dia-completada-filtroFinal");
+  const boton_completadas_por_fechas = document.querySelector("#filtro-completadas-por-fechas");
+  filtro_fechaInicial_completadas.value = "2023-10-12";
+  filtro_fechaFinal_completadas.value = "2023-12-12";
+  const lista_elem = document.querySelector("#lista-tareas");
+  boton_completadas_por_fechas.click();
+  expect(lista_elem.innerHTML).toEqual("");
+});
+
+it("Deberia mostrar las tareas completadas filtrada por una categoria ", () => {
+  const filtro_categoria_completadas = document.querySelector("#categoria-completadas-filtro");
+  const boton_completadas = document.querySelector("#filtro-completadas-por-categoria");
+  filtro_categoria_completadas.value = "personal";
+  const lista_elem = document.querySelector("#lista-tareas");
+  boton_completadas.click();
+  expect(lista_elem.innerHTML).toEqual("");
+});
 
   afterEach(() => {
     const lista_elem = document.querySelector("#lista-tareas");

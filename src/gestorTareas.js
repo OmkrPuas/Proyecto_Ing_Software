@@ -54,7 +54,9 @@ var id = 0;
 gestor.inicializarListas();
 
 window.showImportedMessage = function showImportedMessage(id) {
-  gestor.completarTareaPendiente(id)
+  gestor.completarTareaPendiente(id);
+  alert("Tarea Terminada con el id:"+ id);
+  mostrarTareas_elem.click();
 }
 
 function getSelectedCheckboxValues(name) {
@@ -211,14 +213,7 @@ boton_nueva_etiqueta.addEventListener("click", (event) => {
   gestor.crearNuevaEtiqueta(nuevaEtiqueta);
 });
 
-boton_filtro_tareas_completadas.addEventListener("click", (event) => {
-  if(zz == 0){
-    gestor.crearTareaCompletada("Septima Tarea v2","Descrito","2022-11-19","otros","Guitarra",true);
-    gestor.crearTareaCompletada("Octava Tarea v2","Descrito","2022-11-12","familia","Guitarra",true);
-    zz = zz + 1;
-  }
-  
-  
+boton_filtro_tareas_completadas.addEventListener("click", (event) => {  
   let Informe = gestor.getNumTareasCompletadasPorCategoria();
   let labelInforme = "<label>" + "Tareas completadas por categoria: " + "Trabajo:" + Informe["trabajo"] + " Familia:" + Informe["familia"] + " Personal:" + Informe["personal"] + " Otros:" + Informe["otros"] + " No asignado:" + Informe[""] +  "</label>";
   let tareasFiltradas = gestor.getListaCompletadasTareas();

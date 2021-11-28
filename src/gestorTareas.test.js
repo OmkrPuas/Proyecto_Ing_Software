@@ -333,7 +333,7 @@ describe("Gestor Tareas", () => {
   });
 
   it("deberia crear una tarea completada, y devolverme una instancia de Tarea, y añadirla a la lista de tareas completadas", () => {
-    expect(gestor.crearTareaCompletada("Decima Tarea","Descrito decimo","2022-12-19","trabajo","Guitarra", false)).toEqual({"categoria": "trabajo", "completada": false, "descripcion": "Descrito decimo", "etiquetas": "Guitarra", "fechaLimite": "2022-12-19", "id": 10, "titulo": "Decima Tarea"});
+    expect(gestor.crearTareaCompletada("Decima Tarea","Descrito decimo","2022-12-19","trabajo","Guitarra", true)).toEqual({"categoria": "trabajo", "completada": true, "descripcion": "Descrito decimo", "etiquetas": "Guitarra", "fechaLimite": "2022-12-19", "id": 10, "titulo": "Decima Tarea"});
   });
 
   it("deberia crear una tarea completada, y devolverme una instancia de Tarea, y añadirla a la lista de tareas completadas", () => {
@@ -438,7 +438,7 @@ describe("Gestor Tareas", () => {
     let index = gestor.obtenerIndexABorrar(tarea);
     gestor.borrarTareaListaPendientes(index, index + 1);
     gestor.agregarTareaCompletadaALista(tarea);
-    expect(gestor.getListaTareasCompletadas()).toEqual("[Titulo:Decima Tarea,Descripcion:Descrito decimo,Fecha Limite:2022-12-19,Categoria:trabajo,Etiquetas: Guitarra,Completada:false][Titulo:Primera Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: ,Completada:true]");
+    expect(gestor.getListaTareasCompletadas()).toEqual("[Titulo:Decima Tarea,Descripcion:Descrito decimo,Fecha Limite:2022-12-19,Categoria:trabajo,Etiquetas: Guitarra,Completada:true][Titulo:Primera Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: ,Completada:true]");
   });
 
   it("Deberia visualizar la lista de tareas pendientes con la tarea eliminada", () => {
@@ -449,7 +449,7 @@ describe("Gestor Tareas", () => {
     let listaTareasPendientes = gestor.getListaTareas();
     let tarea = listaTareasPendientes[0];
     gestor.completarTarea(tarea);                   //SEGUNDA TAREA
-    expect(gestor.getListaTareasCompletadas()).toEqual("[Titulo:Decima Tarea,Descripcion:Descrito decimo,Fecha Limite:2022-12-19,Categoria:trabajo,Etiquetas: Guitarra,Completada:false][Titulo:Primera Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: ,Completada:true][Titulo:Segunda Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: ,Completada:true]");
+    expect(gestor.getListaTareasCompletadas()).toEqual("[Titulo:Decima Tarea,Descripcion:Descrito decimo,Fecha Limite:2022-12-19,Categoria:trabajo,Etiquetas: Guitarra,Completada:true][Titulo:Primera Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: ,Completada:true][Titulo:Segunda Tarea,Descripcion:,Fecha Limite:,Categoria:,Etiquetas: ,Completada:true]");
   });
 
   it("Deberia crear una instancia de tarea", () => {
@@ -488,7 +488,7 @@ describe("Gestor Tareas", () => {
   });
 
   it("Deberia devolver uns lista de tareas completadas filtrada por una categoria", () => {
-    expect(gestor.getListaTareasCompletasPorCategoria("trabajo")).toEqual([{"categoria": "trabajo", "completada": false, "descripcion": "Descrito decimo", "etiquetas": "Guitarra", "fechaLimite": "2022-12-19", "id": 10, "titulo": "Decima Tarea"}]);
+    expect(gestor.getListaTareasCompletasPorCategoria("trabajo")).toEqual([{"categoria": "trabajo", "completada": true, "descripcion": "Descrito decimo", "etiquetas": "Guitarra", "fechaLimite": "2022-12-19", "id": 10, "titulo": "Decima Tarea"}]);
   });
 
   it("Deberia devolver una busqueda vacia en la lista de tareas completas por una categoria vacia", () => {
@@ -508,11 +508,11 @@ describe("Gestor Tareas", () => {
   });
 
   it("Deberia devolverme la lista de tareas completadas", () => {
-    expect(gestor.getListaCompletadasTareas()).toEqual([{"categoria": "trabajo", "completada": false, "descripcion": "Descrito decimo", "etiquetas": "Guitarra", "fechaLimite": "2022-12-19", "id": 10, "titulo": "Decima Tarea"}, {"categoria": "", "completada": true, "descripcion": "", "etiquetas": "", "fechaLimite": "", "id": 0, "titulo": "Primera Tarea"}, {"categoria": "", "completada": true, "descripcion": "", "etiquetas": "", "fechaLimite": "", "id": 1, "titulo": "Segunda Tarea"}]);
+    expect(gestor.getListaCompletadasTareas()).toEqual([{"categoria": "trabajo", "completada": true, "descripcion": "Descrito decimo", "etiquetas": "Guitarra", "fechaLimite": "2022-12-19", "id": 10, "titulo": "Decima Tarea"}, {"categoria": "", "completada": true, "descripcion": "", "etiquetas": "", "fechaLimite": "", "id": 0, "titulo": "Primera Tarea"}, {"categoria": "", "completada": true, "descripcion": "", "etiquetas": "", "fechaLimite": "", "id": 1, "titulo": "Segunda Tarea"}]);
   });
 
   it("Deberia devolverme la lista de tareas completadas en un rango de fechas", () => {
-    expect(gestor.getListaTareasPorRangoFechas("2022-12-11","2022-12-21")).toEqual([{"categoria": "trabajo", "completada": false, "descripcion": "Descrito decimo", "etiquetas": "Guitarra", "fechaLimite": "2022-12-19", "id": 10, "titulo": "Decima Tarea"}]);
+    expect(gestor.getListaTareasPorRangoFechas("2022-12-11","2022-12-21")).toEqual([{"categoria": "trabajo", "completada": true, "descripcion": "Descrito decimo", "etiquetas": "Guitarra", "fechaLimite": "2022-12-19", "id": 10, "titulo": "Decima Tarea"}]);
   });
 
   it("Deberia devolverme la lista vacia de una busqueda de tareas completadas en un rango de fechas, por falta de una fecha", () => {
@@ -532,6 +532,14 @@ describe("Gestor Tareas", () => {
     expect(gestor.getNumTareasCompletadasPorCategoria()).toEqual(obj);
   });
 
+  it("Deberia completar una tarea", () => {
+    let lista = gestor.getListaTareasArray();
+    expect(gestor.completarTareaPendiente(lista[0].id)).toEqual(true);
+  });
 
+  it("Deberia fallar al completar una tarea", () => {
+    
+    expect(gestor.completarTareaPendiente(5000000)).toEqual(false);
+  });
 
 });

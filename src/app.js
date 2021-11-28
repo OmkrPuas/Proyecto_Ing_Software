@@ -538,16 +538,13 @@ export function mostrarTarea(tarea){
   return tarea.titulo + "\nDescripcion: " + tarea.descripcion+ "\nFecha Limite: " + tarea.fechaLimite+ "\nCategoria: " + tarea.categoria + "\nEtiquetas: " + tarea.etiquetas + "\nCompletada: " + tarea.completada;
 }
 
-
 //-----------------------------------------------------------------
 //------------------------------PROCESO COMPLETAR TAREA-----------------------
 
 
 
-export function borrarTareaListaPendientes(indexAnt, indexPost){
-  // console.log(tarea);
-  // let isCompleted = (completada) => completada == true;
-  listaTareasPendientes.splice(indexAnt, indexPost);
+export function borrarTareaListaPendientes(indexTarea){
+  listaTareasPendientes.splice(indexTarea, 1);
 }
 
 export function obtenerIndexABorrar(tarea){
@@ -562,8 +559,16 @@ export function completarTarea(tarea){
   agregarTareaCompletadaALista(tarea);
 }
 
+export function buscarTareaPorID(id){
+  for(var i = 0; i < listaTareasPendientes.length ;i++){
+    if(listaTareasPendientes[i].id === id){
+      return i;
+    }
+  }
+  return -1;
+}
+
 export function cambiarEstadoATareaCompletada(tarea){
-  // console.log(listaTareasPendientes[8]);
   if(tarea != undefined){
     tarea.completada = true;
     return tarea;
@@ -571,85 +576,15 @@ export function cambiarEstadoATareaCompletada(tarea){
   return true;
 }
 
-export function buscarTareaPorID(id){
-  for(var i = 0; i < listaTareasPendientes.length ;i++){
-    if(listaTareasPendientes[i].id === id){
-      return listaTareasPendientes[i];
-    }
-  }
-  return false;
-}
-
 export function completarTareaPendiente(id){
-  let tarea = buscarTareaPorID(id);
-  if(tarea != false){
-    tarea.completada = true;
-    borrarTareaListaPendientes(tarea.id,(tarea.id)+1);
-    agregarTareaCompletadaALista(tarea);
+  let indexTarea = buscarTareaPorID(id);
+  let confirmado = false;
+
+    if(indexTarea >= 0){
+    cambiarEstadoATareaCompletada(listaTareasPendientes[indexTarea]);
+    agregarTareaCompletadaALista(listaTareasPendientes[indexTarea]);
+    borrarTareaListaPendientes(indexTarea);
+    confirmado = true;
   }
-  return true;
+  return confirmado;
 }
-
-
-// export function mostrarTareas(){
-//   let lista = [];
-//   for(var i = 0; i < listaTareasPendientes.length; i++){
-//     if(listaTareasPendientes[i].titulo == titulo){
-//       lista = "\n[Titulo:" + listaTareasPendientes[i].titulo + ",Descripcion:" + listaTareasPendientes[i].descripcion +",Fecha Limite: " + listaTareasPendientes[i].fechaLimite + ",Categoria: " + listaTareasPendientes[i].categoria + ",Etiquetas: " + listaTareasPendientes[i].etiquetas + "]";
-//     }
-//   }
-//   return lista;
-// }
-
-
-// export function getNumTareasCompletadasPorCategoria(){
-//   let numTareas = [];
-//   let cont1 =0, cont2=0, cont3=0, cont4=0, cont5 =0;
-//   for (let i = 0; i < listaTareasCompletadas.length; i++){
-//     for(let j = 0; j < listaCategorias.length; j++){
-//       if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'trabajo'){
-//         cont1 = cont1 + 1;
-//       }
-//       if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'familia'){
-//         cont2 = cont2 + 1;
-//       }
-//       if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'personal'){
-//         cont3 = cont3 + 1;
-//       }
-//       if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == 'otros'){
-//         cont4 = cont4 + 1;
-//       }
-//       if(listaTareasCompletadas[i].categoria == listaCategorias[j] && listaCategorias[j] == ""){
-//         cont5 = cont5 + 1;
-//       }
-//     }
-//   }
-//   numTareas[0] = cont1;
-//   numTareas[1] = cont2;
-//   numTareas[2] = cont3;
-//   numTareas[3] = cont4;
-//   numTareas[4] = cont5;
-//   return numTareas;
-// }
-
-
-
-// export function buscarTarea(id){
-//   var tareaId = -1;
-//   for (let index = 0; index < listaTareasPendientes.length; index++) {
-//     if(listaTareasPendientes[index].id === id){
-//       tareaId = index;
-//     }
-//   }
-//   return tareaId;
-// }
-
-// export function completarTarea2(id){
-//   let index = buscarTarea(id)
-//   if( index != -1){
-//     cambiarEstadoATareaCompletada(listaTareasPendientes[index]);
-//     // let index = obtenerIndexABorrar(tarea);
-//     agregarTareaCompletadaALista(listaTareasPendientes[index]);
-//     borrarTareaListaPendientes(index, index + 1);
-//   }
-// }
