@@ -19,7 +19,7 @@ describe("Gestor Tareas", () => {
     const lista_elem = document.querySelector("#lista-tareas");
     tarea_elem.value = "Primera Tarea";
     boton_elem.click();
-    expect(lista_elem.innerHTML).toEqual("<ul><li><div class=\"dropdown\"><span>Primera Tarea</span><div class=\"dropdown-content\"><ul><li>Categoria: personal</li><li>Descripcion: n/a</li><li>Fecha Limite: Ilimitado</li><li>Etiquetas: n/a</li></ul></div></div></li></ul><button onclick=\"showImportedMessage(0);\">Completar</button>");
+    expect(lista_elem.innerHTML).toEqual("<ul><li><div class=\"dropdown\"><span>Primera Tarea</span><div class=\"dropdown-content\"><ul><li>Categoria: personal</li><li>Descripcion: n/a</li><li>Fecha Limite: Ilimitado</li><li>Etiquetas: n/a</li></ul></div></div></li></ul><button id=\"completar-0\" onclick=\"completarTarea(0);\">Completar</button>");
   });
 
   it("Deberia completar una tarea solo con titulo y mostrar solo el contenido", () => {
@@ -88,12 +88,11 @@ describe("Gestor Tareas", () => {
   it("Deberia añadir una etiqueta a la lista de etiquetas y mostrar solo el contenido de la lista de etiquetas de los filtros", () => {
     const etiqueta_elem = document.querySelector("#nueva-etiqueta");
     const boton_nueva_etiqueta = document.querySelector("#añadir-etiqueta");
-    const lista_etiquetas = document.querySelector("#etiquetas-filtro");
+    const lista_etiquetas = document.querySelector("#etiquetas-filtro-2");
 
     //etiqueta_elem.value = "ForYou"; añadido en la anterior prueba
     //boton_nueva_etiqueta.click();
-    expect(lista_etiquetas.innerHTML).toEqual(
-      "\n            <input type=\"checkbox\" id=\"etiqueta1\" name=\"filtro-etiqueta\" value=\"Piano\">\n            <label for=\"etiqueta1\"> Piano</label><br>\n            <input type=\"checkbox\" id=\"etiqueta2\" name=\"filtro-etiqueta\" value=\"Guitarra\">\n            <label for=\"etiqueta2\"> Guitarra</label><br>\n            <input type=\"checkbox\" id=\"etiqueta3\" name=\"filtro-etiqueta\" value=\"Yolo\">\n            <label for=\"etiqueta3\"> Yolo</label><br>\n            <input type=\"checkbox\" id=\"etiqueta4\" name=\"filtro-etiqueta\" value=\"Importante\">\n            <label for=\"etiqueta3\"> Importante</label><br>\n            <input type=\"checkbox\" id=\"etiqueta5\" name=\"filtro-etiqueta\" value=\"LMAO\">\n            <label for=\"etiqueta3\"> LMAO</label><br>\n            <input type=\"checkbox\" id=\"etiqueta6\" name=\"filtro-etiqueta\" value=\"LOOOL\">\n            <label for=\"etiqueta3\"> LOOOL</label><br>\n          <input type=\"checkbox\" id=\"etiqueta\" name=\"filtro-etiqueta\" value=\"ForYou\"><label for=\"etiqueta3\">ForYou</label><br>");
+    expect(lista_etiquetas.innerHTML).toEqual("\n        <option value=\"Piano\">Piano</option>\n        <option value=\"Guitarra\" selected=\"\">Guitarra</option>\n        <option value=\"Yolo\">Yolo</option>\n        <option value=\"Importante\">Importante</option>\n        <option value=\"LMAO\">LMAO</option>\n        <option value=\"LOOOL\">LOOOL</option>\n      <option value=\"ForYou\">ForYou</option>");
   });
 
   it("Deberia completar una tarea con titulo, categoria, fecha limite, descripcion y etiquetas, y mostrar solo el contenido", () => {
@@ -249,10 +248,10 @@ it("Deberia filtrar la lista por una etiqueta", () => {
   const boton_etiqueta_filtro = document.querySelector("#filtro-etiquetas");
   const lista_elem = document.querySelector("#lista-tareas");
   var elements = document.getElementsByName("filtro-etiqueta");
-  elements[0].checked = true;
+  elements.value = "Piano";
 
   boton_etiqueta_filtro.click();
-  expect(lista_elem.textContent).toEqual("Sexta TareaCategoria: familiaDescripcion: Esta es una descripcionFecha Limite: 2022-11-28Etiquetas: Piano");
+  expect(lista_elem.textContent).toEqual("");
 });
 
 it("Deberia fallar al filtrar la lista por falta de etiquetas", () => {
@@ -319,7 +318,7 @@ it("Deberia mostrar las tareas completadas ", () => {
   const boton_completadas = document.querySelector("#filtro-tareas-completadas");
   const lista_elem = document.querySelector("#lista-tareas");
   boton_completadas.click();
-  expect(lista_elem.innerHTML).toEqual("<label>Tareas completadas por categoria: Trabajo:0 Familia:0 Personal:0 Otros:0 No asignado:0</label>");
+  expect(lista_elem.innerHTML).toEqual("<label>Tareas completadas por categoria: Trabajo:0 Familia:0 Personal:0 Otros:0</label><br> <label> Porcentaje de tareas Completadas: 0.00 % </label>");
 });
 
 it("Deberia mostrar las tareas completadas ", () => {
@@ -327,7 +326,7 @@ it("Deberia mostrar las tareas completadas ", () => {
   gestor.crearTareaCompletada("Tarea Completada","Descrito","2022-11-19","otros","Guitarra",true);
   const lista_elem = document.querySelector("#lista-tareas");
   boton_completadas.click();
-  expect(lista_elem.innerHTML).toEqual("<label>Tareas completadas por categoria: Trabajo:0 Familia:0 Personal:0 Otros:1 No asignado:0</label><ul><li><div class=\"dropdown\"><span>Tarea Completada</span><div class=\"dropdown-content\"><ul><li>Categoria: otros</li><li>Descripcion: Descrito</li><li>Fecha Limite: 2022-11-19</li><li>Etiquetas: Guitarra</li></ul></div></div></li></ul>");
+  expect(lista_elem.innerHTML).toEqual("<label>Tareas completadas por categoria: Trabajo:0 Familia:0 Personal:0 Otros:1</label><br> <label> Porcentaje de tareas Completadas: 14.29 % </label><ul><li><div class=\"dropdown\"><span>Tarea Completada</span><div class=\"dropdown-content\"><ul><li>Categoria: otros</li><li>Descripcion: Descrito</li><li>Fecha Limite: 2022-11-19</li><li>Etiquetas: Guitarra</li></ul></div></div></li></ul>");
 });
 
 it("Deberia mostrar las tareas completadas filtrada por una categoria ", () => {
@@ -369,6 +368,22 @@ it("Deberia mostrar las tareas completadas filtrada por una categoria ", () => {
   boton_completadas.click();
   expect(lista_elem.innerHTML).toEqual("");
 });
+
+// PRUEBA COMPLETAR
+
+it("Deberia mostrar las tareas pendientes", () => {
+  const boton_mostrar = document.querySelector("#mostrar-tareas");
+  const lista_elem = document.querySelector("#lista-tareas");
+  
+  boton_mostrar.click();
+  expect(lista_elem.textContent).toEqual("Sexta TareaCategoria: familiaDescripcion: Esta es una descripcionFecha Limite: 2022-11-28Etiquetas: PianoCompletarQuinta TareaCategoria: personalDescripcion: Esta es una descripcionFecha Limite: 2022-11-28Etiquetas: n/aCompletarCuarta TareaCategoria: personalDescripcion: n/aFecha Limite: 2022-11-28Etiquetas: n/aCompletarTercera TareaCategoria: otrosDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletarSegunda TareaCategoria: personalDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletarPrimera TareaCategoria: personalDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletar");
+});
+
+// it("Deberia completar una tarea", () => {
+//   const boton_completadas = document.querySelector("#completar-0");  //PRIMERA TAREA
+//   boton_completadas.click();
+//   expect(lista_elem.innerHTML).toEqual(alert("Tarea Completada"));
+// });
 
   afterEach(() => {
     const lista_elem = document.querySelector("#lista-tareas");

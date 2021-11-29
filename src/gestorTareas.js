@@ -1,7 +1,4 @@
 import * as gestor from './app.js';
-let zz = 0;
-
-
 
 //gestor.algo
 const tarea_elem = document.querySelector("#tarea");
@@ -11,10 +8,6 @@ const boton_elem = document.querySelector("#crear-tarea");
 const lista_elem = document.querySelector("#lista-tareas");
 const categoria_elem = document.querySelector("#select-categoria");
 const mostrarTareas_elem = document.querySelector("#mostrar-tareas");
-
-
-//Completar
-// const boton_completar = document.querySelector("#completar-tarea");
 
 //Alertar Fecha Limite 
 const boton_alertar = document.querySelector("#revisar-fechas");
@@ -32,7 +25,7 @@ const boton_filtro_categoria = document.querySelector("#filtro-categoria");
 const categoria_filtro = document.querySelector("#categoria-filtro");
 
 const boton_filtro_etiquetas = document.querySelector("#filtro-etiquetas");
-const etiquetas_filtro = document.querySelector("#etiquetas-filtro");
+const etiquetas_filtros2 = document.getElementById("etiquetas-filtro-2");
 
 const boton_filtro_dia = document.querySelector("#filtro-dia");
 const dia_filtro = document.querySelector("#dia-filtro");
@@ -51,12 +44,13 @@ const boton_filtro_completadas_fechas = document.querySelector("#filtro-completa
 
 var id = 0;
 
-gestor.inicializarListas();
+// gestor.inicializarListas();
 
-window.showImportedMessage = function showImportedMessage(id) {
+window.completarTarea = function completarTarea(id) {
   gestor.completarTareaPendiente(id);
   alert("Tarea Terminada con el id:"+ id);
   mostrarTareas_elem.click();
+  document.getElementById("visualizar-filtros-tareas-completadas").style="visibility: visible;";
 }
 
 function getSelectedCheckboxValues(name) {
@@ -88,48 +82,51 @@ function limpiarCampos(){
   }
 }
 
-boton_elem.addEventListener("click", (event) => {
-  let validacionFecha = gestor.validarFechaLimite(fecha_elem.value);
-  let etiquetas = getSelectedCheckboxValues('etiqueta');
-  if(etiquetas.length > 5){
+function validarTarea(titulo, fecha, etiquetas){
+  let error = false;
+  if(etiquetas > 5){
     alert("No se pudo crear la tarea, DEMASIADAS ETIQUETAS.");
-    limpiarCampos();
   }else{
-    if(validacionFecha == "No se pudo crear la tarea, FECHA INVALIDA."){
+    if(fecha == "No se pudo crear la tarea, FECHA INVALIDA."){
       alert("No se pudo crear la tarea, FECHA INVALIDA.");
-      limpiarCampos();
     }else{
-      if(tarea_elem.value == ""){
-        alert("I:No se pudo crear la tarea, TITULO INVALIDO.");
-        limpiarCampos();
+      if(titulo == ""){
+        alert("No se pudo crear la tarea, TITULO INVALIDO.");
       }else{
-          etiquetas = gestor.verificarCampoVacio(etiquetas);
-          descripcion_elem.value = gestor.verificarCampoVacio(descripcion_elem.value);
-          let tarea = gestor.classTarea(id, tarea_elem.value, validacionFecha, categoria_elem.value, descripcion_elem.value, etiquetas, false);
-          gestor.añadirAListaTarea(tarea);
-          lista_elem.innerHTML = "";
-          id++;
-          // var aux = lista_elem.innerHTML;
-          // lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tarea.titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tarea.etiquetas + "</li>" +"</div>"+ "</div>"+ "<button class=" + "bloque" + " id=" + "completar-tarea" + ">Completar" + "</" + "button>" + "</ul>" + "</li>"  + aux;
-          let lista = gestor.getListaTareas();
-          for(var i = lista.length - 1; i >= 0 ; i--){
-            let boton_prueba = "<button onclick='showImportedMessage("+lista[i].id+");'>Completar</button>";
-            lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +lista[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + lista[i].categoria +"</li>"+ "<li>" + "Descripcion: " + lista[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + lista[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + lista[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>" + boton_prueba;
-          }
-          limpiarCampos();
-
-          // Ver de refactorizar las siguientes lineas
-          alert("Tarea Creada!");
+        error = true;
       }
     }
   }
+  return error;
+}
+
+boton_elem.addEventListener("click", (event) => {
+  let validacionFecha = gestor.validarFechaLimite(fecha_elem.value);
+  let etiquetas = getSelectedCheckboxValues('etiqueta');
+  
+  if(validarTarea(tarea_elem.value, validacionFecha, etiquetas.length)){
+    etiquetas = gestor.verificarCampoVacio(etiquetas);
+    descripcion_elem.value = gestor.verificarCampoVacio(descripcion_elem.value);
+    let tarea = gestor.classTarea(id, tarea_elem.value, validacionFecha, categoria_elem.value, descripcion_elem.value, etiquetas, false);
+    gestor.añadirAListaTarea(tarea);
+    lista_elem.innerHTML = "";
+    id++;
+    let lista = gestor.getListaTareas();
+    for(var i = lista.length - 1; i >= 0 ; i--){
+      let boton_prueba = "<button  id='completar-" + lista[i].id + "' onclick='completarTarea("+lista[i].id+");'>Completar</button>";
+      lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +lista[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + lista[i].categoria +"</li>"+ "<li>" + "Descripcion: " + lista[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + lista[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + lista[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>" + boton_prueba;
+    }
+    alert("Tarea Creada!");
+    document.getElementById("visualizar-filtros-tareas-pendientes").style="visibility: visible;";
+  }
+  limpiarCampos();
 });
 
 mostrarTareas_elem.addEventListener("click", (event) => {
   let lista = gestor.getListaTareas();
   lista_elem.innerHTML = "";
   for(var i = lista.length - 1; i >= 0 ; i--){
-    let boton_prueba = "<button onclick='showImportedMessage("+lista[i].id+")'>Completar</button>";
+    let boton_prueba = "<button onclick='completarTarea("+lista[i].id+")'>Completar</button>";
     lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +lista[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + lista[i].categoria +"</li>"+ "<li>" + "Descripcion: " + lista[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + lista[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + lista[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>" + boton_prueba;
   }
   limpiarCampos();
@@ -160,10 +157,9 @@ boton_filtro_categoria.addEventListener("click", (event) => {
 });
 
 boton_filtro_etiquetas.addEventListener("click", (event) => {
-  let etiquetas = getSelectedCheckboxValues("filtro-etiqueta");
-  let tareasFiltradas = gestor.getListaTareasPorEtiqueta(etiquetas);
+  let tareasFiltradas = gestor.getListaTareasPorEtiqueta(etiquetas_filtros2.value);
   if(tareasFiltradas == ""){
-    alert("No se pudo encontrar ninguna coincidencia de Etiqueta:' " + etiquetas + "' en la lista de tareas")
+    alert("No se pudo encontrar ninguna coincidencia de Etiqueta:'" + etiquetas_filtros2.value +"' en la lista de tareas")
   }
   lista_elem.innerHTML = "";
   for(var i = tareasFiltradas.length - 1; i >= 0 ; i--){
@@ -171,6 +167,7 @@ boton_filtro_etiquetas.addEventListener("click", (event) => {
   }
   limpiarCampos();
 });
+
 boton_filtro_dia.addEventListener("click", (event) => {
   let tareasFiltradas = gestor.getListaTareasPorDia(dia_filtro.value);
   if(tareasFiltradas == ""){
@@ -203,19 +200,30 @@ boton_alertar.addEventListener("click", (event) => {
 boton_nueva_etiqueta.addEventListener("click", (event) => {
   let nuevaEtiqueta = nueva_etiqueta.value;
   let etiquetas = form_etiquetas.innerHTML;
+  let etiqueta_nueva2 = "<option value='"+nuevaEtiqueta+"'>"+nuevaEtiqueta+"</option>";
   let etiqueta_nueva = "<input type='checkbox' id='etiqueta' name='etiqueta' value='"+ nuevaEtiqueta + "' /><label for='etiqueta3'>" + nuevaEtiqueta + "</label><br />";
-  let etiqueta_nueva_filtro = "<input type='checkbox' id='etiqueta' name='filtro-etiqueta' value='"+ nuevaEtiqueta + "' /><label for='etiqueta3'>" + nuevaEtiqueta + "</label><br />";
+  //let etiqueta_nueva_filtro = "<input type='checkbox' id='etiqueta' name='filtro-etiqueta' value='"+ nuevaEtiqueta + "' /><label for='etiqueta3'>" + nuevaEtiqueta + "</label><br />";
   form_etiquetas.innerHTML = etiquetas + etiqueta_nueva;
 
-  let etiquetas_filtros = etiquetas_filtro.innerHTML;
-  etiquetas_filtro.innerHTML = etiquetas_filtros + etiqueta_nueva_filtro;
+  let vara = etiquetas_filtros2.innerHTML;
+  etiquetas_filtros2.innerHTML = vara + etiqueta_nueva2;
+
 
   gestor.crearNuevaEtiqueta(nuevaEtiqueta);
 });
 
 boton_filtro_tareas_completadas.addEventListener("click", (event) => {  
+
+
   let Informe = gestor.getNumTareasCompletadasPorCategoria();
-  let labelInforme = "<label>" + "Tareas completadas por categoria: " + "Trabajo:" + Informe["trabajo"] + " Familia:" + Informe["familia"] + " Personal:" + Informe["personal"] + " Otros:" + Informe["otros"] + " No asignado:" + Informe[""] +  "</label>";
+  let totalCompletadas = gestor.getListaCompletadasTareas().length;
+  let totalPendientes = gestor.getListaTareas().length;
+  let porcentaje = 0;
+  if(totalPendientes > 0 || totalCompletadas > 0){
+    porcentaje = (totalCompletadas / (totalCompletadas + totalPendientes)) * 100; 
+  }
+  let labelInforme = "<label>" + "Tareas completadas por categoria: " + "Trabajo:" + Informe["trabajo"] + " Familia:" + Informe["familia"] + " Personal:" + Informe["personal"] + " Otros:" + Informe["otros"] +  "</label>" + "<br> <label> Porcentaje de tareas Completadas: " + porcentaje.toFixed(2) + " % </label>";
+
   let tareasFiltradas = gestor.getListaCompletadasTareas();
   if(tareasFiltradas == ""){
     alert("No se pudo encontrar ninguna tarea completa");
