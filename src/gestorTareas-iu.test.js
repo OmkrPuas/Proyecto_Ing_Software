@@ -1,11 +1,11 @@
 import fs from "fs";
-import * as gestor from './app.js';
+import * as gestor from './Tarea-logica-negocios.js';
 
 
 describe("Gestor Tareas", () => {
   beforeAll(() => {
     document.body.innerHTML = fs.readFileSync("index.html", "utf8");
-    require("./gestorTareas.js");
+    require("./Gestor-Tareas-Presentador.js");
   });
 //PRUEBAS DE CREAR TAREA
   it("Al iniciar no hay nada en la lista de tareas", () => {

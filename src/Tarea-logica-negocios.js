@@ -8,7 +8,7 @@ const dia = fechaActual.getDate();
 const mes = fechaActual.getMonth() + 1;
 const anio = fechaActual.getFullYear();
 
-export class Tarea {
+export  class Tarea {
 
   constructor(id, titulo, fechaLimite, categoria, descripcion, etiquetas, completada) {
     this.id = id;
@@ -18,6 +18,10 @@ export class Tarea {
     this.descripcion = descripcion;
     this.etiquetas = etiquetas;
     this.completada = completada;
+  }
+
+  mostrarTitulo(){
+    return this.titulo;
   }
 }
 

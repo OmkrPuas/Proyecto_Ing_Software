@@ -1,4 +1,5 @@
-import * as gestor from './app.js';
+import * as gestor from './Tarea-logica-negocios.js';
+import {Tarea} from './Tarea-logica-negocios.js';
 
 //gestor.algo
 const tarea_elem = document.querySelector("#tarea");
@@ -107,6 +108,10 @@ boton_elem.addEventListener("click", (event) => {
   if(validarTarea(tarea_elem.value, validacionFecha, etiquetas.length)){
     etiquetas = gestor.verificarCampoVacio(etiquetas);
     descripcion_elem.value = gestor.verificarCampoVacio(descripcion_elem.value);
+    //objetoTarea
+    let objetoTarea = new Tarea(id, tarea_elem.value, validacionFecha, categoria_elem.value, descripcion_elem.value, etiquetas, false);
+    alert("Objeto Tarea: "+objetoTarea.mostrarTitulo());
+
     let tarea = gestor.classTarea(id, tarea_elem.value, validacionFecha, categoria_elem.value, descripcion_elem.value, etiquetas, false);
     gestor.añadirAListaTarea(tarea);
     lista_elem.innerHTML = "";
@@ -255,8 +260,3 @@ boton_filtro_completadas_fechas.addEventListener("click", (event) => {
     lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tareasFiltradas[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tareasFiltradas[i].categoria +"</li>"+ "<li>" + "Descripcion: " + tareasFiltradas[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + tareasFiltradas[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tareasFiltradas[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>";
   }
 });
-
-//var nueva etiqueta = "<input type='checkbox' id="etiqueta" name="etiqueta" value="NuevaEtiqueta" /><label for="etiqueta3"> NuevaEtiqueta</label><br /><br />""
-
-//var aux = lista_elem.innerHTML;
-//lista_elem.innerHTML = "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +tarea.titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + tarea.categoria +"</li>"+ "<li>" + "Descripcion: " + tarea.descripcion + "</li>" + "<li>" + "Fecha Limite: " + tarea.fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + tarea.etiquetas + "</li>" +"</div>"+ "</div>"+ "<button class=" + "bloque" + " id=" + "completar-tarea" + ">Completar" + "</" + "button>" + "</ul>" + "</li>"  + aux;

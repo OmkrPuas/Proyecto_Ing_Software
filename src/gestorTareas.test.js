@@ -1,5 +1,5 @@
 import fs from "fs";
-import * as gestor from './app.js';
+import * as gestor from './Tarea-logica-negocios.js';
 
 
 describe("Gestor Tareas", () => {
