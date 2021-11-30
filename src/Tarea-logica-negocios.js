@@ -29,11 +29,6 @@ export function inicializarListas(){
   listas.getListaEtiquetas().push('Piano','Guitarra','Yolo','Importante','LMAO','LOOOL');
 }
 
-
-export function esMañana(){
-  return anio + "-" + mes + "-" + (dia+1);
-}
-
 // ------------ASIGNACIONES-DE-ATRIBUTOS-A-UNA-TAREA-------------
 
 
@@ -64,6 +59,10 @@ export function asignarCategoriaATarea(tarea, categoria){
 //-----------EXTRA------------
 export function esHoy(){
   return anio + "-" + mes + "-" + dia;
+}
+
+export function esMañana(){
+  return anio + "-" + mes + "-" + (dia+1);
 }
 //----------------------------
 
@@ -188,11 +187,12 @@ export function crearFechaLimite(fechaLimite){
 
 export function revisarFechasLimites(){
   var tareas = 0;
+  let lista = listas.getListaTareas();
   for(var i = 0; i < listas.getListaTareas().length; i++){
-    if(listas.getListaTareas()[i].fechaLimite == esMañana()){
+    if(lista[i].fechaLimite == esMañana()){
       tareas++;
     }else{
-      if(listas.getListaTareas()[i].fechaLimite == esHoy()){
+      if(lista[i].fechaLimite == esHoy()){
         tareas++;
       }
     }
