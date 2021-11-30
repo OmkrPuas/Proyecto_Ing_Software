@@ -1,7 +1,9 @@
+import * as listas from './LIstas-logica-negocios';
+
 var id = 0;
-const listaTareasPendientes = new Array();
+var listaTareasPendientes = new Array();
 const listaCategorias = new Array();
-const listaTareasCompletadas = new Array();
+var listaTareasCompletadas = new Array();
 const listaEtiquetas = new Array();
 const fechaActual = new Date();
 const dia = fechaActual.getDate();
@@ -25,11 +27,6 @@ export  class Tarea {
   }
 }
 
-export function classTarea(id, titulo, fechaLimite, categoria, descripcion, etiquetas, completada){
-  let tmp = new Tarea(id, titulo, fechaLimite, categoria, descripcion, etiquetas, completada);
-  return tmp;
-}
-
 export function inicializarListas(){
   listaCategorias.push('','trabajo','personal','familia','otros');
   listaEtiquetas.push('Piano','Guitarra','Yolo','Importante','LMAO','LOOOL');
@@ -40,7 +37,7 @@ export function esMañana(){
   return anio + "-" + mes + "-" + (dia+1);
 }
 
-// ---------------------ASIGNACIONES------------------
+// ------------ASIGNACIONES-DE-ATRIBUTOS-A-UNA-TAREA-------------
 
 
 export function asignarTituloATarea(tarea, titulo){
@@ -186,7 +183,7 @@ export function crearTareaCompletada(nombreTarea, descripcion, fechaLimite, cate
 }
 
 //-----------------------------------------------------------------
-//------------------------------VALIDACIONES-----------------------
+//--------------------VALIDACIONES-DE-ATRIBUTOS--------------------
 
 export function verificarCampoVacio(campo){
   if(campo == "" ){
@@ -322,7 +319,7 @@ export function crearEtiqueta(etiqueta){
 
 
 //-----------------------------------------------------------------
-//------------------------------GET LISTAS-----------------------
+//----------------GET LISTAS-Y-FILTROS-EN-LISTAS-------------------
 
 
 export function getListaTareasPendientes(){
@@ -547,6 +544,7 @@ export function mostrarTarea(tarea){
   return tarea.titulo + "\nDescripcion: " + tarea.descripcion+ "\nFecha Limite: " + tarea.fechaLimite+ "\nCategoria: " + tarea.categoria + "\nEtiquetas: " + tarea.etiquetas + "\nCompletada: " + tarea.completada;
 }
 
+
 //-----------------------------------------------------------------
 //------------------------------PROCESO COMPLETAR TAREA-----------------------
 
@@ -596,4 +594,9 @@ export function completarTareaPendiente(id){
     confirmado = true;
   }
   return confirmado;
+}
+
+export function vaciarListas(){
+  listaTareasPendientes = [];
+  listaTareasCompletadas = [];
 }

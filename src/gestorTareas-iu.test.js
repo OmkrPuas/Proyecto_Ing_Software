@@ -1,5 +1,6 @@
 import fs from "fs";
 import * as gestor from './Tarea-logica-negocios.js';
+import * as listas from './LIstas-logica-negocios';
 
 
 describe("Gestor Tareas", () => {
@@ -388,6 +389,95 @@ it("Deberia mostrar las tareas pendientes", () => {
   afterEach(() => {
     const lista_elem = document.querySelector("#lista-tareas");
     lista_elem.innerHTML = "";
+  });
+
+  it("Deberia crear una tarea independiente", () => {
+    gestor.vaciarListas();
+    const tarea_elem = document.querySelector("#tarea");
+    const boton_elem = document.querySelector("#crear-tarea");
+    const lista_elem = document.querySelector("#lista-tareas");
+    const categoria_elem = document.querySelector("#select-categoria");
+    const fecha_elem = document.querySelector("#fecha");
+    const descripcion_elem = document.querySelector("#descripcion");
+
+    tarea_elem.value = "Nueva primera Tarea";
+    categoria_elem.value = "personal";
+    fecha_elem.value = "2022-11-29";
+    descripcion_elem.value = "Esta es una descripcion";
+    boton_elem.click();
+    expect(lista_elem.textContent).toEqual("Nueva primera TareaCategoria: personalDescripcion: Esta es una descripcionFecha Limite: 2022-11-29Etiquetas: n/aCompletar");
+  });
+
+  it("Deberia filtrar una tarea independiente por titulo", () => {
+    gestor.vaciarListas();
+    const tarea_elem = document.querySelector("#tarea");
+    const boton_elem = document.querySelector("#crear-tarea");
+    const lista_elem = document.querySelector("#lista-tareas");
+    const categoria_elem = document.querySelector("#select-categoria");
+    const fecha_elem = document.querySelector("#fecha");
+    const descripcion_elem = document.querySelector("#descripcion");
+    const boton_titulo_filtro = document.querySelector("#filtro-titulo");
+    const titulo_filtro = document.querySelector("#titulo-filtro");
+    
+
+    tarea_elem.value = "Nueva primera Tarea";
+    categoria_elem.value = "personal";
+    fecha_elem.value = "2022-11-29";
+    descripcion_elem.value = "Esta es una descripcion";
+    boton_elem.click();
+
+    titulo_filtro.value = "Nueva primera Tarea";
+    boton_titulo_filtro.click();
+
+    expect(lista_elem.textContent).toEqual("Nueva primera TareaCategoria: personalDescripcion: Esta es una descripcionFecha Limite: 2022-11-29Etiquetas: n/a");
+  });
+
+  it("Deberia filtrar una tarea independiente por fecha", () => {
+    gestor.vaciarListas();
+    const tarea_elem = document.querySelector("#tarea");
+    const boton_elem = document.querySelector("#crear-tarea");
+    const lista_elem = document.querySelector("#lista-tareas");
+    const categoria_elem = document.querySelector("#select-categoria");
+    const fecha_elem = document.querySelector("#fecha");
+    const descripcion_elem = document.querySelector("#descripcion");
+    const boton_fecha_filtro = document.querySelector("#filtro-dia");
+    const fecha_filtro = document.querySelector("#dia-filtro");
+    
+
+    tarea_elem.value = "Nueva primera Tarea";
+    categoria_elem.value = "personal";
+    fecha_elem.value = "2022-11-29";
+    descripcion_elem.value = "Esta es una descripcion";
+    boton_elem.click();
+
+    fecha_filtro.value = "2022-11-29";
+    boton_fecha_filtro.click();
+
+    expect(lista_elem.textContent).toEqual("Nueva primera TareaCategoria: personalDescripcion: Esta es una descripcionFecha Limite: 2022-11-29Etiquetas: n/a");
+  });
+
+  it("Deberia fallar al filtrar una tarea independiente por una fecha incorrecta", () => {
+    gestor.vaciarListas();
+    const tarea_elem = document.querySelector("#tarea");
+    const boton_elem = document.querySelector("#crear-tarea");
+    const lista_elem = document.querySelector("#lista-tareas");
+    const categoria_elem = document.querySelector("#select-categoria");
+    const fecha_elem = document.querySelector("#fecha");
+    const descripcion_elem = document.querySelector("#descripcion");
+    const boton_fecha_filtro = document.querySelector("#filtro-dia");
+    const fecha_filtro = document.querySelector("#dia-filtro");
+    
+
+    tarea_elem.value = "Nueva primera Tarea";
+    categoria_elem.value = "personal";
+    fecha_elem.value = "2022-11-29";
+    descripcion_elem.value = "Esta es una descripcion";
+    boton_elem.click();
+
+    fecha_filtro.value = "2022-11-20";
+    boton_fecha_filtro.click();
+
+    expect(lista_elem.textContent).toEqual("");
   });
 
 });

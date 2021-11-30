@@ -1,4 +1,5 @@
 import * as gestor from './Tarea-logica-negocios.js';
+import * as listas from './LIstas-logica-negocios';
 import {Tarea} from './Tarea-logica-negocios.js';
 
 //gestor.algo
@@ -109,10 +110,7 @@ boton_elem.addEventListener("click", (event) => {
     etiquetas = gestor.verificarCampoVacio(etiquetas);
     descripcion_elem.value = gestor.verificarCampoVacio(descripcion_elem.value);
     //objetoTarea
-    let objetoTarea = new Tarea(id, tarea_elem.value, validacionFecha, categoria_elem.value, descripcion_elem.value, etiquetas, false);
-    alert("Objeto Tarea: "+objetoTarea.mostrarTitulo());
-
-    let tarea = gestor.classTarea(id, tarea_elem.value, validacionFecha, categoria_elem.value, descripcion_elem.value, etiquetas, false);
+    let tarea = new Tarea(id, tarea_elem.value, validacionFecha, categoria_elem.value, descripcion_elem.value, etiquetas, false);
     gestor.añadirAListaTarea(tarea);
     lista_elem.innerHTML = "";
     id++;

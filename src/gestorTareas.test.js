@@ -1,6 +1,7 @@
 import fs from "fs";
 import * as gestor from './Tarea-logica-negocios.js';
-
+import * as listas from './LIstas-logica-negocios';
+import {Tarea} from './Tarea-logica-negocios.js';
 
 describe("Gestor Tareas", () => {
 
@@ -453,7 +454,7 @@ describe("Gestor Tareas", () => {
   });
 
   it("Deberia crear una instancia de tarea", () => {
-    let tarea = gestor.classTarea(gestor.getListaTareasPendientes.length,"Novena tarea","Descrito","2022-11-19","otros","Guitarra",false);
+    let tarea = new Tarea(gestor.getListaTareasPendientes.length,"Novena tarea","Descrito","2022-11-19","otros","Guitarra",false);
     
     expect(tarea).toEqual({"categoria": "2022-11-19", "completada": false, "descripcion": "otros", "etiquetas": "Guitarra", "fechaLimite": "Descrito", "id": 0, "titulo": 
     "Novena tarea"});
