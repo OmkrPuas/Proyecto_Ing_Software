@@ -1,4 +1,12 @@
 import * as gestor from './Tarea-logica-negocios.js';
+import * as validaciones from './Validaciones-logica-negocios.js';
+
+// var id = 0;
+var listaTareasPendientes = new Array();
+const listaCategorias = new Array();
+var listaTareasCompletadas = new Array();
+const listaEtiquetas = new Array();
+
 
 //-----------------------------------------------------------------
 //----------------GET LISTAS-Y-FILTROS-EN-LISTAS-------------------
@@ -194,7 +202,7 @@ export function getListaTareasPendientes(){
   export function añadirAListaTarea(tarea){
     //console.log(id);
     listaTareasPendientes.push(tarea);
-    id++;
+    // id++;
     return tarea;
   }
   
@@ -224,5 +232,10 @@ export function getListaTareasPendientes(){
   
   export function mostrarTarea(tarea){
     return tarea.titulo + "\nDescripcion: " + tarea.descripcion+ "\nFecha Limite: " + tarea.fechaLimite+ "\nCategoria: " + tarea.categoria + "\nEtiquetas: " + tarea.etiquetas + "\nCompletada: " + tarea.completada;
+  }
+
+  export function vaciarListas(){
+    listaTareasPendientes = [];
+    listaTareasCompletadas = [];
   }
   

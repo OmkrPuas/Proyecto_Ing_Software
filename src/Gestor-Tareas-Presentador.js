@@ -1,5 +1,6 @@
 import * as gestor from './Tarea-logica-negocios.js';
-import * as listas from './LIstas-logica-negocios';
+import * as listas from './Listas-logica-negocios.js';
+import * as validaciones from './Validaciones-logica-negocios.js';
 import {Tarea} from './Tarea-logica-negocios.js';
 
 //gestor.algo
@@ -103,18 +104,18 @@ function validarTarea(titulo, fecha, etiquetas){
 }
 
 boton_elem.addEventListener("click", (event) => {
-  let validacionFecha = gestor.validarFechaLimite(fecha_elem.value);
+  let validacionFecha = validaciones.validarFechaLimite(fecha_elem.value);
   let etiquetas = getSelectedCheckboxValues('etiqueta');
   
   if(validarTarea(tarea_elem.value, validacionFecha, etiquetas.length)){
-    etiquetas = gestor.verificarCampoVacio(etiquetas);
-    descripcion_elem.value = gestor.verificarCampoVacio(descripcion_elem.value);
+    etiquetas = validaciones.verificarCampoVacio(etiquetas);
+    descripcion_elem.value = validaciones.verificarCampoVacio(descripcion_elem.value);
     //objetoTarea
     let tarea = new Tarea(id, tarea_elem.value, validacionFecha, categoria_elem.value, descripcion_elem.value, etiquetas, false);
-    gestor.añadirAListaTarea(tarea);
+    listas.añadirAListaTarea(tarea);
     lista_elem.innerHTML = "";
     id++;
-    let lista = gestor.getListaTareas();
+    let lista = listas.getListaTareas();
     for(var i = lista.length - 1; i >= 0 ; i--){
       let boton_prueba = "<button  id='completar-" + lista[i].id + "' onclick='completarTarea("+lista[i].id+");'>Completar</button>";
       lista_elem.innerHTML = lista_elem.innerHTML + "<ul>" + "<li>" + "<div class='dropdown'>" + "<span>" +lista[i].titulo + "</span>" + "<div class='dropdown-content'>" + "<ul>"+ "<li>" + "Categoria: " + lista[i].categoria +"</li>"+ "<li>" + "Descripcion: " + lista[i].descripcion + "</li>" + "<li>" + "Fecha Limite: " + lista[i].fechaLimite + "</li>"+  "<li>" + "Etiquetas: " + lista[i].etiquetas + "</li>" +"</div>"+ "</div>" + "</ul>" + "</li>" + boton_prueba;
@@ -126,7 +127,7 @@ boton_elem.addEventListener("click", (event) => {
 });
 
 mostrarTareas_elem.addEventListener("click", (event) => {
-  let lista = gestor.getListaTareas();
+  let lista = listas.getListaTareas();
   lista_elem.innerHTML = "";
   for(var i = lista.length - 1; i >= 0 ; i--){
     let boton_prueba = "<button onclick='completarTarea("+lista[i].id+")'>Completar</button>";
@@ -137,7 +138,7 @@ mostrarTareas_elem.addEventListener("click", (event) => {
 });
 
 boton_filtro.addEventListener("click", (event) => {
-  let tareasFiltradas = gestor.getListaTareasPorTituloT(titulo_filtro.value);
+  let tareasFiltradas = listas.getListaTareasPorTituloT(titulo_filtro.value);
   if(tareasFiltradas == ""){
     alert("No se pudo encontrar ninguna coincidencia de Titulo:' " + titulo_filtro.value + "' en la lista de tareas")
   }
@@ -149,7 +150,7 @@ boton_filtro.addEventListener("click", (event) => {
 });
 
 boton_filtro_categoria.addEventListener("click", (event) => {
-  let tareasFiltradas = gestor.getListaTareasPorCategoria(categoria_filtro.value);
+  let tareasFiltradas = listas.getListaTareasPorCategoria(categoria_filtro.value);
   if(tareasFiltradas == ""){
     alert("No se pudo encontrar ninguna coincidencia de Categoria:' " + categoria_filtro.value + "' en la lista de tareas")
   }
@@ -160,7 +161,7 @@ boton_filtro_categoria.addEventListener("click", (event) => {
 });
 
 boton_filtro_etiquetas.addEventListener("click", (event) => {
-  let tareasFiltradas = gestor.getListaTareasPorEtiqueta(etiquetas_filtros2.value);
+  let tareasFiltradas = listas.getListaTareasPorEtiqueta(etiquetas_filtros2.value);
   if(tareasFiltradas == ""){
     alert("No se pudo encontrar ninguna coincidencia de Etiqueta:'" + etiquetas_filtros2.value +"' en la lista de tareas")
   }
@@ -172,7 +173,7 @@ boton_filtro_etiquetas.addEventListener("click", (event) => {
 });
 
 boton_filtro_dia.addEventListener("click", (event) => {
-  let tareasFiltradas = gestor.getListaTareasPorDia(dia_filtro.value);
+  let tareasFiltradas = listas.getListaTareasPorDia(dia_filtro.value);
   if(tareasFiltradas == ""){
     alert("No se pudo encontrar ninguna tarea para el dia:' " + dia_filtro.value + "' en la lista de tareas")
   }
@@ -183,7 +184,7 @@ boton_filtro_dia.addEventListener("click", (event) => {
 });
 
 boton_filtro_descripcion.addEventListener("click", (event) => {
-  let tareasFiltradas = gestor.getListaTareasPorDescripcion(descripcion_filtro.value);
+  let tareasFiltradas = listas.getListaTareasPorDescripcion(descripcion_filtro.value);
   if(tareasFiltradas == ""){
     alert("No se pudo encontrar ninguna tarea para la descripcion:' " + descripcion_filtro.value + "' en la lista de tareas")
   }
@@ -218,16 +219,16 @@ boton_nueva_etiqueta.addEventListener("click", (event) => {
 boton_filtro_tareas_completadas.addEventListener("click", (event) => {  
 
 
-  let Informe = gestor.getNumTareasCompletadasPorCategoria();
-  let totalCompletadas = gestor.getListaCompletadasTareas().length;
-  let totalPendientes = gestor.getListaTareas().length;
+  let Informe = listas.getNumTareasCompletadasPorCategoria();
+  let totalCompletadas = listas.getListaCompletadasTareas().length;
+  let totalPendientes = listas.getListaTareas().length;
   let porcentaje = 0;
   if(totalPendientes > 0 || totalCompletadas > 0){
     porcentaje = (totalCompletadas / (totalCompletadas + totalPendientes)) * 100; 
   }
   let labelInforme = "<label>" + "Tareas completadas por categoria: " + "Trabajo:" + Informe["trabajo"] + " Familia:" + Informe["familia"] + " Personal:" + Informe["personal"] + " Otros:" + Informe["otros"] +  "</label>" + "<br> <label> Porcentaje de tareas Completadas: " + porcentaje.toFixed(2) + " % </label>";
 
-  let tareasFiltradas = gestor.getListaCompletadasTareas();
+  let tareasFiltradas = listas.getListaCompletadasTareas();
   if(tareasFiltradas == ""){
     alert("No se pudo encontrar ninguna tarea completa");
   }
@@ -238,7 +239,7 @@ boton_filtro_tareas_completadas.addEventListener("click", (event) => {
 });
 
 boton_filtro_completadas_categorias.addEventListener("click", (event) => {
-  let tareasFiltradas = gestor.getListaTareasCompletasPorCategoria(categoria_completadas_filtro.value);
+  let tareasFiltradas = listas.getListaTareasCompletasPorCategoria(categoria_completadas_filtro.value);
   if(tareasFiltradas == ""){
     alert("No se pudo encontrar ninguna coincidencia de Categoria:' " + categoria_completadas_filtro.value + "' en la lista de tareas")
   }
@@ -249,7 +250,7 @@ boton_filtro_completadas_categorias.addEventListener("click", (event) => {
 });
 
 boton_filtro_completadas_fechas.addEventListener("click", (event) => {
-  let tareasFiltradas = gestor.getListaTareasPorRangoFechas(dia_Inicio_filtro.value, dia_Final_filtro.value);
+  let tareasFiltradas = listas.getListaTareasPorRangoFechas(dia_Inicio_filtro.value, dia_Final_filtro.value);
   if(tareasFiltradas == ""){
     alert("No se pudo encontrar ninguna tarea completada entre:' " + dia_Inicio_filtro.value + " y " + dia_Final_filtro.value);
   }
