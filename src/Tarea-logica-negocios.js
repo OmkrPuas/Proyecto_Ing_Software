@@ -279,7 +279,7 @@ export function revisarFechasLimites(){
 }
 
 
-//-------------CATEGORIA ------------
+//-------------CATEGORIA DE TAREA------------
 export function crearCategoria(categoria){
   listaCategorias.push(categoria);
   return listaCategorias.includes(categoria);
@@ -292,7 +292,7 @@ export function crearListaDeCategorias(){
 
 
 
-//-------------DESCRIPCION ------------
+//-------------DESCRIPCION DE TAREA------------
 export function crearDescripcion(descripcion){
   if(descripcion == ""){
     return "No Descripcionado";
@@ -301,7 +301,7 @@ export function crearDescripcion(descripcion){
 }
 
 
-//-------------ETIQUETA ------------
+//-------------ETIQUETA DE TAREA------------
 
 export function crearNuevaEtiqueta(etiqueta){
   listaEtiquetas.push(etiqueta);
@@ -409,19 +409,9 @@ export function getListaTareasPorEtiqueta(etiquetas){
   }
   let encontrado = [];
   for(let i = 0; i < listaTareasPendientes.length; i++){
-    // console.log(typeof(listaTareasPendientes[i].etiquetas));
-    // console.log(listaTareasPendientes[i].etiquetas);
-    // console.log(typeof(etiquetas));
-    // console.log(etiquetas);
-    // console.log(listaTareasPendientes[i].etiquetas==etiquetas);
-    // console.log(listaTareasPendientes[i].etiquetas===etiquetas);
     if(listaTareasPendientes[i].etiquetas == etiquetas){
       encontrado.push(listaTareasPendientes[i]);
     }
-
-      // if(listaTareasPendientes[i].etiquetas === etiquetas){
-      //   encontrado.push(listaTareasPendientes[i]);
-      // }
   }
   return encontrado;
 }

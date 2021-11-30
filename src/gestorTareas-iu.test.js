@@ -87,12 +87,8 @@ describe("Gestor Tareas", () => {
   });
 
   it("Deberia añadir una etiqueta a la lista de etiquetas y mostrar solo el contenido de la lista de etiquetas de los filtros", () => {
-    const etiqueta_elem = document.querySelector("#nueva-etiqueta");
-    const boton_nueva_etiqueta = document.querySelector("#añadir-etiqueta");
     const lista_etiquetas = document.querySelector("#etiquetas-filtro-2");
 
-    //etiqueta_elem.value = "ForYou"; añadido en la anterior prueba
-    //boton_nueva_etiqueta.click();
     expect(lista_etiquetas.innerHTML).toEqual("\n        <option value=\"Piano\">Piano</option>\n        <option value=\"Guitarra\" selected=\"\">Guitarra</option>\n        <option value=\"Yolo\">Yolo</option>\n        <option value=\"Importante\">Importante</option>\n        <option value=\"LMAO\">LMAO</option>\n        <option value=\"LOOOL\">LOOOL</option>\n      <option value=\"ForYou\">ForYou</option>");
   });
 
@@ -370,7 +366,7 @@ it("Deberia mostrar las tareas completadas filtrada por una categoria ", () => {
   expect(lista_elem.innerHTML).toEqual("");
 });
 
-// PRUEBA COMPLETAR
+// PRUEBA COMPLETAR TAREA
 
 it("Deberia mostrar las tareas pendientes", () => {
   const boton_mostrar = document.querySelector("#mostrar-tareas");
@@ -379,12 +375,6 @@ it("Deberia mostrar las tareas pendientes", () => {
   boton_mostrar.click();
   expect(lista_elem.textContent).toEqual("Sexta TareaCategoria: familiaDescripcion: Esta es una descripcionFecha Limite: 2022-11-28Etiquetas: PianoCompletarQuinta TareaCategoria: personalDescripcion: Esta es una descripcionFecha Limite: 2022-11-28Etiquetas: n/aCompletarCuarta TareaCategoria: personalDescripcion: n/aFecha Limite: 2022-11-28Etiquetas: n/aCompletarTercera TareaCategoria: otrosDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletarSegunda TareaCategoria: personalDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletarPrimera TareaCategoria: personalDescripcion: n/aFecha Limite: IlimitadoEtiquetas: n/aCompletar");
 });
-
-// it("Deberia completar una tarea", () => {
-//   const boton_completadas = document.querySelector("#completar-0");  //PRIMERA TAREA
-//   boton_completadas.click();
-//   expect(lista_elem.innerHTML).toEqual(alert("Tarea Completada"));
-// });
 
   afterEach(() => {
     const lista_elem = document.querySelector("#lista-tareas");
