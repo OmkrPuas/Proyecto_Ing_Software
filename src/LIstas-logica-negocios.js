@@ -225,4 +225,3 @@ export function getListaTareasPendientes(){
     listaTareasPendientes = [];
     listaTareasCompletadas = [];
   }
-  
