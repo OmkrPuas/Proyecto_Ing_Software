@@ -1,6 +1,3 @@
-import * as gestor from './Tarea-logica-negocios.js';
-import * as validaciones from './Validaciones-logica-negocios.js';
-
 // var id = 0;
 var listaTareasPendientes = new Array();
 const listaCategorias = new Array();
@@ -99,19 +96,9 @@ export function getListaTareasPendientes(){
     }
     let encontrado = [];
     for(let i = 0; i < listaTareasPendientes.length; i++){
-      // console.log(typeof(listaTareasPendientes[i].etiquetas));
-      // console.log(listaTareasPendientes[i].etiquetas);
-      // console.log(typeof(etiquetas));
-      // console.log(etiquetas);
-      // console.log(listaTareasPendientes[i].etiquetas==etiquetas);
-      // console.log(listaTareasPendientes[i].etiquetas===etiquetas);
       if(listaTareasPendientes[i].etiquetas == etiquetas){
         encontrado.push(listaTareasPendientes[i]);
       }
-  
-        // if(listaTareasPendientes[i].etiquetas === etiquetas){
-        //   encontrado.push(listaTareasPendientes[i]);
-        // }
     }
     return encontrado;
   }

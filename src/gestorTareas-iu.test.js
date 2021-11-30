@@ -1,7 +1,5 @@
 import fs from "fs";
 import * as gestor from './Tarea-logica-negocios.js';
-import * as listas from './Listas-logica-negocios.js';
-import * as validaciones from './Validaciones-logica-negocios.js';
 
 
 describe("Gestor Tareas", () => {
